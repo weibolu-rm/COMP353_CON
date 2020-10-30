@@ -1,36 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-</head>
-<body>
-<div class="container">
-    <div class="header">
-        <h2>Register</h2>
+<?php
+    include_once "header.php";
+?>
+
+<div class="container-md">
+    <div class="col-md-13">
+        <h1>Register</h1>
     </div>
     
     
     <form action="registration.php" method="post">
 
-        <div>
+        <div class="form-group">
             <label for="username">Username</label>
-            <input type="test" name="username" required>
+            <input type="test" name="username" class="form-control" required>
         </div>
-        <div>
+        <div class="form-group">
             <label for="password">Password</label>
-            <input type="test" name="password_1" required>
+            <input type="test" name="password_1" class="form-control" required>
         </div>
-        <div>
+        <div class="form-group">
             <label for="password">Confirm Password</label>
-            <input type="test" name="password_2" required>
+            <input type="test" name="password_2" class="form-control" required>
         </div>
 
-        <button type="submit" name="register_user">Register</button>
+        <button type="submit" name="register_user" class="btn btn-light">Register</button>
 
         <p>Already registered? <a href="login.php"><b>Log in</b></a></p>
     </form>
+
 </div>
-</body>
-</html>
+<?php
+    include_once "footer.php";
+?>
+

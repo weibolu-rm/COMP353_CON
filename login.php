@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Log in</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h2>Register</h2>
-            </div>
+<?php
+    include_once "header.php";
+?>
+
             
-            <form action="login.php" method="post">
+<div class="container-md">
+    <div class="col-md-13">
+            <h1>Login</h1>
+    </div
+    <form action="login.php" method="post">
 
-                <div>
-                    <label for="username">Username</label>
-                    <input type="test" name="username" required>
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input type="test" name="password_1" required>
-                </div>
-
-                <button type="submit" name="login_user">Log in</button>
-
-                <p>Not registered? <a href="registration.php"><b>Register Here<b></a></p>
-            </form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" required>
         </div>
-    </body>
-</html>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password_1" class="form-control" required>
+        </div>
+
+        <button type="submit" name="login_user" class="btn btn-light">Log in</button>
+
+        <p>Not registered? <a href="registration.php"><b>Register Here<b></a></p>
+    </form>
+</div>
+
+<?php
+    include_once "footer.php";
+?>
