@@ -6,12 +6,13 @@
 <div class="container-md">
     <div class="col-md-13">
             <h1>Login</h1>
-    </div
-    <form action="login.php" method="post">
+    </div>
+
+    <form action="includes/login_inc.php" method="post">
 
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" class="form-control" required>
+            <label for="email">Email</label>
+            <input type="text" name="email" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
@@ -22,6 +23,15 @@
 
         <p>Not registered? <a href="registration.php"><b>Register Here<b></a></p>
     </form>
+
+    <?php
+        if (isset($_GET["error"])) {
+            if($_GET["error"] == "wronglogin") 
+                echo "<div class=\"alert alert-danger\" role=\"alert\">
+                Wrong Email or Password. Please try again.
+                </div>";
+        }
+    ?>
 </div>
 
 <?php

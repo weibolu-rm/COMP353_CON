@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +18,8 @@
         $home_url = "index.php";
         $login_url = "login.php";
         $register_url = "registration.php";
+        $profile_url = "profile.php";
+        $logout_url = "includes/logout_inc.php";
     ?>
 
     <!-- navbar -->
@@ -25,10 +31,20 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $login_url ?>">Login</a>
+                <?php
+                    if (isset($_SESSION["uid"]))
+                        echo "<a class=\"nav-link\" href=\"{$profile_url}\">Profile</a>";
+                    else
+                        echo "<a class=\"nav-link\" href=\"{$login_url}\">Login</a>";
+                ?>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $register_url ?>">Register</a>
+                <li class="nav-item">                
+                <?php
+                    if (isset($_SESSION["uid"]))
+                        echo "<a class=\"nav-link\" href=\"{$logout_url}\">Log out</a>";
+                    else
+                        echo "<a class=\"nav-link\" href=\"{$register_url}\">Register</a>";
+                ?>
                 </li>
             </ul>
         </div>
