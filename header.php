@@ -17,9 +17,11 @@
     <?php 
         $home_url = "index.php";
         $login_url = "login.php";
-        $register_url = "registration.php";
-        $profile_url = "profile.php";
+        $register_url = "admin_registration.php";
+        $profile_url = "#";
         $logout_url = "includes/logout_inc.php";
+        $admin_url = "admin.php";
+        $active_page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);  
     ?>
 
     <!-- navbar -->
@@ -32,18 +34,32 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                 <?php
-                    if (isset($_SESSION["uid"]))
-                        echo "<a class=\"nav-link\" href=\"{$profile_url}\">Profile</a>";
-                    else
-                        echo "<a class=\"nav-link\" href=\"{$login_url}\">Login</a>";
+                    if (isset($_SESSION["uid"])) {
+                        if ($_SESSION["uprivilege"] == 1) {
+                            echo "<li class=\"nav-item\"><a class=\"nav-link ";
+                            if($active_page == "admin.php")
+                                echo "active";
+                            echo "\" href=\"{$admin_url}\">Admin</a></li>";
+                        }
+                        echo "<a class=\"nav-link ";
+                            if($active_page == "profile.php")
+                                echo "active";
+                        echo "\" href=\"{$profile_url}\">Profile</a>";
+                    }
+                    else {
+                        echo "<a class=\"nav-link ";
+                            if($active_page == "login.php")
+                                echo "active";
+                        echo "\" href=\"{$login_url}\">Login</a>";
+                    }
                 ?>
                 </li>
                 <li class="nav-item">                
                 <?php
                     if (isset($_SESSION["uid"]))
                         echo "<a class=\"nav-link\" href=\"{$logout_url}\">Log out</a>";
-                    else
-                        echo "<a class=\"nav-link\" href=\"{$register_url}\">Register</a>";
+                    // else
+                    //     echo "<a class=\"nav-link\" href=\"{$register_url}\">Register</a>";
                 ?>
                 </li>
             </ul>

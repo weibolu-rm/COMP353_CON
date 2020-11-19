@@ -21,7 +21,7 @@
 
         <button type="submit" name="login_user" class="btn btn-light">Log in</button>
 
-        <p>Not registered? <a href="registration.php"><b>Register Here<b></a></p>
+        <p>Not registered? Contact your condo administration.</p>
     </form>
 
     <?php
