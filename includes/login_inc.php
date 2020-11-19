@@ -12,6 +12,6 @@ if (isset($_POST["login_user"])) {
 }
 // will send users back to registration page if they accessed this include illegally
 else {
-    header("location: ../login.php");
+    header("location: ../{$login_url}");
     exit();
 }
