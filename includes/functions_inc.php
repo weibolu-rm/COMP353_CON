@@ -22,7 +22,7 @@ function fetch_user($conn, $email) {
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../{$registration_url}?error=stmterror");
+        header("location: ../admin_registration.php?error=stmterror");
         exit();
     }
 
@@ -101,7 +101,7 @@ function create_user($conn, $name, $email, $password, $privilege) {
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../{$registration_url}?error=stmterror");
+        header("location: ../admin_registration.php?error=stmterror");
         exit();
     }
 
@@ -120,16 +120,16 @@ function create_user($conn, $name, $email, $password, $privilege) {
     mysqli_stmt_close($stmt);
     header("location: ../admin_registration.php?error=none");
     exit();
-}
+    }
 
 function login_user($conn, $email, $password) {
     $user = fetch_user($conn, $email);
 
     if($user === false) {
-        header("location: ../{$login_url}?error=wronglogin");
+        header("location: ../login.php?error={$login_url}wronglogin");
         exit();
     }
-    
+        
     // for the admin user password = admin, since its password isn't hashed
     // we have a special case. 
     // here uid will always be 1 for admin
@@ -140,14 +140,14 @@ function login_user($conn, $email, $password) {
         $_SESSION["uname"] = $user["uname"];
         $_SESSION["uprivilege"] = $user["uprivilege"];
         header("location: ../index.php");
-        exit();
+    exit();
     }
 
     $password_hashed = $user["upassword"];
     $password_check = password_verify($password, $password_hashed);
 
     if($password_check === false) {
-        header("location: ../{$login_url}?error=wronglogin");
+        header("location: ../login.php?error=wronglogin");
         exit();
     } 
     else {

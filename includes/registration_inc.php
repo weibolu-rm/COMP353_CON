@@ -12,31 +12,31 @@ if (isset($_POST["register_user"])) {
     require_once "db_handler_inc.php";
 
     if (invalid_email($email)) {
-        header("location: ../admin_registration.php?error=invalidemail");
+        header("location: ../{$register_url}?error=invalidemail");
         exit();
     }
     if (invalid_name($name)) {
-        header("location: ../admin_registration.php?error=invalidname");
+        header("location: ../{$register_url}?error=invalidname");
         exit();
     }
     if (email_already_taken($conn, $email)) {
-        header("location: ../admin_registration.php?error=emailalreadytaken");
+        header("location: ../{$register_url}?error=emailalreadytaken");
         exit();
     }
     if (invalid_password($password, $password_confirm)) {
-        header("location: ../admin_registration.php?error=passworddontmatch");
+        header("location: ../{$register_url}?error=passworddontmatch");
         exit();
     }
     if (invalid_password_length($password)) {
-        header("location: ../admin_registration.php?error=invalidpasswordlength");
+        header("location: ../{$register_url}?error=invalidpasswordlength");
         exit();
     }
     create_user($conn, $name, $email, $password, $privilege);
 
 }
 
-// will send users back to registration page if they accessed this include illegally
+// will send users back to register page if they accessed this include illegally
 else {
-    header("location: ../admin_registration.php");
+    header("location: ../{$register_url}");
     exit();
 }

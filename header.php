@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require_once "includes/config_inc.php";
 ?>
 
 <!DOCTYPE html>
@@ -14,15 +15,7 @@
 </head>
 <body>
 
-    <?php 
-        $home_url = "index.php";
-        $login_url = "login.php";
-        $register_url = "admin_registration.php";
-        $profile_url = "#";
-        $logout_url = "includes/logout_inc.php";
-        $admin_url = "admin.php";
-        $active_page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);  
-    ?>
+
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
@@ -37,10 +30,15 @@
                     if (isset($_SESSION["uid"])) {
                         if ($_SESSION["uprivilege"] == 1) {
                             echo "<li class=\"nav-item\"><a class=\"nav-link ";
-                            if($active_page == "admin.php")
+                            if(strpos($active_page, "admin") !== false) // if name page contains "admin"
                                 echo "active";
                             echo "\" href=\"{$admin_url}\">Admin</a></li>";
                         }
+                        echo "<li class=\"nav-item\"><a class=\"nav-link ";
+                            if($active_page == "setings.php") // if name page contains "admin"
+                                echo "active";
+                            echo "\" href=\"{$settings_url}\">Settings</a></li>";
+
                         echo "<a class=\"nav-link ";
                             if($active_page == "profile.php")
                                 echo "active";
