@@ -1,4 +1,5 @@
 <?php
+    require_once "config_inc.php";
 
 if (isset($_POST["login_user"])) {
 
@@ -10,7 +11,7 @@ if (isset($_POST["login_user"])) {
 
     login_user($conn, $email, $password);
 }
-// will send users back to registration page if they accessed this include illegally
+// will send users back to login page if they accessed this include illegally
 else {
     header("location: ../{$login_url}");
     exit();
