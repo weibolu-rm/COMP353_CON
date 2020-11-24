@@ -12,8 +12,8 @@ if (isset($_GET["uid"])) {
 
     $uid = $_GET["uid"];
 
-    // we won't let people delete the default admin user
-    if($uid == 1) {
+    // we won't let people delete the default admin user or themselves
+    if($uid == 1 || $uid == $_SESSION["uid"]) {
         header("location: ../{$admin_url}?error=forbiden");
         exit();
     }
