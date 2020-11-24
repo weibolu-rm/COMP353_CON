@@ -2,10 +2,11 @@
     include_once "admin_header.php";
 ?>
 
-
+<div class=container-fluid>
 <h2>Register New User</h2>
-    
-<div class="container">
+
+<div class="row justify-content-start">
+<div class="col-lg-6">
 <!-- _inc.php files are include files -->
 <form action="includes/registration_inc.php" method="post">
 
@@ -36,7 +37,7 @@
 
 </form>
 
-
+</div>
 <?php
     if (isset($_GET["error"])) {
         $message_type = "danger";
@@ -68,6 +69,7 @@
         echo "</div>";
     }
 ?>
+</div>
 </div>
 
 <?php

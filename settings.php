@@ -1,30 +1,32 @@
 <?php 
     include_once "header.php";
 ?>
-
+<div class="justify-content-start">
 <div class="pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Settings</h1>
 </div>
 
-<h2>Change password</h2>
-<div class="container">
-<form action="includes/settings_inc.php" method="post">
-    <div class="form-group">
-        <label for="password">Old password</label>
-        <input type="password" name="password_1" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="password">New Password</label>
-        <input type="password" name="password_2" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="password">Confirm Password</label>
-        <input type="password" name="password_3" class="form-control" required>
-    </div>
-    <button type="submit" name="change_user_password" class="btn btn-light">Change Password</button>
+<div class="container-fluid">
+    <h2>Change password</h2>
+    <div class="row justify-content-start">
+        <div class ="col-lg-6 col-md-6">
+            <form action="includes/settings_inc.php" method="post">
+                <div class="form-group">
+                    <label for="password">Old password</label>
+                    <input type="password" name="password_1" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">New Password</label>
+                    <input type="password" name="password_2" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Confirm Password</label>
+                    <input type="password" name="password_3" class="form-control" required>
+                </div>
+                <button type="submit" name="change_user_password" class="btn btn-light">Change Password</button>
 
-</form>
-
+            </form>
+        </div>
 
 <?php
     if (isset($_GET["error"])) {
@@ -54,8 +56,8 @@
         echo "</div>";
     }
 ?>
+    </div>
 </div>
-
 <?php 
     include_once "footer.php";
 ?>

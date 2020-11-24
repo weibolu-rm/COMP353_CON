@@ -75,6 +75,7 @@ function print_user_table($conn) {
               <th>Name</th>
               <th>Email</th>
               <th>Privilege</th>
+              <th>Manage</th>
             </tr>
             </thead>
             <tbody>";
@@ -85,7 +86,12 @@ function print_user_table($conn) {
             echo "<td>{$row["uname"]}</td>";
             echo "<td>{$row["uemail"]}</td>";
             echo "<td>{$row["uprivilege"]}</td>";
-            echo "</tr>";
+            echo "<td>
+                <div class=\"btn-group mr-2\">
+                <a href=\"includes/change_inc.php?uid={$row["uid"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Change</button></a>
+                <a href=\"includes/delete_inc.php?uid={$row["uid"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
+                </div>
+                </td>";
         }
     }
     echo "</tbody>";
@@ -127,7 +133,7 @@ function create_user($conn, $name, $email, $password, $privilege) {
     if(!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../admin_registration.php?error=stmterror");
         exit();
-    }
+    }    
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     switch($privilege) {
@@ -144,7 +150,26 @@ function create_user($conn, $name, $email, $password, $privilege) {
     mysqli_stmt_close($stmt);
     header("location: ../admin_registration.php?error=none");
     exit();
+}
+
+function delete_user($conn, $uid) {
+    $sql = "DELETE FROM user WHERE uid = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../admin.php?error=stmterror");
+        exit();
     }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../admin.php?error=none");
+    exit();
+
+}
+
+
 
 function login_user($conn, $email, $password) {
     $user = fetch_user($conn, $email);
@@ -200,7 +225,7 @@ function change_user_password($conn, $uid, $password, $new_password, $new_passwo
         exit();
     } 
     
-    $sql = "UPDATE user SET upassword = ? WHERE uid = ?";
+    $sql = "UPDATE user SET upassword = ? WHERE uid = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
     if(!mysqli_stmt_prepare($stmt, $sql)) {
