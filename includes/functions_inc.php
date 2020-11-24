@@ -22,7 +22,7 @@ function fetch_user($conn, $email) {
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../{$registration_url}?error=stmterror");
+        header("location: ../admin_registration.php?error=stmterror");
         exit();
     }
 
@@ -41,8 +41,32 @@ function fetch_user($conn, $email) {
     }
 }
 
+function fetch_user_by_id($conn, $uid) {
+    $sql = "SELECT * FROM user WHERE uid = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($query_result)) {
+        mysqli_stmt_close($stmt);
+        return $row;
+    }
+    else {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+}
+
 function print_user_table($conn) {
-    $sql = "SELECT * FROM user ORDER BY uid ASC";
+    $sql = "SELECT * FROM user ORDER BY uid ASC;";
     // here we don't need to bind a prepared statement as you couldn't do 
     $query_result = mysqli_query($conn, $sql);
     echo "<thead>
@@ -51,6 +75,7 @@ function print_user_table($conn) {
               <th>Name</th>
               <th>Email</th>
               <th>Privilege</th>
+              <th>Manage</th>
             </tr>
             </thead>
             <tbody>";
@@ -61,7 +86,12 @@ function print_user_table($conn) {
             echo "<td>{$row["uname"]}</td>";
             echo "<td>{$row["uemail"]}</td>";
             echo "<td>{$row["uprivilege"]}</td>";
-            echo "</tr>";
+            echo "<td>
+                <div class=\"btn-group mr-2\">
+                <a href=\"admin_change_user.php?uid={$row["uid"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Change</button></a>
+                <a href=\"includes/delete_inc.php?uid={$row["uid"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
+                </div>
+                </td>";
         }
     }
     echo "</tbody>";
@@ -69,6 +99,27 @@ function print_user_table($conn) {
 
     mysqli_free_result($query_result);
     mysqli_close($conn);
+}
+
+function print_single_user_table($conn, $uid) {
+    echo "<thead>
+            <tr>
+              <th>uid</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Privilege</th>
+            </tr>
+            </thead>
+            <tbody>";
+
+    if($row = fetch_user_by_id($conn, $uid)) {
+        echo "<tr>";
+        echo "<td>{$row["uid"]}</td>";
+        echo "<td>{$row["uname"]}</td>";
+        echo "<td>{$row["uemail"]}</td>";
+        echo "<td>{$row["uprivilege"]}</td>";
+    }
+    echo "</tbody>";
 }
 
 function email_already_taken($conn, $email) {
@@ -101,9 +152,9 @@ function create_user($conn, $name, $email, $password, $privilege) {
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../{$registration_url}?error=stmterror");
+        header("location: ../admin_registration.php?error=stmterror");
         exit();
-    }
+    }    
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     switch($privilege) {
@@ -122,24 +173,43 @@ function create_user($conn, $name, $email, $password, $privilege) {
     exit();
 }
 
+function delete_user($conn, $uid) {
+    $sql = "DELETE FROM user WHERE uid = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../admin.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../admin.php?error=none");
+    exit();
+
+}
+
+
+
 function login_user($conn, $email, $password) {
     $user = fetch_user($conn, $email);
 
     if($user === false) {
-        header("location: ../{$login_url}?error=wronglogin");
+        header("location: ../login.php?error=wronglogin");
         exit();
     }
-    
+        
     // for the admin user password = admin, since its password isn't hashed
     // we have a special case. 
     // here uid will always be 1 for admin
-
     if($user["uid"] == 1 && $user["upassword"] == "admin") {
         session_start();
         $_SESSION["uid"] = $user["uid"];
         $_SESSION["uname"] = $user["uname"];
+        $_SESSION["uemail"] = $user["uemail"];
         $_SESSION["uprivilege"] = $user["uprivilege"];
-        header("location: ../index.php");
+        header("location: ../settings.php?error=changeadmin");
         exit();
     }
 
@@ -147,13 +217,14 @@ function login_user($conn, $email, $password) {
     $password_check = password_verify($password, $password_hashed);
 
     if($password_check === false) {
-        header("location: ../{$login_url}?error=wronglogin");
+        header("location: ../login.php?error=wronglogin");
         exit();
     } 
     else {
         session_start();
         $_SESSION["uid"] = $user["uid"];
         $_SESSION["uname"] = $user["uname"];
+        $_SESSION["uemail"] = $user["uemail"];
         $_SESSION["uprivilege"] = $user["uprivilege"];
         header("location: ../index.php");
         header("location: ../index.php");
@@ -161,3 +232,112 @@ function login_user($conn, $email, $password) {
     }
 }
 
+function change_user_password($conn, $uid, $password, $new_password) {
+    $user = fetch_user_by_id($conn, $uid);
+
+    $password_hashed = $user["upassword"];
+    $password_check = password_verify($password, $password_hashed);
+
+    // base case if the user is the admin with default admin pwd
+    if($user["uid"] == 1 && $user["upassword"] == "admin") {
+        if($password != "admin") { // since "admin" isn't hashed
+            header("location: ../settings.php?error=wrongpassword");
+            exit();
+        }
+    }
+    else if($password_check === false) {
+        header("location: ../settings.php?error=wrongpassword");
+        exit();
+    } 
+    
+    $sql = "UPDATE user SET upassword = ? WHERE uid = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../setting.php?error=stmterror");
+        exit();
+    }
+
+    $new_hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+    
+    mysqli_stmt_bind_param($stmt, "si", $new_hashed_password, $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../settings.php?error=none");
+    exit();
+}
+
+// for admin use
+function admin_change_user_name($conn, $uid, $name) {
+    $user = fetch_user_by_id($conn, $uid);
+    $sql = "UPDATE user SET uname = ? WHERE uid = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+        
+    mysqli_stmt_bind_param($stmt, "si", $name, $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
+// for admin use
+function admin_change_user_email($conn, $uid, $email) {
+    $user = fetch_user_by_id($conn, $uid);
+    $sql = "UPDATE user SET uemail = ? WHERE uid = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+        
+    mysqli_stmt_bind_param($stmt, "si", $email, $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
+// for admin use
+function admin_change_user_password($conn, $uid, $password) {
+    $user = fetch_user_by_id($conn, $uid);
+    $sql = "UPDATE user SET upassword = ? WHERE uid = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+        
+    $new_hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    
+    mysqli_stmt_bind_param($stmt, "si", $new_hashed_password, $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
+// for admin use
+function admin_change_user_privilege($conn, $uid, $privilege) {
+    $user = fetch_user_by_id($conn, $uid);
+    $sql = "UPDATE user SET uprivilege = ? WHERE uid = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+            
+    switch($privilege) {
+        case "Standard user":
+            $privilege = 9;
+        break;
+        case "Administrator":
+            $privilege = 1;
+        break;
+    }
+
+    mysqli_stmt_bind_param($stmt, "ii", $privilege, $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}

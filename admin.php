@@ -5,17 +5,34 @@
 <h2>Registered Users</h2>
         
 
-<div class="table-responsive">
+<div class="table-responsive sm-margin-top">
 <table class="table table-striped table-sm">
 
     <?php
         require_once "includes/db_handler_inc.php";
         require_once "includes/functions_inc.php";
-        echo $curPageName;
         print_user_table($conn);
 
     ?>          
 </table>
+<?php
+    if (isset($_GET["error"])) {
+        switch($_GET["error"]) {
+        case "none":
+            echo "<div class=\"alert alert-success\" role=\"alert\">
+            Successfully removed user.
+            </div>";
+        break;
+        case "forbiden":
+            echo "<div class=\"alert alert-danger\" role=\"alert\">
+            This action is forbiden.
+            </div>";
+        break;
+
+        }
+    }
+?>
+</div>
 
 <?php
     include_once "admin_footer.php";

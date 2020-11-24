@@ -26,10 +26,17 @@
 
     <?php
         if (isset($_GET["error"])) {
-            if($_GET["error"] == "wronglogin") 
+            switch($_GET["error"]) {
+            case "wronglogin":
                 echo "<div class=\"alert alert-danger\" role=\"alert\">
                 Wrong Email or Password. Please try again.
                 </div>";
+            break;
+            case "restricted":
+                echo "<div class=\"alert alert-danger\" role=\"alert\">
+                You do not have access.
+                </div>";
+            }
         }
     ?>
 </div>
