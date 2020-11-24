@@ -26,7 +26,6 @@
                 <button type="submit" name="change_user_password" class="btn btn-light">Change Password</button>
 
             </form>
-        </div>
 
 <?php
     if (isset($_GET["error"])) {
@@ -34,7 +33,7 @@
         if ($_GET["error"] == "none")
             $message_type = "success";
 
-        echo "<div class=\"margin-top alert alert-{$message_type}\" role=\"alert\">";
+        echo "<div class=\"sm-margin-top alert alert-{$message_type}\" role=\"alert\">";
 
         switch ($_GET["error"]) {
             case "changeadmin":
@@ -56,6 +55,7 @@
         echo "</div>";
     }
 ?>
+        </div>
     </div>
 </div>
 <?php 

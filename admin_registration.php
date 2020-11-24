@@ -37,14 +37,13 @@
 
 </form>
 
-</div>
 <?php
     if (isset($_GET["error"])) {
         $message_type = "danger";
         if ($_GET["error"] == "none")
             $message_type = "success";
 
-        echo "<div class=\"margin-top alert alert-{$message_type}\" role=\"alert\">";
+        echo "<div class=\"sm-margin-top alert alert-{$message_type}\" role=\"alert\">";
 
         switch ($_GET["error"]) {
             case "invalidemail":
@@ -69,6 +68,7 @@
         echo "</div>";
     }
 ?>
+</div>
 </div>
 </div>
 
