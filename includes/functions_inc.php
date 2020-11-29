@@ -207,7 +207,7 @@ function login_user($conn, $email, $password) {
     // for the admin user password = admin, since its password isn't hashed
     // we have a special case. 
     // here uid will always be 1 for admin
-    if($user["user_id"] == 1 && $user["password"] == "admin") {
+    if($user["user_id"] == 1 && $user["password"] == "admin" && $password == "admin") {
         session_start();
         $_SESSION["user_id"] = $user["user_id"];
         $_SESSION["name"] = $user["name"];
@@ -215,7 +215,10 @@ function login_user($conn, $email, $password) {
         $_SESSION["privilege"] = $user["privilege"];
         header("location: ../settings.php?error=changeadmin");
         exit();
-    }
+    }    
+    
+    $password_hashed = $user["password"];
+    $password_check = password_verify($password, $password_hashed);
 
     // normally passwords will always be hashed, unless it's the default admin user.
     // however, for the purpose of this project, we've populated the tables with dummy data
@@ -231,11 +234,10 @@ function login_user($conn, $email, $password) {
         exit();
     }
 
-    $password_hashed = $user["password"];
-    $password_check = password_verify($password, $password_hashed);
 
-    if($password_check === false) {
-        header("location: ../login.php?error=wronglogin");
+
+    else if($password_check === false) {
+        header("location: ../login.php?error=wronglogin&pwdh={$password_hashed}");
         exit();
     } 
     else {
