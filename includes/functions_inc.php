@@ -234,10 +234,8 @@ function login_user($conn, $email, $password) {
         exit();
     }
 
-
-
     else if($password_check === false) {
-        header("location: ../login.php?error=wronglogin&pwdh={$password_hashed}");
+        header("location: ../login.php?error=wronglogin");
         exit();
     } 
     else {

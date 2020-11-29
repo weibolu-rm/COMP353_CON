@@ -80,9 +80,9 @@ CREATE TABLE `consys`.`condo_owners` (
 );
 
 -- -----------------------------------------------------
--- Table `consys`.`Maintenance`
+-- Table `consys`.`maintenance`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`Maintenance` (
+CREATE TABLE `consys`.`maintenance` (
   `Contractor` VARCHAR(45) NOT NULL,
   `start_date` DATE NOT NULL,
   `complete_date` DATE NULL,
@@ -93,43 +93,54 @@ CREATE TABLE `consys`.`Maintenance` (
   PRIMARY KEY (`Contractor`, `start_date`)
 );
 
+-- -----------------------------------------------------
+-- Table `consys`.`posts`
+-- image will be in upload/<post_id>_img.jpg
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`posts` (
+  `post_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `post_date` DATETIME NOT NULL,
+  `view_permission` VARCHAR(45) DEFAULT "public",
+  `title` VARCHAR(45),
+  `content` VARCHAR(1000),
+  `image_status` INT(1) DEFAULT 0, /* 0 = no image, 1 = has image */
+  PRIMARY KEY (`post_id`),
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
+);
 
-/*row data for building table*/
-INSERT INTO building (square_footage, address) VALUES (2300, "3524 Rue Sherbrooke, Montreal, QC");
-INSERT INTO building (square_footage, address) VALUES (3000, "1587 Rue Laval, Montreal, QC");
-INSERT INTO building (square_footage, address) VALUES (2500, "2490 Rue St Denis, Montreal, QC");
+-- -----------------------------------------------------
+-- Table `consys`.`friend`
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`friend` (
+  `friend_id_1` INT NOT NULL,
+  `friend_id_2` INT NOT NULL,
+  FOREIGN KEY (`friend_id_1`) REFERENCES condo_owners(`user_id`),
+  FOREIGN KEY (`friend_id_2`) REFERENCES condo_owners(`user_id`),
+  CHECK (friend_id_1 <> friend_id_2)
+);
 
-/*row data for condo table*/
-INSERT INTO condo VALUES (1,1);
-INSERT INTO condo VALUES (1,2);
-INSERT INTO condo VALUES (1,3);
-INSERT INTO condo VALUES (1,4);
-INSERT INTO condo VALUES (1,5);
-INSERT INTO condo VALUES (1,6);
-INSERT INTO condo VALUES (1,7);
-INSERT INTO condo VALUES (1,8);
-INSERT INTO condo VALUES (1,9);
-INSERT INTO condo VALUES (1,10);
-INSERT INTO condo VALUES (2,1);
-INSERT INTO condo VALUES (2,2);
-INSERT INTO condo VALUES (2,3);
-INSERT INTO condo VALUES (2,4);
-INSERT INTO condo VALUES (2,5);
-INSERT INTO condo VALUES (2,6);
-INSERT INTO condo VALUES (2,7);
-INSERT INTO condo VALUES (2,8);
-INSERT INTO condo VALUES (2,9);
-INSERT INTO condo VALUES (2,10);
-INSERT INTO condo VALUES (3,1);
-INSERT INTO condo VALUES (3,2);
-INSERT INTO condo VALUES (3,3);
-INSERT INTO condo VALUES (3,4);
-INSERT INTO condo VALUES (3,5);
-INSERT INTO condo VALUES (3,6);
-INSERT INTO condo VALUES (3,7);
-INSERT INTO condo VALUES (3,8);
-INSERT INTO condo VALUES (3,9);
-INSERT INTO condo VALUES (3,10);
+-- -----------------------------------------------------
+-- table `consys`.`groups`
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`groups` (
+  `group_id` INT NOT NULL AUTO_INCREMENT,
+  `owner_id` INT NOT NULL,
+  `grou_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`group_id`),
+  FOREIGN KEY (`owner_id`) REFERENCES condo_owners(`user_id`)
+);
+
+
+-- -----------------------------------------------------
+-- table `consys`.`groups`
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`from_group` (
+  `user_id` INT NOT NULL,
+  `group_id` INT NOT NULL,
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`),
+  FOREIGN KEY (`group_id`) REFERENCES groups(`group_id`)
+);
 
 /* default admin user */
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
