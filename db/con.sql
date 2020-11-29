@@ -105,6 +105,7 @@ CREATE TABLE `consys`.`posts` (
   `title` VARCHAR(45),
   `content` VARCHAR(1000),
   `image_status` INT(1) DEFAULT 0, /* 0 = no image, 1 = has image */
+  `is_announcement` INT(1) DEFAULT 0, /* 0 = not announcement, 1 = announcement */
   PRIMARY KEY (`post_id`),
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
 );
