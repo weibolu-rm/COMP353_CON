@@ -25,35 +25,31 @@
             Add User
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Products
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Customers
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Reports
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Integrations
-            </a>
-        </li>
         </ul>
 
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Manage Posts</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo $admin_posts_url; ?>">
+            Dashboard 
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo $admin_announcement_url; ?>">
+            Create Announcement 
+            </a>
+        </li>
+        </ul>        
+        
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
         <span>Manage Groups</span>
         </h6>
         <ul class="nav flex-column mb-2">
         <li class="nav-item">
             <a class="nav-link" href="#">
-            Current month
+            Dashboard
             </a>
         </li>
         <li class="nav-item">
@@ -71,6 +67,7 @@
             Year-end sale
             </a>
         </li>
+
         </ul>
     </div>
     </nav>

@@ -58,6 +58,9 @@
             case "privilegesuccess":
                 echo "Successfuly changed privileges.";
             break;
+            case "addresssuccess":
+                echo "Successfuly changed address.";
+            break;
         }
         echo "</div>";
     }
@@ -65,7 +68,7 @@
 
 <h2>Change Name</h2>
 <div class="row justify-content-start">
-    <div class ="col-lg-6 col-md-6">
+    <div class ="col-lg-6">
         <?php echo'<form action="'. $change_inc_url .'?uid=' . $_GET["uid"] . '" method="post">'; ?>
             <div class="form-group">
                 <label for="name">Name</label>
@@ -78,7 +81,7 @@
 </div>
 <h2 class="sm-margin-top">Change Email</h2>
 <div class="row justify-content-start">
-    <div class ="col-lg-6 col-md-6">
+    <div class ="col-lg-6">
         <?php echo'<form action="'. $change_inc_url .'?uid=' . $_GET["uid"] . '" method="post">'; ?>
             <div class="form-group">
                 <label for="email">Email</label>
@@ -91,7 +94,7 @@
 </div>
 <h2 class="sm-margin-top">Change password</h2>
 <div class="row justify-content-start">
-    <div class ="col-lg-6 col-md-6">
+    <div class ="col-lg-6">
         <?php echo'<form action="'. $change_inc_url .'?uid=' . $_GET["uid"] . '" method="post">'; ?>
             <div class="form-group">
                 <label for="password">New Password</label>
@@ -106,13 +109,25 @@
         </form>
     </div>
 </div>
+<h2 class="sm-margin-top">Change Address</h2>
+<div class="row justify-content-start">
+    <div class ="col-lg-6">
+        <?php echo'<form action="'. $change_inc_url .'?uid=' . $_GET["uid"] . '" method="post">'; ?>
+            <div class="form-group">
+                <label for="name">Address</label>
+                <input type="text" name="address" class="form-control" required>
+            </div>
+            <button type="submit" name="change_user_address" class="btn btn-light">Change Address</button>
 
+        </form>
+    </div>
+</div>
 <?php  // prevent default admin user to change privilege
 if($_GET["uid"] != 1)
 echo '
     <h2 class="sm-margin-top">Change privilege</h2>
     <div class="row justify-content-start">
-        <div class ="col-lg-6 col-md-6">
+        <div class ="col-lg-6">
             <form action="'. $change_inc_url .'?uid=' . $_GET["uid"] . '" method="post">
                 <div class="form-group">
                     <label for="privilege">User privilege</label>

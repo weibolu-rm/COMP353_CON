@@ -22,8 +22,31 @@ if (isset($_GET["uid"])) {
     require_once "db_handler_inc.php";
     require_once "functions_inc.php";
 
-    delete_user($conn, $uid);
-    header("location: ../{$admin_url}");
+    if(delete_user($conn, $uid) === false){
+        header("location: ../{$admin_url}?error=stmterror");
+        exit();
+    }
+    else {
+        header("location: ../{$admin_url}?error=none");
+        exit();
+    }
+}
+
+if (isset($_GET["pid"])) {
+    $pid = $_GET["pid"];
+
+    require_once "db_handler_inc.php";
+    require_once "post_functions_inc.php";
+
+    if(delete_post($conn, $pid) === false) {
+        header("location: ../{$admin_posts_url}?error=stmterror");
+        exit();
+    }
+
+    else {
+        header("location: ../{$admin_posts_url}?error=none");
+        exit();
+    }
 }
 // will send users back to login page if they accessed this include illegally
 else {

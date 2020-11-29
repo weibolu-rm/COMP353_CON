@@ -81,7 +81,18 @@ if (isset($_GET["uid"])) {
             exit();
         }
     }
+    if(isset($_POST["change_user_address"])) {
+        $address = $_POST["address"];
 
+        if(admin_change_user_address($conn, $uid, $address)) {
+            header("location: ../{$admin_change_url}?uid={$uid}&error=addresssuccess");
+            exit();
+        }
+        else {
+            header("location: ../{$admin_change_url}?uid={$uid}&error=stmterror");
+            exit();
+        }
+    }
     if(isset($_POST["change_user_privilege"])) {
         $privilege = $_POST["privilege"];        
         

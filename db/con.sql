@@ -126,7 +126,7 @@ CREATE TABLE `consys`.`friend` (
 CREATE TABLE `consys`.`groups` (
   `group_id` INT NOT NULL AUTO_INCREMENT,
   `owner_id` INT NOT NULL,
-  `grou_name` VARCHAR(45) NOT NULL,
+  `group_name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`group_id`),
   FOREIGN KEY (`owner_id`) REFERENCES condo_owners(`user_id`)
 );

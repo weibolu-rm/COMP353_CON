@@ -156,8 +156,7 @@ function create_user($conn, $name, $email, $password, $address, $privilege) {
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin_registration.php?error=stmterror");
-        exit();
+        return false;
     }    
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -173,8 +172,7 @@ function create_user($conn, $name, $email, $password, $address, $privilege) {
     mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $hashed_password, $address, $privilege);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../admin_registration.php?error=none");
-    exit();
+    return true;
 }
 
 function delete_user($conn, $uid) {
@@ -182,16 +180,13 @@ function delete_user($conn, $uid) {
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin.php?error=stmterror");
-        exit();
+        return false;
     }
 
     mysqli_stmt_bind_param($stmt, "i", $uid);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../admin.php?error=none");
-    exit();
-
+    return true;
 }
 
 
@@ -244,7 +239,6 @@ function login_user($conn, $email, $password) {
         $_SESSION["name"] = $user["name"];
         $_SESSION["email"] = $user["email"];
         $_SESSION["privilege"] = $user["privilege"];
-        header("location: ../index.php");
         header("location: ../index.php");
         exit();
     }
@@ -308,7 +302,21 @@ function admin_change_user_name($conn, $uid, $name) {
     mysqli_stmt_close($stmt);
     return true;
 }
+// for admin use
+function admin_change_user_address($conn, $uid, $address) {
+    $user = fetch_user_by_id($conn, $uid);
+    $sql = "UPDATE condo_owners SET address = ? WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+        
+    mysqli_stmt_bind_param($stmt, "si", $address, $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
 // for admin use
 function admin_change_user_email($conn, $uid, $email) {
     $user = fetch_user_by_id($conn, $uid);

@@ -33,7 +33,14 @@ if (isset($_POST["register_user"])) {
         header("location: ../{$register_url}?error=invalidpasswordlength");
         exit();
     }
-    create_user($conn, $name, $email, $password, $address, $privilege);
+    if(create_user($conn, $name, $email, $password, $address, $privilege) === false) {
+        header("location: ../{$admin_registration_url}?error=stmterror");
+        exit();
+    }
+    else {
+        header("location: ../{$admin_registration_url}?error=none");
+        exit();
+    }
 
 }
 

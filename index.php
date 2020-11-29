@@ -7,8 +7,9 @@
     <?php 
         if (isset($_SESSION["name"]))
             echo "<h3 class=\"margin-top\">Welcome back, {$_SESSION["name"]}.";
+            
         require_once "includes/db_handler_inc.php";
-        require_once "includes/post_functions.php";
+        require_once "includes/post_functions_inc.php";
         print_posts($conn);
     ?>
 
