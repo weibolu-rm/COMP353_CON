@@ -1,5 +1,42 @@
 USE `consys`;
 
+/*row data for building table*/
+INSERT INTO building (square_footage, address) VALUES (2300, "3524 Rue Sherbrooke, Montreal, QC");
+INSERT INTO building (square_footage, address) VALUES (3000, "1587 Rue Laval, Montreal, QC");
+INSERT INTO building (square_footage, address) VALUES (2500, "2490 Rue St Denis, Montreal, QC");
+
+/*row data for condo table*/
+INSERT INTO condo VALUES (1,1);
+INSERT INTO condo VALUES (1,2);
+INSERT INTO condo VALUES (1,3);
+INSERT INTO condo VALUES (1,4);
+INSERT INTO condo VALUES (1,5);
+INSERT INTO condo VALUES (1,6);
+INSERT INTO condo VALUES (1,7);
+INSERT INTO condo VALUES (1,8);
+INSERT INTO condo VALUES (1,9);
+INSERT INTO condo VALUES (1,10);
+INSERT INTO condo VALUES (2,1);
+INSERT INTO condo VALUES (2,2);
+INSERT INTO condo VALUES (2,3);
+INSERT INTO condo VALUES (2,4);
+INSERT INTO condo VALUES (2,5);
+INSERT INTO condo VALUES (2,6);
+INSERT INTO condo VALUES (2,7);
+INSERT INTO condo VALUES (2,8);
+INSERT INTO condo VALUES (2,9);
+INSERT INTO condo VALUES (2,10);
+INSERT INTO condo VALUES (3,1);
+INSERT INTO condo VALUES (3,2);
+INSERT INTO condo VALUES (3,3);
+INSERT INTO condo VALUES (3,4);
+INSERT INTO condo VALUES (3,5);
+INSERT INTO condo VALUES (3,6);
+INSERT INTO condo VALUES (3,7);
+INSERT INTO condo VALUES (3,8);
+INSERT INTO condo VALUES (3,9);
+INSERT INTO condo VALUES (3,10);
+
 /* Data for populating condo owners */
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
 VALUES ("Shinji Ikari", "s.ikari@hotmail.com", "passw0rd1234", "3524 Rue Sherbrooke #1, Montreal, QC", "user", 10);
@@ -63,16 +100,16 @@ INSERT INTO condo_owners (name, email, password, address, privilege, percent_own
 VALUES ("Yasuo Iwakura", "y.iwakura@gmail.com", "passw0rd1234", "2490 Rue St Denis #10, Montreal, QC", "user", 10);
 
 /*data for maintenance table*/
-INSERT INTO Maintenance VALUES ("Terminexx", "2020-03-24", "2020-03-26", "unclogged rats from sink", 54.10, 1, 7);
-INSERT INTO Maintenance VALUES ("Father Jean Francois", "2020-01-19", "2020-01-19", "excorcized malaevolent spirits from gym", 210.99, 1, null);
-INSERT INTO Maintenance VALUES ("Terminexx", "2020-05-03", "2020-05-06", "removed raccoons from bedroom", 50.24, 1, 10);
-INSERT INTO Maintenance VALUES ("PlumbCo", "2020-01-10", "2020-01-10", "replaced shattered toilet", 200.87, 2, 6);
-INSERT INTO Maintenance VALUES ("ElectroPro", "2020-02-10", "2020-02-18", "rewired entire living room after The Incident", 1450.69, 2, 8);
-INSERT INTO Maintenance VALUES ("Terminexx", "2020-03-12", "2020-03-12", "fumigated storage sheds for Australian Huntsman spiders", 189.12, 2, null);
-INSERT INTO Maintenance VALUES ("Claude's Repairs", "2020-02-14", "2020-02-16", "repaired shotgun damage to bedroom wall", 300.64, 3, 3);
-INSERT INTO Maintenance VALUES ("Plumbco", "2020-06-20", "2020-06-20", "neutralized sewage geiser from toilet", 310.45, 3, 7);
-INSERT INTO Maintenance VALUES ("ElectroPro", "2020-04-21", "2020-04-22", "fixed flickering lights in kitchen", 230.34, 3, 1);
-INSERT INTO Maintenance VALUES ("RenovationInc", "2020-04-21", NULL, "Stairs restoration", 15000.00 , 3, NULL);
+INSERT INTO maintenance VALUES ("Terminexx", "2020-03-24", "2020-03-26", "unclogged rats from sink", 54.10, 1, 7);
+INSERT INTO maintenance VALUES ("Father Jean Francois", "2020-01-19", "2020-01-19", "excorcized malaevolent spirits from gym", 210.99, 1, null);
+INSERT INTO maintenance VALUES ("Terminexx", "2020-05-03", "2020-05-06", "removed raccoons from bedroom", 50.24, 1, 10);
+INSERT INTO maintenance VALUES ("PlumbCo", "2020-01-10", "2020-01-10", "replaced shattered toilet", 200.87, 2, 6);
+INSERT INTO maintenance VALUES ("ElectroPro", "2020-02-10", "2020-02-18", "rewired entire living room after The Incident", 1450.69, 2, 8);
+INSERT INTO maintenance VALUES ("Terminexx", "2020-03-12", "2020-03-12", "fumigated storage sheds for Australian Huntsman spiders", 189.12, 2, null);
+INSERT INTO maintenance VALUES ("Claude's Repairs", "2020-02-14", "2020-02-16", "repaired shotgun damage to bedroom wall", 300.64, 3, 3);
+INSERT INTO maintenance VALUES ("Plumbco", "2020-06-20", "2020-06-20", "neutralized sewage geiser from toilet", 310.45, 3, 7);
+INSERT INTO maintenance VALUES ("ElectroPro", "2020-04-21", "2020-04-22", "fixed flickering lights in kitchen", 230.34, 3, 1);
+INSERT INTO maintenance VALUES ("RenovationInc", "2020-04-21", NULL, "Stairs restoration", 15000.00 , 3, NULL);
 
 /*data for parking table*/
 insert into parking_space values (1, 1);
@@ -142,3 +179,18 @@ insert into storage_space values (3, 7);
 insert into storage_space values (3, 8);
 insert into storage_space values (3, 9);
 insert into storage_space values (3, 10);
+
+insert into posts (user_id, post_date, title, content)
+VALUES (1, "2020-11-28 20:30:30", "Admin message", "This is an admin test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (2, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (3, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (4, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (5, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (6, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (7, "2020-11-28 20:30:35", "Test message", "This is another test message.");

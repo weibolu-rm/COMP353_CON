@@ -6,6 +6,9 @@
     $logout_url = "includes/logout_inc.php";
     $admin_url = "admin.php";
     $admin_change_url = "admin_change_user.php";
+    $admin_posts_url = "admin_posts.php";
+    $admin_registration_url = "admin_registration.php";
+    $admin_announcement_url = "admin_announcement.php";
     $settings_url = "settings.php";
     $active_page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);  
     $settings_inc_url = "includes/settings_inc.php";
