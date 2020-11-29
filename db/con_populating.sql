@@ -179,3 +179,18 @@ insert into storage_space values (3, 7);
 insert into storage_space values (3, 8);
 insert into storage_space values (3, 9);
 insert into storage_space values (3, 10);
+
+insert into posts (user_id, post_date, title, content)
+VALUES (1, "2020-11-28 20:30:30", "Admin message", "This is an admin test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (2, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (3, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (4, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (5, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (6, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+insert into posts (user_id, post_date, title, content)
+VALUES (7, "2020-11-28 20:30:35", "Test message", "This is another test message.");
