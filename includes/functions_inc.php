@@ -18,7 +18,7 @@ function invalid_name($name) {
 }
 
 function fetch_user($conn, $email) {
-    $sql = "SELECT * FROM user WHERE uemail = ?;";
+    $sql = "SELECT * FROM condo_owners WHERE email = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -42,7 +42,7 @@ function fetch_user($conn, $email) {
 }
 
 function fetch_user_by_id($conn, $uid) {
-    $sql = "SELECT * FROM user WHERE uid = ?;";
+    $sql = "SELECT * FROM condo_owners WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -66,7 +66,7 @@ function fetch_user_by_id($conn, $uid) {
 }
 
 function print_user_table($conn) {
-    $sql = "SELECT * FROM user ORDER BY uid ASC;";
+    $sql = "SELECT * FROM condo_owners ORDER BY user_id ASC;";
     // here we don't need to bind a prepared statement as you couldn't do 
     $query_result = mysqli_query($conn, $sql);
     echo "<thead>
@@ -74,6 +74,7 @@ function print_user_table($conn) {
               <th>uid</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Address</th>
               <th>Privilege</th>
               <th>Manage</th>
             </tr>
@@ -82,14 +83,15 @@ function print_user_table($conn) {
     if($query_result) {
         while($row = mysqli_fetch_assoc($query_result)) {
             echo "<tr>";
-            echo "<td>{$row["uid"]}</td>";
-            echo "<td>{$row["uname"]}</td>";
-            echo "<td>{$row["uemail"]}</td>";
-            echo "<td>{$row["uprivilege"]}</td>";
+            echo "<td>{$row["user_id"]}</td>";
+            echo "<td>{$row["name"]}</td>";
+            echo "<td>{$row["email"]}</td>";
+            echo "<td>{$row["address"]}</td>";
+            echo "<td>{$row["privilege"]}</td>";
             echo "<td>
                 <div class=\"btn-group mr-2\">
-                <a href=\"admin_change_user.php?uid={$row["uid"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Change</button></a>
-                <a href=\"includes/delete_inc.php?uid={$row["uid"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
+                <a href=\"admin_change_user.php?uid={$row["user_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Change</button></a>
+                <a href=\"includes/delete_inc.php?uid={$row["user_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
                 </div>
                 </td>";
         }
@@ -107,6 +109,7 @@ function print_single_user_table($conn, $uid) {
               <th>uid</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Address</th>
               <th>Privilege</th>
             </tr>
             </thead>
@@ -114,10 +117,11 @@ function print_single_user_table($conn, $uid) {
 
     if($row = fetch_user_by_id($conn, $uid)) {
         echo "<tr>";
-        echo "<td>{$row["uid"]}</td>";
-        echo "<td>{$row["uname"]}</td>";
-        echo "<td>{$row["uemail"]}</td>";
-        echo "<td>{$row["uprivilege"]}</td>";
+        echo "<td>{$row["user_id"]}</td>";
+        echo "<td>{$row["name"]}</td>";
+        echo "<td>{$row["email"]}</td>";
+        echo "<td>{$row["address"]}</td>";
+        echo "<td>{$row["privilege"]}</td>";
     }
     echo "</tbody>";
 }
@@ -147,8 +151,8 @@ function invalid_password_length($password) {
     return $invalid;
 }
 
-function create_user($conn, $name, $email, $password, $privilege) {
-    $sql = "INSERT INTO user (uname, uemail, upassword, uprivilege) VALUES (?, ?, ?, ?);";
+function create_user($conn, $name, $email, $password, $address, $privilege) {
+    $sql = "INSERT INTO condo_owners (name, email, password, address, privilege) VALUES (?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -159,14 +163,14 @@ function create_user($conn, $name, $email, $password, $privilege) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     switch($privilege) {
         case "Standard user":
-            $privilege = 9;
+            $privilege = "user";
         break;
         case "Administrator":
-            $privilege = 1;
+            $privilege = "admin";
         break;
     }
 
-    mysqli_stmt_bind_param($stmt, "sssi", $name, $email, $hashed_password, $privilege);
+    mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $hashed_password, $address, $privilege);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../admin_registration.php?error=none");
@@ -174,7 +178,7 @@ function create_user($conn, $name, $email, $password, $privilege) {
 }
 
 function delete_user($conn, $uid) {
-    $sql = "DELETE FROM user WHERE uid = ?;";
+    $sql = "DELETE FROM condo_owners WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -203,17 +207,31 @@ function login_user($conn, $email, $password) {
     // for the admin user password = admin, since its password isn't hashed
     // we have a special case. 
     // here uid will always be 1 for admin
-    if($user["uid"] == 1 && $user["upassword"] == "admin") {
+    if($user["user_id"] == 1 && $user["password"] == "admin") {
         session_start();
-        $_SESSION["uid"] = $user["uid"];
-        $_SESSION["uname"] = $user["uname"];
-        $_SESSION["uemail"] = $user["uemail"];
-        $_SESSION["uprivilege"] = $user["uprivilege"];
+        $_SESSION["user_id"] = $user["user_id"];
+        $_SESSION["name"] = $user["name"];
+        $_SESSION["email"] = $user["email"];
+        $_SESSION["privilege"] = $user["privilege"];
         header("location: ../settings.php?error=changeadmin");
         exit();
     }
 
-    $password_hashed = $user["upassword"];
+    // normally passwords will always be hashed, unless it's the default admin user.
+    // however, for the purpose of this project, we've populated the tables with dummy data
+    // these users have plain text passwords.
+    // This is what we're checking here, this would not be in the deployable version
+    if($user["password"] == "$password") {
+        session_start();
+        $_SESSION["user_id"] = $user["user_id"];
+        $_SESSION["name"] = $user["name"];
+        $_SESSION["email"] = $user["email"];
+        $_SESSION["privilege"] = $user["privilege"];
+        header("location: ../settings.php?error=changecredentials");
+        exit();
+    }
+
+    $password_hashed = $user["password"];
     $password_check = password_verify($password, $password_hashed);
 
     if($password_check === false) {
@@ -222,10 +240,10 @@ function login_user($conn, $email, $password) {
     } 
     else {
         session_start();
-        $_SESSION["uid"] = $user["uid"];
-        $_SESSION["uname"] = $user["uname"];
-        $_SESSION["uemail"] = $user["uemail"];
-        $_SESSION["uprivilege"] = $user["uprivilege"];
+        $_SESSION["user_id"] = $user["user_id"];
+        $_SESSION["name"] = $user["name"];
+        $_SESSION["email"] = $user["email"];
+        $_SESSION["privilege"] = $user["privilege"];
         header("location: ../index.php");
         header("location: ../index.php");
         exit();
@@ -235,22 +253,30 @@ function login_user($conn, $email, $password) {
 function change_user_password($conn, $uid, $password, $new_password) {
     $user = fetch_user_by_id($conn, $uid);
 
-    $password_hashed = $user["upassword"];
+    $password_hashed = $user["password"];
     $password_check = password_verify($password, $password_hashed);
 
     // base case if the user is the admin with default admin pwd
-    if($user["uid"] == 1 && $user["upassword"] == "admin") {
+    if($user["user_id"] == 1 && $user["password"] == "admin") {
         if($password != "admin") { // since "admin" isn't hashed
             header("location: ../settings.php?error=wrongpassword");
             exit();
         }
     }
+    // normally passwords will always be hashed, unless it's the default admin user.
+    // however, for the purpose of this project, we've populated the tables with dummy data
+    // these users have plain text passwords.
+    // This is what we're checking here, this would not be in the deployable version
+    if($user["password"] == "$password") {
+        // pass the hash check
+    }
+
     else if($password_check === false) {
         header("location: ../settings.php?error=wrongpassword");
         exit();
     } 
     
-    $sql = "UPDATE user SET upassword = ? WHERE uid = ?;";
+    $sql = "UPDATE condo_owners SET password = ? WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -270,7 +296,7 @@ function change_user_password($conn, $uid, $password, $new_password) {
 // for admin use
 function admin_change_user_name($conn, $uid, $name) {
     $user = fetch_user_by_id($conn, $uid);
-    $sql = "UPDATE user SET uname = ? WHERE uid = ?;";
+    $sql = "UPDATE condo_owners SET name = ? WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -286,7 +312,7 @@ function admin_change_user_name($conn, $uid, $name) {
 // for admin use
 function admin_change_user_email($conn, $uid, $email) {
     $user = fetch_user_by_id($conn, $uid);
-    $sql = "UPDATE user SET uemail = ? WHERE uid = ?;";
+    $sql = "UPDATE condo_owners SET email = ? WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -302,7 +328,7 @@ function admin_change_user_email($conn, $uid, $email) {
 // for admin use
 function admin_change_user_password($conn, $uid, $password) {
     $user = fetch_user_by_id($conn, $uid);
-    $sql = "UPDATE user SET upassword = ? WHERE uid = ?;";
+    $sql = "UPDATE condo_owners SET password = ? WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -320,7 +346,7 @@ function admin_change_user_password($conn, $uid, $password) {
 // for admin use
 function admin_change_user_privilege($conn, $uid, $privilege) {
     $user = fetch_user_by_id($conn, $uid);
-    $sql = "UPDATE user SET uprivilege = ? WHERE uid = ?;";
+    $sql = "UPDATE condo_owners SET privilege = ? WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -329,14 +355,14 @@ function admin_change_user_privilege($conn, $uid, $privilege) {
             
     switch($privilege) {
         case "Standard user":
-            $privilege = 9;
+            $privilege = "user";
         break;
         case "Administrator":
-            $privilege = 1;
+            $privilege = "admin";
         break;
     }
 
-    mysqli_stmt_bind_param($stmt, "ii", $privilege, $uid);
+    mysqli_stmt_bind_param($stmt, "ss", $privilege, $uid);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;

@@ -20,7 +20,7 @@ if (isset($_POST["change_user_password"])) {
         exit();
     }
 
-    change_user_password($conn, $_SESSION["uid"], $password, $new_password);
+    change_user_password($conn, $_SESSION["user_id"], $password, $new_password);
 }
 
 if (isset($_POST["change_user_name"])) {
@@ -34,8 +34,8 @@ if (isset($_POST["change_user_name"])) {
         exit();
     }
 
-    if(admin_change_user_name($conn, $_SESSION["uid"], $name)) {
-        $_SESSION["uname"] = $name;
+    if(admin_change_user_name($conn, $_SESSION["user_id"], $name)) {
+        $_SESSION["name"] = $name;
         header("location: ../{$settings_url}?error=namesuccess");
         exit();
     }
@@ -60,8 +60,8 @@ if (isset($_POST["change_user_email"])) {
         exit();
     }
 
-    if(admin_change_user_email($conn, $_SESSION["uid"], $email)) {
-        $_SESSION["uemail"] = $email;
+    if(admin_change_user_email($conn, $_SESSION["user_id"], $email)) {
+        $_SESSION["email"] = $email;
         header("location: ../{$settings_url}?error=emailsuccess");
         exit();
     } 

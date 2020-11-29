@@ -27,8 +27,8 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                 <?php
-                    if (isset($_SESSION["uid"])) {
-                        if ($_SESSION["uprivilege"] == 1) {
+                    if (isset($_SESSION["user_id"])) {
+                        if ($_SESSION["privilege"] == "admin") {
                             echo "<li class=\"nav-item\"><a class=\"nav-link ";
                             if(strpos($active_page, "admin") !== false) // if name page contains "admin"
                                 echo "active";
@@ -54,7 +54,7 @@
                 </li>
                 <li class="nav-item">                
                 <?php
-                    if (isset($_SESSION["uid"]))
+                    if (isset($_SESSION["user_id"]))
                         echo "<a class=\"nav-link\" href=\"{$logout_url}\">Log out</a>";
                     // else
                     //     echo "<a class=\"nav-link\" href=\"{$register_url}\">Register</a>";

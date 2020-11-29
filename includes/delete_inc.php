@@ -3,7 +3,7 @@
     require_once "config_inc.php";
 
 // prevents non admins to delete users by manually entering some url
-if(!isset($_SESSION["uid"]) || $_SESSION["uprivilege"] != 1){
+if(!isset($_SESSION["user_id"]) || $_SESSION["privilege"] != "admin"){
     header("location: ../{$login_url}?error=restricted");
     exit();
 }
@@ -13,7 +13,7 @@ if (isset($_GET["uid"])) {
     $uid = $_GET["uid"];
 
     // we won't let people delete the default admin user or themselves
-    if($uid == 1 || $uid == $_SESSION["uid"]) {
+    if($uid == 1 || $uid == $_SESSION["user_id"]) {
         header("location: ../{$admin_url}?error=forbiden");
         exit();
     }
