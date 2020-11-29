@@ -1,3 +1,5 @@
+/* 40058095 */
+
 body{
     color: #fff;
     background-color: #151617;
@@ -72,4 +74,15 @@ body{
 .table {
   color: inherit;
 }
- 
+
+.blog-post {
+  margin-bottom: 4rem;
+}
+.blog-post-title {
+  margin-bottom: .25rem;
+  font-size: 2.5rem;
+}
+.blog-post-meta {
+  margin-bottom: 1.25rem;
+  color: #999;
+}
