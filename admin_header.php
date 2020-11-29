@@ -1,7 +1,7 @@
 <?php // 40058095
     include_once "header.php";
 
-    if(!isset($_SESSION["uid"]) || $_SESSION["uprivilege"] != 1){
+    if(!isset($_SESSION["user_id"]) || $_SESSION["privilege"] != "admin"){
         header("location: {$login_url}?error=restricted");
         exit();
     }

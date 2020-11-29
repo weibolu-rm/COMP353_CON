@@ -6,6 +6,7 @@ if (isset($_POST["register_user"])) {
     $email = $_POST["email"];
     $password = $_POST["password_1"];
     $password_confirm = $_POST["password_2"];
+    $address = $_POST["address"];
     $privilege = $_POST["privilege"];
 
 
@@ -32,7 +33,7 @@ if (isset($_POST["register_user"])) {
         header("location: ../{$register_url}?error=invalidpasswordlength");
         exit();
     }
-    create_user($conn, $name, $email, $password, $privilege);
+    create_user($conn, $name, $email, $password, $address, $privilege);
 
 }
 

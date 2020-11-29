@@ -3,18 +3,6 @@
 ?>
 
 <h2>Registered Users</h2>
-        
-
-<div class="table-responsive sm-margin-top">
-<table class="table table-striped table-sm">
-
-    <?php
-        require_once "includes/db_handler_inc.php";
-        require_once "includes/functions_inc.php";
-        print_user_table($conn);
-
-    ?>          
-</table>
 <?php
     if (isset($_GET["error"])) {
         switch($_GET["error"]) {
@@ -32,6 +20,18 @@
         }
     }
 ?>
+
+<div class="table-responsive sm-margin-top">
+<table class="table table-striped table-sm">
+
+    <?php
+        require_once "includes/db_handler_inc.php";
+        require_once "includes/functions_inc.php";
+        print_user_table($conn);
+
+    ?>          
+</table>
+
 </div>
 
 <?php

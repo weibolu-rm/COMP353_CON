@@ -3,7 +3,7 @@
     require_once "config_inc.php";
 
 // prevents non admins to delete users by manually entering some url
-if(!isset($_SESSION["uid"]) || $_SESSION["uprivilege"] != 1){
+if(!isset($_SESSION["user_id"]) || $_SESSION["privilege"] != "admin"){
     header("location: ../{$login_url}?error=restricted");
     exit();
 }
@@ -24,8 +24,8 @@ if (isset($_GET["uid"])) {
             exit();
         }
         if(admin_change_user_name($conn, $uid, $name)) {
-            if($_SESSION["uid"] == $uid)
-                $_SESSION["uname"] = $name; // updating session variable if the connected admin changes themselves
+            if($_SESSION["user_id"] == $uid)
+                $_SESSION["name"] = $name; // updating session variable if the connected admin changes themselves
             header("location: ../{$admin_change_url}?uid={$uid}&error=namesuccess");
             exit();
         }
@@ -49,8 +49,8 @@ if (isset($_GET["uid"])) {
         }
 
         if(admin_change_user_email($conn, $uid, $email)) {
-            if($_SESSION["uid"] == $uid)
-                $_SESSION["uemail"] = $email; // updating session variable if the connected admin changes themselves
+            if($_SESSION["user_id"] == $uid)
+                $_SESSION["email"] = $email; // updating session variable if the connected admin changes themselves
             header("location: ../{$admin_change_url}?uid={$uid}&error=emailsuccess");
             exit();
         } 
@@ -89,7 +89,7 @@ if (isset($_GET["uid"])) {
 
             // We're only preventing the default ademin from being revoked admin privilege.
             // If an admin wants to remove itself the admin privilege, we'll let him/her but he/she'll be redirected outside the admin panel.
-            if($_SESSION["uid"] == $uid) {
+            if($_SESSION["user_id"] == $uid) {
                 switch($privilege) {
                     case "Standard user":
                         $privilege = 9;
@@ -99,7 +99,7 @@ if (isset($_GET["uid"])) {
                     break;
                 }
 
-                $_SESSION["uprivilege"] = $privilege;
+                $_SESSION["privilege"] = $privilege;
             }
             header("location: ../{$admin_change_url}?uid={$uid}&error=privilegesuccess");
             exit();

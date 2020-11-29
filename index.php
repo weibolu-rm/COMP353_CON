@@ -5,9 +5,9 @@
 <div class="col-md-12 text-center">
     <h1 class="display-4">Condo-association Online Network System</h1>
     <?php 
-        if (isset($_SESSION["uname"]))
-            echo "<h3 class=\"margin-top\">Welcome back, {$_SESSION["uname"]}.";
-    ?>  
+          if (isset($_SESSION["name"]))
+            echo "<h3 class=\"margin-top\">Welcome back, {$_SESSION["name"]}.";
+    ?>
     <div class="row mb-2 margin-top">
         <div class="col-md-6">
             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">

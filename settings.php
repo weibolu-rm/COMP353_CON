@@ -17,7 +17,10 @@
 
         switch ($_GET["error"]) {
             case "changeadmin":
-                echo "Please change the default Administrator Credentials.";
+                echo "Please change the default administrator credentials.";
+            break;
+            case "changecredentials":
+                echo "Please change the default credentials.";
             break;
             case "invalidname":
                 echo "Name is invalid. Please try again.";
@@ -52,8 +55,8 @@
 ?>
 <?php
     // This is for the first login, after that the admin can use the admin panel to change names/emails as he/she sees fit.
-    if($_SESSION["uid"] == 1)
-        if($_SESSION["uemail"] == "admin" || $_SESSION["uname"] == "admin")
+    if($_SESSION["user_id"] == 1)
+        if($_SESSION["email"] == "admin" || $_SESSION["name"] == "admin")
             echo '
     <h2>Change Name</h2>
     <div class="row justify-content-start">
