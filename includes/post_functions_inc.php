@@ -2,29 +2,39 @@
 
 function print_posts($conn) {
     require_once "functions_inc.php";
-    $sql = "SELECT * FROM posts ORDER BY post_id DESC;";
+    
+    $sql = "SELECT * FROM posts ORDER BY is_announcement DESC, post_id DESC;";
     $query_result = mysqli_query($conn, $sql);
     echo '<div class="row mb-2 margin-top">';
     if($query_result) {
         while($row = mysqli_fetch_assoc($query_result)) {
             $user = fetch_user_by_id($conn, $row["user_id"]);
+            $message_type = "primary";
+            if($row["is_announcement"] == 1)
+                $message_type = "danger";
             
+            // visibility
+            if($_SESSION["privilege"] != "admin" && $row["view_permission"] == "admin")
+                continue;
+            if(!isset($_SESSION["user_id"]) && $row["view_permission"] == "user")
+                continue;
 
-        echo '
-            <div class="col-md-6">
-                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-primary">'.$user["name"].'</strong>
-                        <h3 class="mb-0">'. $row["title"] .'</h3>
-                        <div class="mb-1 text-muted">'. $row["post_date"] .'</div>
-                        <p class="card-text mb-auto">'. $row["content"] .'</p>
-                        <a href="#?pid='. $row["post_id"] .'" class="stretched-link text-muted">Continue reading</a>
+
+            echo '
+                <div class="col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-'. $message_type .'">'.$user["name"].'</strong>
+                            <h3 class="mb-0">'. $row["title"] .'</h3>
+                            <div class="mb-1 text-muted">'. $row["post_date"] .'</div>
+                            <p class="card-text mb-auto">'. $row["content"] .'</p>
+                            <a href="#?pid='. $row["post_id"] .'" class="stretched-link text-muted">Continue reading</a>
+                        </div>
+                        <!-- <div class="col-auto d-none d-lg-block">
+                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                        </div> -->
                     </div>
-                    <!-- <div class="col-auto d-none d-lg-block">
-                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                    </div> -->
-                </div>
-            </div>';
+                </div>';
         }
     }
 
@@ -84,6 +94,37 @@ function delete_post($conn, $pid) {
     }
 
     mysqli_stmt_bind_param($stmt, "i", $pid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
+function create_post($conn, $uid, $title, 
+                     $content, $visibility, $img = false, $announcement = false) {
+
+    if(!$announcement === false)
+        $announcement = 1;
+    else
+        $announcement = 0;
+    
+    if(!$img === false)
+        $img = 1;
+    else
+        $img = 0;
+    
+    $sql = "INSERT INTO posts (user_id, post_date, title, content, view_permission, image_status, is_announcement)
+            VALUES (?, ?, ?, ?, ?, ?, ?);";
+
+
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+
+    $current_datetime = date('Y-m-d H:i:s');
+
+    mysqli_stmt_bind_param($stmt, "issssii", $uid, $current_datetime, $title, $content, $visibility, $img, $announcement);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
