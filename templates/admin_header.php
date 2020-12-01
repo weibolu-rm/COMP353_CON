@@ -2,7 +2,7 @@
     include_once "header.php";
 
     if(!isset($_SESSION["user_id"]) || $_SESSION["privilege"] != "admin"){
-        header("location: ../{$login_url}?error=restricted");
+        header("location: {$login_url}?error=restricted");
         exit();
     }
 ?>
@@ -16,12 +16,12 @@
         </h6>
         <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link"  href="<?php echo "../".$admin_url; ?>">
+            <a class="nav-link"  href="<?php echo "".$admin_url; ?>">
             Dashboard
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo "../".$register_url; ?>">
+            <a class="nav-link" href="<?php echo "".$register_url; ?>">
             Add User
             </a>
         </li>
@@ -32,12 +32,12 @@
         </h6>
         <ul class="nav flex-column mb-2">
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo "../".$admin_posts_url; ?>">
+            <a class="nav-link" href="<?php echo "".$admin_posts_url; ?>">
             Dashboard 
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo "../".$admin_announcement_url; ?>">
+            <a class="nav-link" href="<?php echo "".$admin_announcement_url; ?>">
             Create Announcement 
             </a>
         </li>
