@@ -12,72 +12,52 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
     <div class="sidebar-sticky pt-3">
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Manage Users</span>
+            <span>Manage Emails</span>
         </h6>
         <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link"  href="<?php echo $admin_url; ?>">
-            Dashboard
+            <a class="nav-link"  href="<?php echo $email_url; ?>">
+            Inbox
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo $register_url; ?>">
-            Add User
+            <a class="nav-link" href="<?php echo $email_url; ?>">
+            Sent
             </a>
         </li>
         </ul>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Manage Posts</span>
-        </h6>
-        <ul class="nav flex-column mb-2">
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo $admin_posts_url; ?>">
-            Dashboard 
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo $admin_announcement_url; ?>">
-            Create Announcement 
-            </a>
-        </li>
-        </ul>        
-        
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Manage Groups</span>
-        </h6>
-        <ul class="nav flex-column mb-2">
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Dashboard
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Last quarter
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Social engagement
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Year-end sale
-            </a>
-        </li>
-
-        </ul>
     </div>
     </nav>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-    <div class="pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
+    <div class="pt-3 pb-2 mb-3">
+        <h1 class="h2">Internal Emails</h1>
     </div>
 
+    <?php
+        if (isset($_GET["error"])) {
+            switch($_GET["error"]) {
+            case "none":
+                echo "<div class=\"alert alert-success\" role=\"alert\">
+                Successfully deleted email.
+                </div>";
+            break;
+            }
+        }
+    ?>
 
+    <div class="table-responsive sm-margin-top">
+    <table class="table table-striped table-sm">
+
+        <?php
+            require_once "includes/db_handler_inc.php";
+            require_once "includes/email_functions_inc.php";
+            $uid = $_SESSION["user_id"];
+            print_emails($conn, $uid);
+
+        ?>          
+    </table>
       
       
 

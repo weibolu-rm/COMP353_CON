@@ -149,9 +149,9 @@ CREATE TABLE `consys`.`from_group` (
 CREATE TABLE `consys`.`emails` (
   `from_id` INT NOT NULL,
   `to_id` INT NOT NULL,
-  `subject` VARCHAR(45) DEFAULT = "No Subject",
+  `subject` VARCHAR(45) DEFAULT "No Subject",
   `content` VARCHAR(1000) NOT NULL,
-  `email_date` DATETIME NUT NULL,
+  `email_date` DATETIME NOT NULL,
   FOREIGN KEY (`from_id`) REFERENCES condo_owners(`user_id`),
   FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
 );

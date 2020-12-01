@@ -194,3 +194,12 @@ insert into posts (user_id, post_date, title, content)
 VALUES (6, "2020-11-28 20:30:35", "Test message", "This is another test message.");
 insert into posts (user_id, post_date, title, content)
 VALUES (7, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+
+INSERT INTO emails (from_id, to_id, subject, content, email_date) 
+VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+ sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+ veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+ pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+ mollit anim id est laborum.", "2020-11-30 00:12:12");
+  
