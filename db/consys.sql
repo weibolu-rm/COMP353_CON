@@ -104,7 +104,7 @@ CREATE TABLE `consys`.`posts` (
   `view_permission` VARCHAR(45) DEFAULT "public",
   `title` VARCHAR(45),
   `content` VARCHAR(1000),
-  `image_status` INT(1) DEFAULT 0, /* 0 = no image, 1 = has image */
+  `image_id` VARCHAR(45) DEFAULT "none", /* none = no image */
   `is_announcement` INT(1) DEFAULT 0, /* 0 = not announcement, 1 = announcement */
   PRIMARY KEY (`post_id`),
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)

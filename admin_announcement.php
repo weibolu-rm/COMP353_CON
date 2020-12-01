@@ -20,7 +20,7 @@
 <div class="row justify-content-start">
 <div class="col-lg-6">
 <!-- _inc.php files are include files -->
-<form action="includes/post_inc.php" method="post">
+<form action="includes/post_inc.php" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
         <label for="name">Title</label>
@@ -37,6 +37,10 @@
             <option>user</option>
             <option>admin</option>
         </select>
+    </div>
+     <div class="form-group">
+        <label for="exampleFormControlFile1">Upload image</label>
+        <input type="file" class="form-control-file" name="img_file">
     </div>
     <button type="submit" name="post_announcement" class="btn btn-light">Post</button>
 
