@@ -56,7 +56,8 @@ function print_emails($conn, $to_id) {
     echo "</tbody>";
         
 
-    mysqli_free_result($query_result);
+    if($query_result !== false)
+        mysqli_free_result($query_result);
     mysqli_close($conn);
 }
 
