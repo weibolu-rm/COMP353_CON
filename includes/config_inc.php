@@ -14,3 +14,4 @@
     $settings_inc_url = "includes/settings_inc.php";
     $change_inc_url = "includes/change_inc.php";
     $post_url = "post.php";
+    $email_url = "email.php";

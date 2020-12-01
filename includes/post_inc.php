@@ -27,7 +27,7 @@ if (isset($_POST["post_announcement"])) {
             exit();
         } 
         if(!in_array($file_type, $allowed_img_types) || getimagesize($file_tmp) === false) {
-            header("location: ../{$admin_announcement_url}?error=imgtype{$file_type}");
+            header("location: ../{$admin_announcement_url}?error=imgtype");
             exit();
         }
 

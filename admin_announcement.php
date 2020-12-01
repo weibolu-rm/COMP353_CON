@@ -6,12 +6,27 @@
 <div class=container-fluid>
 <h2>Post Admin Announcement</h2>
 <?php
-    if (isset($_GET["error"])) {
+    if (isset($_GET["error"])) {        
+        $message_type = "danger";
+        if ($_GET["error"] == "none" || strpos($_GET["error"], "success") !== false)
+            $message_type = "success";
 
-        echo "<div class=\"sm-margin-top alert alert-success\" role=\"alert\">";
+        echo "<div class=\"sm-margin-top alert alert-{$message_type}\" role=\"alert\">";
         switch ($_GET["error"]) {
             case "none":
                 echo "Successfuly posted announcement.";
+            break;
+            case "imgerror":
+                echo "There was a problem with your file.";
+            break;
+            case "imgsize":
+                echo "Image file too big. Max 5MB.";
+            break;
+            case "imgtype":
+                echo "Image file must be of type jpg, jpeg, png or gif.";
+            break;
+            case "imgupload":
+                echo "There was a problem uploading your imagage.";
             break;
         }
         echo "</div>";

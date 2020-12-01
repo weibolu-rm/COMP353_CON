@@ -143,6 +143,20 @@ CREATE TABLE `consys`.`from_group` (
   FOREIGN KEY (`group_id`) REFERENCES groups(`group_id`)
 );
 
+-- -----------------------------------------------------
+-- table `consys`.`emails`
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`emails` (
+  `from_id` INT NOT NULL,
+  `to_id` INT NOT NULL,
+  `subject` VARCHAR(45) DEFAULT = "No Subject",
+  `content` VARCHAR(1000) NOT NULL,
+  `email_date` DATETIME NUT NULL,
+  FOREIGN KEY (`from_id`) REFERENCES condo_owners(`user_id`),
+  FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
+);
+
+
 /* default admin user */
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
 VALUES ("admin", "admin", "admin", "admin", "admin", 0);
