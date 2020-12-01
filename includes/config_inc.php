@@ -13,3 +13,5 @@
     $active_page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);  
     $settings_inc_url = "includes/settings_inc.php";
     $change_inc_url = "includes/change_inc.php";
+    $post_url = "post.php";
+    $email_url = "email.php";

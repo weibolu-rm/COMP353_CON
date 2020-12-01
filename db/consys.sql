@@ -104,7 +104,7 @@ CREATE TABLE `consys`.`posts` (
   `view_permission` VARCHAR(45) DEFAULT "public",
   `title` VARCHAR(45),
   `content` VARCHAR(1000),
-  `image_status` INT(1) DEFAULT 0, /* 0 = no image, 1 = has image */
+  `image_id` VARCHAR(45) DEFAULT "none", /* none = no image */
   `is_announcement` INT(1) DEFAULT 0, /* 0 = not announcement, 1 = announcement */
   PRIMARY KEY (`post_id`),
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
@@ -142,6 +142,20 @@ CREATE TABLE `consys`.`from_group` (
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`),
   FOREIGN KEY (`group_id`) REFERENCES groups(`group_id`)
 );
+
+-- -----------------------------------------------------
+-- table `consys`.`emails`
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`emails` (
+  `from_id` INT NOT NULL,
+  `to_id` INT NOT NULL,
+  `subject` VARCHAR(45) DEFAULT "No Subject",
+  `content` VARCHAR(1000) NOT NULL,
+  `email_date` DATETIME NOT NULL,
+  FOREIGN KEY (`from_id`) REFERENCES condo_owners(`user_id`),
+  FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
+);
+
 
 /* default admin user */
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 

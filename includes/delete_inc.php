@@ -2,6 +2,45 @@
     session_start();
     require_once "config_inc.php";
 
+
+
+if (isset($_GET["pid"])) {
+    $pid = $_GET["pid"];
+    require_once "db_handler_inc.php";
+    require_once "post_functions_inc.php";
+    
+    // prevents non admins and non post authors to delete posts by manually entering some url
+    if(!isset($_SESSION["user_id"])){
+        header("location: ../{$login_url}?error=restricted");
+        exit();
+    }
+
+    if ($_SESSION["privilege"] != "admin") {
+        if($row = fetch_post_by_id($conn, $pid) === false) {
+            header("location: ../{$admin_posts_url}?error=stmterror");
+            exit();
+        }
+        // will allow post author to delete post
+        if($row["user_id"] != $_SESSION["user_id"]) {
+            header("location: ../{$login_url}?error=restricted");
+            exit();
+        }
+
+    }
+
+
+
+    if(delete_post($conn, $pid) === false) {
+        header("location: ../{$admin_posts_url}?error=stmterror");
+        exit();
+    }
+
+    else {
+        header("location: ../{$admin_posts_url}?error=none");
+        exit();
+    }
+}
+
 // prevents non admins to delete users by manually entering some url
 if(!isset($_SESSION["user_id"]) || $_SESSION["privilege"] != "admin"){
     header("location: ../{$login_url}?error=restricted");
@@ -32,22 +71,7 @@ if (isset($_GET["uid"])) {
     }
 }
 
-if (isset($_GET["pid"])) {
-    $pid = $_GET["pid"];
 
-    require_once "db_handler_inc.php";
-    require_once "post_functions_inc.php";
-
-    if(delete_post($conn, $pid) === false) {
-        header("location: ../{$admin_posts_url}?error=stmterror");
-        exit();
-    }
-
-    else {
-        header("location: ../{$admin_posts_url}?error=none");
-        exit();
-    }
-}
 // will send users back to login page if they accessed this include illegally
 else {
     header("location: ../{$login_url}");

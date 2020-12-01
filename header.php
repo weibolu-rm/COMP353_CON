@@ -28,6 +28,10 @@
                 <li class="nav-item">
                 <?php
                     if (isset($_SESSION["user_id"])) {
+                        echo "<a class=\"nav-link ";
+                            if($active_page == "email.php")
+                                echo "active";
+                        echo "\" href=\"{$email_url}\">Email</a>";
                         if ($_SESSION["privilege"] == "admin") {
                             echo "<li class=\"nav-item\"><a class=\"nav-link ";
                             if(strpos($active_page, "admin") !== false) // if name page contains "admin"
