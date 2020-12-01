@@ -19,10 +19,14 @@ function print_posts($conn) {
                 $message_type = "danger";
             
             // visibility
-            if($_SESSION["privilege"] != "admin" && $row["view_permission"] == "admin")
-                continue;
-            if(!isset($_SESSION["user_id"]) && $row["view_permission"] == "user")
-                continue;
+            if(!isset($_SESSION["privilege"])) {
+                if($row["view_permission"] != "public")
+                    continue;
+            } 
+            else {
+                if($row["view_permission"] == "admin" && $_SESSION["privilege"] != "admin")
+                    continue;
+            }
 
 
             echo '
