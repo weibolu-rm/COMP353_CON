@@ -124,6 +124,8 @@ function print_single_post($conn, $pid) {
     if($row = fetch_post_by_id($conn, $pid)) {
         $uid = $row["user_id"];
         $user = fetch_user_by_id($conn, $uid);
+
+
         echo '
             <div class="jumbotron jumbotron-fluid">
             <div class="container">
@@ -131,8 +133,10 @@ function print_single_post($conn, $pid) {
                 <p class="lead">Post by '. $user["name"].'</p>
                 <div class="mb-1 text-muted">'. $row["post_date"] .'</div>
                 <hr class="my-4">
-                <p class="lead">'. $row["content"] .'</p>
-                <img src="uploads/'. $row["image_id"] .'" class="img-fluid" alt="Post image">
+                <p class="lead">'. $row["content"] .'</p>';
+        if($row["image_id"] != "none")
+            echo '<img src="uploads/'. $row["image_id"] .'" class="img-fluid" alt="Post image">';
+        echo'
             </div>
             </div>';
     }

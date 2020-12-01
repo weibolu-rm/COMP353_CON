@@ -61,7 +61,7 @@ if (isset($_POST["post_announcement"])) {
     } // endif for image post
 
     // NO IMAGE
-    if(create_post($conn, $uid, $title, $content, $visibility, 0, true) === false) {
+    if(create_post($conn, $uid, $title, $content, $visibility, "none", true) === false) {
         header("location: ../{$admin_announcement_url}?error=stmterror");
         exit();
     }
