@@ -156,6 +156,18 @@ CREATE TABLE `consys`.`emails` (
   FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
 );
 
+-- -----------------------------------------------------
+-- table `consys`.`emails_record`
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`emails_record` (
+  `from_id` INT NOT NULL,
+  `to_id` INT NOT NULL,
+  `subject` VARCHAR(45) DEFAULT "No Subject",
+  `content` VARCHAR(1000) NOT NULL,
+  `email_date` DATETIME NOT NULL,
+  FOREIGN KEY (`from_id`) REFERENCES condo_owners(`user_id`),
+  FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
+);
 
 /* default admin user */
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 

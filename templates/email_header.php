@@ -21,7 +21,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo $email_url; ?>">
+            <a class="nav-link" href="<?php echo $email_sent_url; ?>">
             Sent
             </a>
         </li>

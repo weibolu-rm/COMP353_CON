@@ -166,7 +166,6 @@ function create_post($conn, $uid, $title,
     else
         $announcement = 0;
     
-;
     
     $sql = "INSERT INTO posts (user_id, post_date, title, content, view_permission, image_id, is_announcement)
             VALUES (?, ?, ?, ?, ?, ?, ?);";

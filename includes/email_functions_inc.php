@@ -1,18 +1,22 @@
-<?php //40058095o
+<?php //40058095
 
-function send_email($from_id, $to_id, $subject, $title, $content) {
-    $sql = "INSERT INTO emails (from_id, to_id, subject, content, email_date) VALUES (?, ?, ?, ?, ?);";
+function send_email($conn, $from_id, $to_id, $subject, $content) {
+    $sql = "INSERT INTO emails (from_id, to_id, `subject`, content, email_date) VALUES (?, ?, ?, ?, ?);";
+    $sql_record = "INSERT INTO emails_record (from_id, to_id, `subject`, content, email_date) VALUES (?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
-
-    if(!mysqli_stmt_prepare($stmt, $sql)) {
+    $stmt_record = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql) || !mysqli_stmt_prepare($stmt_record, $sql_record)) {
         return false;
-    }    
+    }
 
     $current_date_time = date('Y-m-d H:i:s');
 
-    mysqli_stmt_bind_param($stmt, "iisss", $from_id, $to_id, $title, $content, $current_date_time);
+    mysqli_stmt_bind_param($stmt, "iisss", $from_id, $to_id, $subject, $content, $current_date_time);
+    mysqli_stmt_bind_param($stmt_record, "iisss", $from_id, $to_id, $subject, $content, $current_date_time);
     mysqli_stmt_execute($stmt);
+    mysqli_stmt_execute($stmt_record);
     mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmt_record);
     return true;
 }
 
@@ -49,6 +53,51 @@ function print_emails($conn, $to_id) {
                 <div class=\"btn-group mr-2\">
                 <a href=\"email.php?fid={$row["from_id"]}&tid={$row["to_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">View</button>
                 <a href=\"includes/delete_inc.php?fid={$row["from_id"]}&tid={$row["to_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
+                </div>
+                </td>";
+        }
+    }
+    echo "</tbody>";
+        
+
+    if($query_result !== false)
+        mysqli_free_result($query_result);
+    mysqli_close($conn);
+}
+
+function print_emails_sent($conn, $from_id) {
+    require_once "functions_inc.php";
+    $sql = "SELECT * FROM emails_record WHERE from_id = {$from_id};";
+
+
+    $query_result = mysqli_query($conn, $sql);
+    echo "<thead>
+            <tr>
+              <th>To</th>
+              <th>Subject</th>
+              <th>Content</th>
+              <th>Date</th>
+              <th>Manage</th>
+            </tr>
+            </thead>
+            <tbody>";
+    if($query_result) {
+        while($row = mysqli_fetch_assoc($query_result)) {
+            $content = $row["content"];
+            $to = fetch_user_by_id($conn, $row["to_id"]);
+
+            if(strlen($content) > 100)
+                $content = substr($content, 0, 100)."...";
+
+            echo "<tr>";
+            echo "<td>{$to["email"]}</td>";
+            echo "<td>{$row["subject"]}</td>";
+            echo "<td>{$content}</td>";
+            echo "<td>{$row["email_date"]}</td>";
+            echo "<td>
+                <div class=\"btn-group mr-2\">
+                <a href=\"email.php?fid={$row["from_id"]}&tid={$row["to_id"]}&inbox=yes\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">View</button>
+                <a href=\"includes/delete_inc.php?fid={$row["from_id"]}&tid={$row["to_id"]}&inbox=no\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
                 </div>
                 </td>";
         }

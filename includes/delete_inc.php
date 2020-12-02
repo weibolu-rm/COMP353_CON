@@ -1,13 +1,14 @@
 <?php // 40058095
     session_start();
     require_once "config_inc.php";
+    require_once "db_handler_inc.php";
+    require_once "post_functions_inc.php";
+    require_once "functions_inc.php";
 
 
 
 if (isset($_GET["pid"])) {
     $pid = $_GET["pid"];
-    require_once "db_handler_inc.php";
-    require_once "post_functions_inc.php";
     
     // prevents non admins and non post authors to delete posts by manually entering some url
     if(!isset($_SESSION["user_id"])){
@@ -25,10 +26,7 @@ if (isset($_GET["pid"])) {
             header("location: ../{$login_url}?error=restricted");
             exit();
         }
-
     }
-
-
 
     if(delete_post($conn, $pid) === false) {
         header("location: ../{$admin_posts_url}?error=stmterror");
@@ -57,10 +55,6 @@ if (isset($_GET["uid"])) {
         exit();
     }
 
-
-    require_once "db_handler_inc.php";
-    require_once "functions_inc.php";
-
     if(delete_user($conn, $uid) === false){
         header("location: ../{$admin_url}?error=stmterror");
         exit();
@@ -70,7 +64,6 @@ if (isset($_GET["uid"])) {
         exit();
     }
 }
-
 
 // will send users back to login page if they accessed this include illegally
 else {

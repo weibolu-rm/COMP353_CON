@@ -22,8 +22,7 @@ function fetch_user($conn, $email) {
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin_registration.php?error=stmterror");
-        exit();
+        return false;
     }
 
     mysqli_stmt_bind_param($stmt, "s", $email);
@@ -32,7 +31,9 @@ function fetch_user($conn, $email) {
     $query_result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($query_result)) {
+        mysqli_free_result($query_result);
         mysqli_stmt_close($stmt);
+
         return $row;
     }
     else {

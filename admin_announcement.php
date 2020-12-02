@@ -42,7 +42,7 @@
         <input type="text" name="title" class="form-control" required>
     </div>      
     <div class="form-group">
-        <label for="email">Content</label>
+        <label for="content">Content</label>
         <textarea name="content" class="form-control" rows="4" required></textarea>
     </div>
     <div class="form-group">
