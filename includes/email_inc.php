@@ -12,12 +12,12 @@ if (isset($_POST["send_email"])) {
     $content = $_POST["content"];
     $from_id = $_SESSION["user_id"];
     $to_user = fetch_user($conn, $recipient);
-    
+
     if($to_user !== false) {
         $to_id = $to_user["user_id"];
     
         if(send_email($conn, $from_id, $to_id, $subject, $content) === false) {
-            header("location: ../{$send_email_url}?error=stmterror");
+            header("location: ../{$send_email_url}?error=stmt");
             exit();
         }
         else {

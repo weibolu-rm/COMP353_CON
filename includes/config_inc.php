@@ -15,6 +15,7 @@
     $change_inc_url = "includes/change_inc.php";
     $post_url = "post.php";
     $email_url = "email.php";
+    $email_view_url = "email_view.php";
     $email_sent_url = "email_sent.php";
     $send_email_url = "send_email.php";
     date_default_timezone_set("America/New_York");

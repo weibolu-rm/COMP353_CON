@@ -1,7 +1,26 @@
 <?php
     include_once "templates/email_header.php";
-?>
 
+    if (isset($_GET["error"])) {        
+        $message_type = "danger";
+        if ($_GET["error"] == "none" || strpos($_GET["error"], "success") !== false)
+            $message_type = "success";
+
+        echo "<div class=\"sm-margin-top alert alert-{$message_type}\" role=\"alert\">";
+        switch ($_GET["error"]) {
+            case "none":
+                echo "Successfuly sent email.";
+            break;
+            case "stmt":
+                echo "Error sending your email. Please try again later.";
+            break;
+            case "usernotfound":
+                echo "There exists no users with this email address.";
+            break;
+        }
+        echo "</div>";
+    }
+?>
 <div class="pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Send Email </h1>
 </div>

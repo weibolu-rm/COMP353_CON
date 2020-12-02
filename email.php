@@ -4,16 +4,23 @@
     <div class="pt-3 pb-2 mb-3">
         <h1 class="h2">Internal Emails </h1>
     </div>
-
     <?php
-        if (isset($_GET["error"])) {
-            switch($_GET["error"]) {
-            case "none":
-                echo "<div class=\"alert alert-success\" role=\"alert\">
-                Successfully deleted email.
-                </div>";
-            break;
+        if (isset($_GET["error"])) {        
+            $message_type = "danger";
+            if ($_GET["error"] == "none" || strpos($_GET["error"], "success") !== false)
+                $message_type = "success";
+
+            echo "<div class=\"sm-margin-top alert alert-{$message_type}\" role=\"alert\">";
+            switch ($_GET["error"]) {
+                case "none":
+                    echo "Successfuly deleted email.";
+                break;
+                case "forbidden":
+                    echo "Forbidden access.";
+                break;
+
             }
+            echo "</div>";
         }
     ?>
 
