@@ -28,6 +28,35 @@ CREATE TABLE `consys`.`condo` (
 -- -----------------------------------------------------
 -- Table `consys`.`parking_space`
 -- -----------------------------------------------------
+-- Schema consys
+-- -----------------------------------------------------
+DROP DATABASE IF EXISTS `consys`;
+CREATE DATABASE `consys`;
+USE `consys`;
+
+-- -----------------------------------------------------
+-- Table `consys`.`building`
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`building` (
+  `building_id` INT NOT NULL AUTO_INCREMENT,
+  `square_footage` DECIMAL NOT NULL,
+  `address` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`building_id`)
+);
+
+-- -----------------------------------------------------
+-- Table `consys`.`condo`
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`condo` (
+  `building_id` INT NOT NULL,
+  `condo_id` INT NOT NULL,
+  PRIMARY KEY (`building_id`, `condo_id`),
+  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
+);
+
+-- -----------------------------------------------------
+-- Table `consys`.`parking_space`
+-- -----------------------------------------------------
 CREATE TABLE `consys`.`parking_space` (
   `building_id` INT NOT NULL,
   `parking_space_id` INT NOT NULL,
@@ -49,10 +78,12 @@ CREATE TABLE `consys`.`storage_space` (
 -- Table `consys`.`public_space`
 -- -----------------------------------------------------
 CREATE TABLE `consys`.`public_space` (
+  `user_id` INT NOT NULL,
   `building_id` INT NOT NULL,
   `square_footage` DECIMAL NOT NULL,
   `type` VARCHAR(45) NOT NULL UNIQUE,
   PRIMARY KEY (`building_id`, `square_footage`, `type`),
+  FOREIGN KEY(`user_id``) REFERENCES condo_owners(`user_id`),
   FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
 );
 
@@ -60,9 +91,12 @@ CREATE TABLE `consys`.`public_space` (
 -- Table `consys`.`transaction_record`
 -- -----------------------------------------------------
 CREATE TABLE `consys`.`transaction_record` (
+  `user_id` INT NOT NULL,
   `payment_date` DATE NOT NULL,
   `default_monthly_payment` DECIMAL NULL,
-  `maintenance_payment` DECIMAL NULL
+  `maintenance_payment` DECIMAL NULL, 
+  PRIMARY KEY (`user_id`),
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
 );
 
 -- -----------------------------------------------------
@@ -89,7 +123,7 @@ CREATE TABLE `consys`.`maintenance` (
   `Type` VARCHAR(45) NOT NULL,
   `total_cost` DECIMAL DEFAULT NULL,
   `building_id` INT NOT NULL,
-  `condo_id` INT DEFAULT NULL,
+  `condo_id` INT DEFAULT NOT NULL,
   PRIMARY KEY (`Contractor`, `start_date`)
 );
 
