@@ -78,12 +78,10 @@ CREATE TABLE `consys`.`storage_space` (
 -- Table `consys`.`public_space`
 -- -----------------------------------------------------
 CREATE TABLE `consys`.`public_space` (
-  `user_id` INT NOT NULL,
   `building_id` INT NOT NULL,
   `square_footage` DECIMAL NOT NULL,
   `type` VARCHAR(45) NOT NULL UNIQUE,
   PRIMARY KEY (`building_id`, `square_footage`, `type`),
-  FOREIGN KEY(`user_id``) REFERENCES condo_owners(`user_id`),
   FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
 );
 
@@ -93,8 +91,8 @@ CREATE TABLE `consys`.`public_space` (
 CREATE TABLE `consys`.`transaction_record` (
   `user_id` INT NOT NULL,
   `payment_date` DATE NOT NULL,
-  `default_monthly_payment` DECIMAL NULL,
-  `maintenance_payment` DECIMAL NULL, 
+  `default_monthly_payment` DECIMAL,
+  `maintenance_payment` DECIMAl, 
   PRIMARY KEY (`user_id`),
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
 );
@@ -123,7 +121,7 @@ CREATE TABLE `consys`.`maintenance` (
   `Type` VARCHAR(45) NOT NULL,
   `total_cost` DECIMAL DEFAULT NULL,
   `building_id` INT NOT NULL,
-  `condo_id` INT DEFAULT NOT NULL,
+  `condo_id` INT,
   PRIMARY KEY (`Contractor`, `start_date`)
 );
 
