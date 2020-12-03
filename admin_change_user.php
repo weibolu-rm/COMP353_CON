@@ -144,5 +144,5 @@ echo '
 <!-- give some space to scroll -->
 <div class="margin-top"></div> 
 <?php
-    include_once "templates/dmin_footer.php";
+    include_once "templates/admin_footer.php";
 ?>

@@ -5,13 +5,26 @@
 <div class="row justify-content-center">
 <div class="col-lg-6 text-center">
     <?php 
-        // if (isset($_SESSION["name"]))
-        //     echo "<h3 class=\"margin-top\">Welcome back, {$_SESSION["name"]}.";
             
         require_once "includes/db_handler_inc.php";
         require_once "includes/post_functions_inc.php";
-        // print_posts($conn);
         $pid = $_GET["pid"];
+        $post = fetch_post_by_id($conn, $pid);
+        
+        // visibility
+        if(!isset($_SESSION["privilege"])) {
+            if($post["view_permission"] != "public") {
+                header("location: {$login_url}?error=restricted");
+                exit();
+            }
+        } 
+        else {
+            if($post["view_permission"] == "admin" && $_SESSION["privilege"] != "admin") {
+                header("location: {$login_url}?error=restricted");
+                exit();
+            }
+        }
+
         print_single_post($conn, $pid);
     ?>
 
