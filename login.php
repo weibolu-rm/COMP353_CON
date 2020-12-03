@@ -1,5 +1,5 @@
 <?php // 40058095
-    include_once "header.php";
+    include_once "templates/header.php";
 ?>
 
             
@@ -42,5 +42,5 @@
 </div>
 
 <?php
-    include_once "footer.php";
+    include_once "templates/footer.php";
 ?>

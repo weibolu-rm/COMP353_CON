@@ -169,9 +169,15 @@ CREATE TABLE `emails` (
 );
 
 -- -----------------------------------------------------
+<<<<<<< HEAD
 -- table `emails_record`
 -- -----------------------------------------------------
 CREATE TABLE `emails_record` (
+=======
+-- table `consys`.`emails_record`
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`emails_record` (
+>>>>>>> master
   `from_id` INT NOT NULL,
   `to_id` INT NOT NULL,
   `subject` VARCHAR(45) DEFAULT "No Subject",
