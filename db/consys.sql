@@ -1,5 +1,7 @@
 
--- USE `eac353_2`;
+CREATE DATABASE IF NOT EXISTS `eac353_2`;
+USE `eac353_2`;
+
 DROP TABLE IF EXISTS `parking_space`;
 DROP TABLE IF EXISTS `storage_space`;
 DROP TABLE IF EXISTS `public_space`;
@@ -169,15 +171,9 @@ CREATE TABLE `emails` (
 );
 
 -- -----------------------------------------------------
-<<<<<<< HEAD
 -- table `emails_record`
 -- -----------------------------------------------------
 CREATE TABLE `emails_record` (
-=======
--- table `consys`.`emails_record`
--- -----------------------------------------------------
-CREATE TABLE `consys`.`emails_record` (
->>>>>>> master
   `from_id` INT NOT NULL,
   `to_id` INT NOT NULL,
   `subject` VARCHAR(45) DEFAULT "No Subject",
