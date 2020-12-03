@@ -21,7 +21,7 @@ CREATE TABLE `consys`.`building` (
 CREATE TABLE `consys`.`condo` (
   `building_id` INT NOT NULL,
   `condo_id` INT NOT NULL,
-  PRIMARY KEY (`building_id`, `condo_id`),
+  CONSTRAINT compkey1 PRIMARY KEY (`building_id`, `condo_id`),
   FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
 );
 
@@ -50,7 +50,7 @@ CREATE TABLE `consys`.`building` (
 CREATE TABLE `consys`.`condo` (
   `building_id` INT NOT NULL,
   `condo_id` INT NOT NULL,
-  PRIMARY KEY (`building_id`, `condo_id`),
+  CONSTRAINT compkey2 PRIMARY KEY (`building_id`, `condo_id`),
   FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
 );
 
@@ -60,7 +60,7 @@ CREATE TABLE `consys`.`condo` (
 CREATE TABLE `consys`.`parking_space` (
   `building_id` INT NOT NULL,
   `parking_space_id` INT NOT NULL,
-  PRIMARY KEY (`building_id`, `parking_space_id`),
+  CONSTRAINT compkey3 PRIMARY KEY (`building_id`, `parking_space_id`),
   FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
 );
 
@@ -70,7 +70,7 @@ CREATE TABLE `consys`.`parking_space` (
 CREATE TABLE `consys`.`storage_space` (
   `building_id` INT NOT NULL,
   `ss_id` INT NOT NULL,
-  PRIMARY KEY (`building_id`, `ss_id`),
+  CONSTRAINT compkey4 PRIMARY KEY (`building_id`, `ss_id`),
   FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
 );
 
@@ -80,21 +80,9 @@ CREATE TABLE `consys`.`storage_space` (
 CREATE TABLE `consys`.`public_space` (
   `building_id` INT NOT NULL,
   `square_footage` DECIMAL NOT NULL,
-  `type` VARCHAR(45) NOT NULL UNIQUE,
-  PRIMARY KEY (`building_id`, `square_footage`, `type`),
+  `type` VARCHAR(45) NOT NULL,
+  CONSTRAINT compkey5 PRIMARY KEY (`building_id`, `square_footage`, `type`),
   FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
-);
-
--- -----------------------------------------------------
--- Table `consys`.`transaction_record`
--- -----------------------------------------------------
-CREATE TABLE `consys`.`transaction_record` (
-  `user_id` INT NOT NULL,
-  `payment_date` DATE NOT NULL,
-  `default_monthly_payment` DECIMAL,
-  `maintenance_payment` DECIMAl, 
-  PRIMARY KEY (`user_id`),
-  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
 );
 
 -- -----------------------------------------------------
@@ -109,6 +97,18 @@ CREATE TABLE `consys`.`condo_owners` (
   `percent_owned` DECIMAL NOT NULL,
   `privilege` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`)
+);
+
+-- -----------------------------------------------------
+-- Table `consys`.`transaction_record`
+-- -----------------------------------------------------
+CREATE TABLE `consys`.`transaction_record` (
+  `user_id` INT NOT NULL,
+  `payment_date` DATE NOT NULL,
+  `default_monthly_payment` DECIMAL,
+  `maintenance_payment` DECIMAL, 
+  CONSTRAINT compkey6 PRIMARY KEY (`user_id`, `payment_date`),
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
 );
 
 -- -----------------------------------------------------
