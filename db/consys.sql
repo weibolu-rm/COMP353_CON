@@ -1,14 +1,24 @@
--- -----------------------------------------------------
--- Schema consys
--- -----------------------------------------------------
-DROP DATABASE IF EXISTS `consys`;
-CREATE DATABASE `consys`;
-USE `consys`;
+
+-- USE `eac353_2`;
+DROP TABLE IF EXISTS `parking_space`;
+DROP TABLE IF EXISTS `storage_space`;
+DROP TABLE IF EXISTS `public_space`;
+DROP TABLE IF EXISTS `maintenance`;
+DROP TABLE IF EXISTS `transaction_record`;
+DROP TABLE IF EXISTS `posts`;
+DROP TABLE IF EXISTS `friend`;
+DROP TABLE IF EXISTS `from_group`;
+DROP TABLE IF EXISTS `groups`;
+DROP TABLE IF EXISTS `emails`;
+DROP TABLE IF EXISTS `emails_record`;
+DROP TABLE IF EXISTS `condo`;
+DROP TABLE IF EXISTS `building`;
+DROP TABLE IF EXISTS `condo_owners`;
 
 -- -----------------------------------------------------
--- Table `consys`.`building`
+-- Table `building`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`building` (
+CREATE TABLE `building` (
   `building_id` INT NOT NULL AUTO_INCREMENT,
   `square_footage` DECIMAL NOT NULL,
   `address` VARCHAR(45) NOT NULL,
@@ -16,9 +26,9 @@ CREATE TABLE `consys`.`building` (
 );
 
 -- -----------------------------------------------------
--- Table `consys`.`condo`
+-- Table `condo`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`condo` (
+CREATE TABLE `condo` (
   `building_id` INT NOT NULL,
   `condo_id` INT NOT NULL,
   CONSTRAINT compkey1 PRIMARY KEY (`building_id`, `condo_id`),
@@ -26,38 +36,9 @@ CREATE TABLE `consys`.`condo` (
 );
 
 -- -----------------------------------------------------
--- Table `consys`.`parking_space`
+-- Table `parking_space`
 -- -----------------------------------------------------
--- Schema consys
--- -----------------------------------------------------
-DROP DATABASE IF EXISTS `consys`;
-CREATE DATABASE `consys`;
-USE `consys`;
-
--- -----------------------------------------------------
--- Table `consys`.`building`
--- -----------------------------------------------------
-CREATE TABLE `consys`.`building` (
-  `building_id` INT NOT NULL AUTO_INCREMENT,
-  `square_footage` DECIMAL NOT NULL,
-  `address` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`building_id`)
-);
-
--- -----------------------------------------------------
--- Table `consys`.`condo`
--- -----------------------------------------------------
-CREATE TABLE `consys`.`condo` (
-  `building_id` INT NOT NULL,
-  `condo_id` INT NOT NULL,
-  CONSTRAINT compkey2 PRIMARY KEY (`building_id`, `condo_id`),
-  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
-);
-
--- -----------------------------------------------------
--- Table `consys`.`parking_space`
--- -----------------------------------------------------
-CREATE TABLE `consys`.`parking_space` (
+CREATE TABLE `parking_space` (
   `building_id` INT NOT NULL,
   `parking_space_id` INT NOT NULL,
   CONSTRAINT compkey3 PRIMARY KEY (`building_id`, `parking_space_id`),
@@ -65,9 +46,9 @@ CREATE TABLE `consys`.`parking_space` (
 );
 
 -- -----------------------------------------------------
--- Table `consys`.`storage_space`
+-- Table `storage_space`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`storage_space` (
+CREATE TABLE `storage_space` (
   `building_id` INT NOT NULL,
   `ss_id` INT NOT NULL,
   CONSTRAINT compkey4 PRIMARY KEY (`building_id`, `ss_id`),
@@ -75,9 +56,9 @@ CREATE TABLE `consys`.`storage_space` (
 );
 
 -- -----------------------------------------------------
--- Table `consys`.`public_space`
+-- Table `public_space`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`public_space` (
+CREATE TABLE `public_space` (
   `building_id` INT NOT NULL,
   `square_footage` DECIMAL NOT NULL,
   `type` VARCHAR(45) NOT NULL,
@@ -86,9 +67,9 @@ CREATE TABLE `consys`.`public_space` (
 );
 
 -- -----------------------------------------------------
--- Table `consys`.`condo_owners`
+-- Table `condo_owners`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`condo_owners` (
+CREATE TABLE `condo_owners` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -100,9 +81,9 @@ CREATE TABLE `consys`.`condo_owners` (
 );
 
 -- -----------------------------------------------------
--- Table `consys`.`transaction_record`
+-- Table `transaction_record`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`transaction_record` (
+CREATE TABLE `transaction_record` (
   `user_id` INT NOT NULL,
   `payment_date` DATE NOT NULL,
   `default_monthly_payment` DECIMAL,
@@ -112,9 +93,9 @@ CREATE TABLE `consys`.`transaction_record` (
 );
 
 -- -----------------------------------------------------
--- Table `consys`.`maintenance`
+-- Table `maintenance`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`maintenance` (
+CREATE TABLE `maintenance` (
   `Contractor` VARCHAR(45) NOT NULL,
   `start_date` DATE NOT NULL,
   `complete_date` DATE NULL,
@@ -126,10 +107,9 @@ CREATE TABLE `consys`.`maintenance` (
 );
 
 -- -----------------------------------------------------
--- Table `consys`.`posts`
--- image will be in upload/<post_id>_img.jpg
+-- Table `posts`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`posts` (
+CREATE TABLE `posts` (
   `post_id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `post_date` DATETIME NOT NULL,
@@ -143,9 +123,9 @@ CREATE TABLE `consys`.`posts` (
 );
 
 -- -----------------------------------------------------
--- Table `consys`.`friend`
+-- Table `friend`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`friend` (
+CREATE TABLE `friend` (
   `friend_id_1` INT NOT NULL,
   `friend_id_2` INT NOT NULL,
   FOREIGN KEY (`friend_id_1`) REFERENCES condo_owners(`user_id`),
@@ -154,9 +134,9 @@ CREATE TABLE `consys`.`friend` (
 );
 
 -- -----------------------------------------------------
--- table `consys`.`groups`
+-- table `groups`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`groups` (
+CREATE TABLE `groups` (
   `group_id` INT NOT NULL AUTO_INCREMENT,
   `owner_id` INT NOT NULL,
   `group_name` VARCHAR(45) NOT NULL,
@@ -166,9 +146,9 @@ CREATE TABLE `consys`.`groups` (
 
 
 -- -----------------------------------------------------
--- table `consys`.`groups`
+-- table `groups`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`from_group` (
+CREATE TABLE `from_group` (
   `user_id` INT NOT NULL,
   `group_id` INT NOT NULL,
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`),
@@ -176,9 +156,9 @@ CREATE TABLE `consys`.`from_group` (
 );
 
 -- -----------------------------------------------------
--- table `consys`.`emails`
+-- table `emails`
 -- -----------------------------------------------------
-CREATE TABLE `consys`.`emails` (
+CREATE TABLE `emails` (
   `from_id` INT NOT NULL,
   `to_id` INT NOT NULL,
   `subject` VARCHAR(45) DEFAULT "No Subject",
@@ -188,6 +168,18 @@ CREATE TABLE `consys`.`emails` (
   FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
 );
 
+-- -----------------------------------------------------
+-- table `emails_record`
+-- -----------------------------------------------------
+CREATE TABLE `emails_record` (
+  `from_id` INT NOT NULL,
+  `to_id` INT NOT NULL,
+  `subject` VARCHAR(45) DEFAULT "No Subject",
+  `content` VARCHAR(1000) NOT NULL,
+  `email_date` DATETIME NOT NULL,
+  FOREIGN KEY (`from_id`) REFERENCES condo_owners(`user_id`),
+  FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
+);
 
 /* default admin user */
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 

@@ -91,7 +91,7 @@ VALUES ("Lain Iwakura", "l.iwakura@hotmail.com", "passw0rd1234", "2490 Rue St De
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
 VALUES ("Mika Iwakura", "m.iwakura@gmail.com", "passw0rd1234", "2490 Rue St Denis #6, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("m.eiri@gmail.com", "Masami Eiri", "passw0rd1234", "2490 Rue St Denis #7, Montreal, QC", "user", 10);
+VALUES ("Masami Eiri", "m.eiri@gmail.com", "passw0rd1234", "2490 Rue St Denis #7, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
 VALUES ("Alice Mizuki", "a.mizuki@yahoo.com", "passw0rd1234", "2490 Rue St Denis #8, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
@@ -596,22 +596,30 @@ insert into storage_space values (3, 8);
 insert into storage_space values (3, 9);
 insert into storage_space values (3, 10);
 
+insert into posts (user_id, post_date, title, content, is_announcement)
+VALUES (1, "2020-11-28 20:30:30", "Administrator Announcement", "Welcome to CONSYS", 1);
+insert into posts (user_id, post_date, title, content, view_permission)
+VALUES (2, "2020-11-28 20:30:35", "Wow so cool", "Guys, I love my new condo. Thanks for having me", "user");
+insert into posts (user_id, post_date, title, content, view_permission)
+VALUES (3, "2020-11-28 20:30:35", "Test message", "Can anyone see this post???", "user");
+insert into posts (user_id, post_date, title, content, view_permission)
+VALUES (4, "2020-11-28 20:30:35", "Package stealing", "It has come to my attention that a few of my packages have been
+getting stolen. After speaking with some of my neighbors, it seems that it is a common occurence.", "user");
 insert into posts (user_id, post_date, title, content)
-VALUES (1, "2020-11-28 20:30:30", "Admin message", "This is an admin test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (2, "2020-11-28 20:30:35", "Test message", "This is another test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (3, "2020-11-28 20:30:35", "Test message", "This is another test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (4, "2020-11-28 20:30:35", "Test message", "This is another test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (5, "2020-11-28 20:30:35", "Test message", "This is another test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (6, "2020-11-28 20:30:35", "Test message", "This is another test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (7, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+VALUES (5, "2020-11-28 20:30:35", "Free cookies", "Email me with a receipt of your donation to your favorite charity and I'll
+make the arrangements for you to get free cookies.
+
+
+Best, Asuka.");
 
 INSERT INTO emails (from_id, to_id, subject, content, email_date) 
+VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+ sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+ veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+ pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+ mollit anim id est laborum.", "2020-11-30 00:12:12");
+INSERT INTO emails_record (from_id, to_id, subject, content, email_date) 
 VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
