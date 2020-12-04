@@ -124,42 +124,6 @@ if (isset($_GET["uid"])) {
 
     header("location: ../{$admin_url}");
 }
-
-
-if (isset($_GET["gid"])) {
-
-    $gid = $_GET["gid"];
-
-    require_once "db_handler_inc.php";
-    require_once "group_functions_inc.php";
-
-    // name change
-    if(isset($_POST["change_group_name"])) {
-        $group_name = $_POST["group_name"];
-
-        if(admin_change_group_name($conn, $gid, $group_name)) {
-            if($_SESSION["group_id"] == $gid)
-                $_SESSION["group_name"] = $group_name; // updating session variable if the connected admin changes themselves
-            header("location: ../{$admin_group_change_url}?gid={$gid}&error=namesuccess");
-            exit();
-        }
-        else {
-            header("location: ../{$admin_group_change_url}?gid={$gid}&error=stmterror");
-            exit();
-        }
-    }
-    
-    // email change
-  
-
-
-    header("location: ../{$admin_group_url}");
-}
-
-
-
-
-
 // will send users back to login page if they accessed this include illegally
 else {
     header("location: ../{$login_url}");
