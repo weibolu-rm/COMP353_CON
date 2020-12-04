@@ -1,4 +1,4 @@
-USE `consys`;
+USE `eac353_2`;
 
 /*row data for building table*/
 INSERT INTO building (square_footage, address) VALUES (2300, "3524 Rue Sherbrooke, Montreal, QC");
@@ -39,65 +39,65 @@ INSERT INTO condo VALUES (3,10);
 
 /* Data for populating condo owners */
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Shinji Ikari", "s.ikari@hotmail.com", "passw0rd1234", "3524 Rue Sherbrooke #1, Montreal, QC", "user", 10);
+VALUES ("Shinji Ikari", "s.ikari@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #1, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Misato Katsuragi", "m.katsuragi@gmail.com", "passw0rd1234", "3524 Rue Sherbrooke #2, Montreal, QC", "user", 10);
+VALUES ("Misato Katsuragi", "m.katsuragi@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #2, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Rei Ayanami", "r.ayami@yahoo.com", "passw0rd1234", "3524 Rue Sherbrooke #3, Montreal, QC", "user", 10);
+VALUES ("Rei Ayanami", "r.ayami@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #3, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Asuka Langley Soryu", "a.soryu@hotmail.com", "passw0rd1234", "3524 Rue Sherbrooke #4, Montreal, QC", "user", 10);
+VALUES ("Asuka Langley Soryu", "a.soryu@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #4, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Gendo Ikari", "g.ikari@gmail.com", "passw0rd1234", "3524 Rue Sherbrooke #5, Montreal, QC", "admin", 10);
+VALUES ("Gendo Ikari", "g.ikari@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #5, Montreal, QC", "admin", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Ritsuko Akagi", "r.akagi@yahoo.com", "passw0rd1234", "3524 Rue Sherbrooke #6, Montreal, QC", "user", 10);
+VALUES ("Ritsuko Akagi", "r.akagi@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #6, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Kozo Fuyutsuki", "k.fuyutsuki@hotmail.com", "passw0rd1234", "3524 Rue Sherbrooke #7, Montreal, QC", "user", 10);
+VALUES ("Kozo Fuyutsuki", "k.fuyutsuki@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #7, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Ryoji Kaji", "r.kaji@gmail.com", "passw0rd1234", "3524 Rue Sherbrooke #8, Montreal, QC", "user", 10);
+VALUES ("Ryoji Kaji", "r.kaji@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #8, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Makoto Hyuga", "m.hyuga@yahoo.com", "passw0rd1234", "3524 Rue Sherbrooke #9, Montreal, QC", "user", 10);
+VALUES ("Makoto Hyuga", "m.hyuga@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #9, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Maya Ibuki", "m.ibuki@hotmail.com", "passw0rd1234", "3524 Rue Sherbrooke #10, Montreal, QC", "user", 10);
+VALUES ("Maya Ibuki", "m.ibuki@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #10, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Shigeru Aoba", "s.aoba@gmail.com", "passw0rd1234", "1587 Rue Laval #1, Montreal, QC", "user", 10);
+VALUES ("Shigeru Aoba", "s.aoba@consys.com", "passw0rd1234", "1587 Rue Laval #1, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Kaworu Nagisa", "k.nagisa@yahoo.com", "passw0rd1234", "1587 Rue Laval #2, Montreal, QC", "user", 10);
+VALUES ("Kaworu Nagisa", "k.nagisa@consys.com", "passw0rd1234", "1587 Rue Laval #2, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Toji Suzuhara", "t.suzuhara@hotmail.com", "passwo0rd1234", "1587 Rue Laval #3, Montreal, QC", "user", 10);
+VALUES ("Toji Suzuhara", "t.suzuhara@consys.com", "passwo0rd1234", "1587 Rue Laval #3, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Kensuke Aida", "k.aida@gmail.com", "passw0rd1234", "1587 Rue Laval #4, Montreal, QC", "user", 10);
+VALUES ("Kensuke Aida", "k.aida@consys.com", "passw0rd1234", "1587 Rue Laval #4, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Hikari Horaki", "h.horaki@yahoo.com", "passw0rd1234", "1587 Rue Laval #5, Montreal, QC", "user", 10);
+VALUES ("Hikari Horaki", "h.horaki@consys.com", "passw0rd1234", "1587 Rue Laval #5, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Pen Pen", "p.pen@gmail.com", "passw0rd1234", "1587 Rue Laval #6, Montreal, QC", "admin", 10);
+VALUES ("Pen Pen", "p.pen@consys.com", "passw0rd1234", "1587 Rue Laval #6, Montreal, QC", "admin", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Naoko Akagi", "n.akagi@yahoo.com", "passw0rd1234", "1587 Rue Laval #7, Montreal, QC", "admin", 10);
+VALUES ("Naoko Akagi", "n.akagi@consys.com", "passw0rd1234", "1587 Rue Laval #7, Montreal, QC", "admin", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Yui Ikari", "y.ikari@hotmail.com", "passw0rd1234", "1587 Rue Laval #8, Montreal, QC", "user", 10);
+VALUES ("Yui Ikari", "y.ikari@consys.com", "passw0rd1234", "1587 Rue Laval #8, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Kyoko Zeppelin Soryu", "k.soryu@gmail.com", "passw0rd1234", "1587 Rue Laval #9, Montreal, QC", "user", 10);
+VALUES ("Kyoko Zeppelin Soryu", "k.soryu@consys.com", "passw0rd1234", "1587 Rue Laval #9, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Keel Lorenz", "k.lorenz@yahoo.com", "passw0rd1234", "1587 Rue Laval #10, Montreal, QC", "user", 10);
+VALUES ("Keel Lorenz", "k.lorenz@consys.com", "passw0rd1234", "1587 Rue Laval #10, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Adam Angel", "a.angel@gmail.com", "passw0rd1234", "2490 Rue St Denis #1, Montreal, QC", "admin", 10);
+VALUES ("Adam Angel", "a.angel@consys.com", "passw0rd1234", "2490 Rue St Denis #1, Montreal, QC", "admin", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Lilith Angel", "lth.angel@hotmail.com", "passw0rd1234", "2490 Rue St Denis #2, Montreal, QC", "user", 10);
+VALUES ("Lilith Angel", "lth.angel@consys.com", "passw0rd1234", "2490 Rue St Denis #2, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Tabris Angel", "t.angel@gmail.com", "passw0rd1234", "2490 Rue St Denis #3, Montreal, QC", "user", 10);
+VALUES ("Tabris Angel", "t.angel@consys.com", "passw0rd1234", "2490 Rue St Denis #3, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Lilin Angel", "ln.angel@yahoo.com", "passw0rd1234", "2490 Rue St Denis #4, Montreal, QC", "user", 10);
+VALUES ("Lilin Angel", "ln.angel@consys.com", "passw0rd1234", "2490 Rue St Denis #4, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Lain Iwakura", "l.iwakura@hotmail.com", "passw0rd1234", "2490 Rue St Denis #5, Montreal, QC", "user", 10);
+VALUES ("Lain Iwakura", "l.iwakura@consys.com", "passw0rd1234", "2490 Rue St Denis #5, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Mika Iwakura", "m.iwakura@gmail.com", "passw0rd1234", "2490 Rue St Denis #6, Montreal, QC", "user", 10);
+VALUES ("Mika Iwakura", "m.iwakura@consys.com", "passw0rd1234", "2490 Rue St Denis #6, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("m.eiri@gmail.com", "Masami Eiri", "passw0rd1234", "2490 Rue St Denis #7, Montreal, QC", "user", 10);
+VALUES ("Masami Eiri", "m.eiri@consys.com", "passw0rd1234", "2490 Rue St Denis #7, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Alice Mizuki", "a.mizuki@yahoo.com", "passw0rd1234", "2490 Rue St Denis #8, Montreal, QC", "user", 10);
+VALUES ("Alice Mizuki", "a.mizuki@consys.com", "passw0rd1234", "2490 Rue St Denis #8, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Chisa Yomoda", "c.yomoda@hotmail.com", "passw0rd1234", "2490 Rue St Denis #9, Montreal, QC", "user", 10);
+VALUES ("Chisa Yomoda", "c.yomoda@consys.com", "passw0rd1234", "2490 Rue St Denis #9, Montreal, QC", "user", 10);
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("Yasuo Iwakura", "y.iwakura@gmail.com", "passw0rd1234", "2490 Rue St Denis #10, Montreal, QC", "user", 10);
+VALUES ("Yasuo Iwakura", "y.iwakura@consys.com", "passw0rd1234", "2490 Rue St Denis #10, Montreal, QC", "user", 10);
 
 /*data for maintenance table*/
 INSERT INTO maintenance VALUES ("Terminexx", "2020-03-24", "2020-03-26", "unclogged rats from sink", 54.10, 1, 7);
@@ -596,20 +596,21 @@ insert into storage_space values (3, 8);
 insert into storage_space values (3, 9);
 insert into storage_space values (3, 10);
 
+insert into posts (user_id, post_date, title, content, is_announcement, image_id)
+VALUES (1, "2020-11-28 20:30:30", "Administrator Announcement", "Welcome to CONSYS", 1, "condo.jpg");
+insert into posts (user_id, post_date, title, content, view_permission)
+VALUES (2, "2020-11-28 20:30:35", "Wow so cool", "Guys, I love my new condo. Thanks for having me", "user");
+insert into posts (user_id, post_date, title, content, view_permission)
+VALUES (3, "2020-11-28 20:30:35", "Test message", "Can anyone see this post???", "user");
+insert into posts (user_id, post_date, title, content, view_permission)
+VALUES (4, "2020-11-28 20:30:35", "Package stealing", "It has come to my attention that a few of my packages have been
+getting stolen. After speaking with some of my neighbors, it seems that it is a common occurence.", "user");
 insert into posts (user_id, post_date, title, content)
-VALUES (1, "2020-11-28 20:30:30", "Admin message", "This is an admin test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (2, "2020-11-28 20:30:35", "Test message", "This is another test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (3, "2020-11-28 20:30:35", "Test message", "This is another test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (4, "2020-11-28 20:30:35", "Test message", "This is another test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (5, "2020-11-28 20:30:35", "Test message", "This is another test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (6, "2020-11-28 20:30:35", "Test message", "This is another test message.");
-insert into posts (user_id, post_date, title, content)
-VALUES (7, "2020-11-28 20:30:35", "Test message", "This is another test message.");
+VALUES (5, "2020-11-28 20:30:35", "Free cookies", "Email me with a receipt of your donation to your favorite charity and I'll
+make the arrangements for you to get free cookies.
+
+
+Best, Asuka.");
 
 INSERT INTO emails (from_id, to_id, subject, content, email_date) 
 VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -618,4 +619,55 @@ VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing 
  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
  mollit anim id est laborum.", "2020-11-30 00:12:12");
-  
+
+
+INSERT INTO emails_record (from_id, to_id, subject, content, email_date) 
+VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+ sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+ veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+ pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+ mollit anim id est laborum.", "2020-11-30 00:12:12");
+ 
+ 
+ 
+INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (1,6, "3524Sherb");
+INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (2,17, "1587Laval1");
+INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (3,18, "1587Laval2");
+INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (4,22, "2490Stden");
+
+
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 12, 2);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 13, 2);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 14, 2);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 15, 2);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 16, 2);
+
+
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 19, 3);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 20, 3);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 21, 3);
+
+
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 23, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 24, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 25, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 26, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 27, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 28, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 29, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 30, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 31, 4);
+
+
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 2, 1);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 3, 1);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 4, 1);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 5, 1);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 7, 1);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 8, 1);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 9, 1);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 10, 1);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 11, 1);
+
+

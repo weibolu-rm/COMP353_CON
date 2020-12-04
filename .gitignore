@@ -1,1 +1,6 @@
-uploads/*
+*.jpg
+*.jpeg
+*.png
+*.gif
+!condo.jpg
+config.ini
