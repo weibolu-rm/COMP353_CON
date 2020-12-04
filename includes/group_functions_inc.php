@@ -1,46 +1,9 @@
 <?php // 40058095
+// 40024592
 
-function invalid_email($email) {
-    $invalid = false;
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) 
-        $invalid = true;
-    
-    
-    return $invalid;
-}
 
-function invalid_name($name) {
-    $invalid = false;
-    if (!preg_match("/^[a-zA-Z\s]*$/", $name)) 
-        $invalid = true;
-    
-    return $invalid;
-}
 
-function fetch_user($conn, $email) {
-    $sql = "SELECT * FROM condo_owners WHERE email = ?;";
-    $stmt = mysqli_stmt_init($conn); // prevents sql injection
-    
-    if(!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin_registration.php?error=stmterror");
-        exit();
-    }
-
-    mysqli_stmt_bind_param($stmt, "s", $email);
-    mysqli_stmt_execute($stmt);
-
-    $query_result = mysqli_stmt_get_result($stmt);
-
-    if ($row = mysqli_fetch_assoc($query_result)) {
-        mysqli_stmt_close($stmt);
-        return $row;
-    }
-    else {
-        mysqli_stmt_close($stmt);
-        return false;
-    }
-}
-
+/*
 function fetch_user_by_id($conn, $uid) {
     $sql = "SELECT * FROM condo_owners WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
@@ -64,8 +27,32 @@ function fetch_user_by_id($conn, $uid) {
         return false;
     }
 }
+*/
+function admin_by_id($conn, $uid) {
+    $sql = "SELECT * FROM condo_owners WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
 
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
 
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($query_result)) {
+        mysqli_stmt_close($stmt);
+        return $row["privilege"];
+    }
+    else {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+}
+
+/*
 function print_single_user_name($conn, $uid) {
 
     if($row = fetch_user_by_id($conn, $uid)) {
@@ -82,6 +69,7 @@ function print_single_user_profile($conn, $uid) {
     }
 
 }
+*/
 
 function fetch_name_by_id($conn, $uid) {
     $sql = "SELECT * FROM condo_owners WHERE user_id = ?;";
@@ -158,6 +146,30 @@ function fetch_group_name_by_admin($conn, $uid) {
     }
 }
 
+function fetch_group_id_by_admin($conn, $uid) {
+    $sql = "SELECT * FROM groups WHERE owner_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($query_result)) {
+        mysqli_stmt_close($stmt);
+        return $row["group_id"];
+    }
+    else {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+}
+
 
 function fetch_group_name_by_user($conn, $uid) {
     $sql = "SELECT * FROM from_group WHERE user_id = ?;";
@@ -187,6 +199,31 @@ function fetch_group_name_by_user($conn, $uid) {
         return false;
     }
 }
+
+function fetch_group_id_by_user($conn, $uid) {
+    $sql = "SELECT * FROM from_group WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($query_result)) {
+        mysqli_stmt_close($stmt);
+        return $row["group_id"];
+    }
+    else {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+}
+
 
 
 function print_group_button($conn, $uid) {
@@ -432,7 +469,7 @@ function print_from_group_table($conn) {
 
 
 
-
+/*
 
 function print_single_user_table($conn, $gid) {
     echo "<thead>
@@ -453,6 +490,8 @@ function print_single_user_table($conn, $gid) {
     echo "</tbody>";
 }
 
+*/
+
 function print_single_group_table($conn, $gid) {
     echo "<thead>
             <tr>
@@ -472,7 +511,7 @@ function print_single_group_table($conn, $gid) {
     echo "</tbody>";
 }
 
-
+/*
 function email_already_taken($conn, $email) {
     $invalid = false;
 
@@ -497,6 +536,7 @@ function invalid_password_length($password) {
 
     return $invalid;
 }
+
 
 function create_user($conn, $name, $email, $password, $address, $privilege) {
     $sql = "INSERT INTO condo_owners (name, email, password, address, privilege) VALUES (?, ?, ?, ?, ?);";
@@ -738,3 +778,5 @@ function admin_change_user_privilege($conn, $uid, $privilege) {
     mysqli_stmt_close($stmt);
     return true;
 }
+
+*/

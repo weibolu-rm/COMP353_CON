@@ -1,4 +1,5 @@
 <?php // 40058095
+      // 40024592
     include_once "templates/header.php";
 ?>
 
@@ -12,7 +13,12 @@
             
         require_once "includes/db_handler_inc.php";
         require_once "includes/post_functions_inc.php";
-        print_posts($conn);
+        if (isset($_SESSION["user_id"])){
+            print_posts($conn,$_SESSION["user_id"]);
+        }
+        else{
+        print_posts_no_id($conn);
+        }
     ?>
 
 </div>

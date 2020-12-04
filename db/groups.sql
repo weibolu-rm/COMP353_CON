@@ -1,41 +1,4 @@
 
-6
-Gendo Ikari
-g.ikari@gmail.com
-passw0rd1234
-3524 Rue Sherbrooke #5, Montreal, QC
-10
-admin
-
-
-17
-Pen Pen
-p.pen@gmail.com
-passw0rd1234
-1587 Rue Laval #6, Montreal, QC
-10
-admin
-
-
-18
-Naoko Akagi
-n.akagi@yahoo.com
-passw0rd1234
-1587 Rue Laval #7, Montreal, QC
-10
-admin
-
-
-22
-Adam Angel
-a.angel@gmail.com
-passw0rd1234
-2490 Rue St Denis #1, Montreal, QC
-10
-admin
-
-
-
 INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (1,6, "3524Sherb");
 INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (2,17, "1587Laval1");
 INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (3,18, "1587Laval2");

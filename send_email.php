@@ -1,4 +1,4 @@
-<?php
+<?php // 40024592
     include_once "templates/email_header.php";
 
     if (isset($_GET["error"])) {        
@@ -34,7 +34,8 @@
     
     <?php
         require_once "includes/db_handler_inc.php";
-        require_once "includes/group_functions_inc.php";
+       // require_once "includes/group_functions_inc.php";
+        require_once "includes/functions_inc.php";
         if(isset($_GET["uid"])){
         $row = fetch_user_by_id($conn, $_GET["uid"]);
         echo "<input type=" ."email". " name=" ."recipient". " class=" ."form-control". " value=".$row["email"]." required>";

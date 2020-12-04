@@ -1,4 +1,4 @@
-<?php // 40058095
+<?php   // 40024592
     include_once "templates/header.php";
 ?>
 
@@ -7,12 +7,14 @@
     <span class="align-baseline">
     <?php
         require_once "includes/db_handler_inc.php";
+        require_once "includes/functions_inc.php";
         require_once "includes/group_functions_inc.php";
         print_single_user_name($conn, $_GET["uid"]);  
     ?>
     <img src="assets/images/head.png" alt="head" />
     <?php
         require_once "includes/db_handler_inc.php";
+        require_once "includes/functions_inc.php";
         require_once "includes/group_functions_inc.php";       
         print_single_user_profile($conn, $_GET["uid"]); 
         if ($_SESSION["privilege"] == "admin") {
@@ -31,12 +33,11 @@
 
 <div class="row justify-content-md-end"> <span class="align-text-top">
     <?php
-            if ($_SESSION["privilege"] == "admin") {
         require_once "includes/db_handler_inc.php";
         require_once "includes/post_functions_inc.php";     
         
         print_post_button($conn, $_GET["uid"]);
-            }
+
     ?>
 
 </span> </div>
@@ -47,7 +48,7 @@
         require_once "includes/db_handler_inc.php";
         require_once "includes/post_functions_inc.php";
 
-        
+        echo "User Posts";
         print_posts_table_id($conn,$_GET["uid"]);
     ?>
 </table>

@@ -21,3 +21,4 @@
     $email_view_url = "email_view.php";
     $email_sent_url = "email_sent.php";
     $send_email_url = "send_email.php";
+    $user_post_url = "user_post.php";
