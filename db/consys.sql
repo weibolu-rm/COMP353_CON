@@ -29,17 +29,6 @@ CREATE TABLE `building` (
 );
 
 -- -----------------------------------------------------
--- Table `condo`
--- -----------------------------------------------------
-CREATE TABLE `condo` (
-  `building_id` INT NOT NULL,
-  `condo_id` INT NOT NULL,
-  CONSTRAINT compkey2 PRIMARY KEY (`building_id`, `condo_id`),
-  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`) ON DELETE CASCADE
-
-);
-
--- -----------------------------------------------------
 -- Table `parking_space`
 -- -----------------------------------------------------
 CREATE TABLE `parking_space` (
@@ -78,10 +67,21 @@ CREATE TABLE `condo_owners` (
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL, 
-  `address` VARCHAR(45) NOT NULL,
-  `percent_owned` DECIMAL NOT NULL DEFAULT 0.0,
+  `primary_address` VARCHAR(45) NOT NULL,
   `privilege` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`)
+);
+
+-- -----------------------------------------------------
+-- Table `condo`
+-- -----------------------------------------------------
+CREATE TABLE `condo` (
+  `building_id` INT NOT NULL,
+  `condo_id` INT NOT NULL,
+  `owner_id` INT NOT NULL,
+  CONSTRAINT compkey2 PRIMARY KEY (`building_id`, `condo_id`),
+  FOREIGN KEY (`building_id`) REFERENCES building (`building_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`owner_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -156,7 +156,7 @@ CREATE TABLE `from_group` (
   `user_id` INT NOT NULL,
   `group_id` INT NOT NULL,
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`)
+  FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE
 
 );
 
@@ -187,5 +187,6 @@ CREATE TABLE `emails_record` (
 );
 
 /* default admin user */
-INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
-VALUES ("admin", "admin", "admin", "admin", "admin", 0);
+INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
+VALUES ("admin", "admin", "admin", "admin", "admin");
+
