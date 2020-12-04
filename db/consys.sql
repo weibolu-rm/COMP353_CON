@@ -154,7 +154,7 @@ CREATE TABLE `from_group` (
   `user_id` INT NOT NULL,
   `group_id` INT NOT NULL,
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`),
-  FOREIGN KEY (`group_id`) REFERENCES groups(`group_id`)
+  FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`)
 );
 
 -- -----------------------------------------------------
