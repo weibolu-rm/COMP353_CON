@@ -33,6 +33,8 @@ function print_posts($conn) {
     mysqli_close($conn);
 }
 
+
+
 function print_posts_table($conn) {
     $sql = "SELECT * FROM posts ORDER BY post_id ASC;";
 
@@ -87,4 +89,53 @@ function delete_post($conn, $pid) {
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
+}
+
+
+
+
+function print_posts_table_id($conn,$uid) {
+    $sql = "SELECT * FROM posts WHERE user_id =?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+
+        
+    $query_result = mysqli_stmt_get_result($stmt);
+    if($query_result) {
+    echo "<thead>
+            <tr>
+              <th>Title</th>
+              <th>Content</th>
+              <th>Date</th>
+              <th>Visibility</th>
+              <th>Manage</th>
+            </tr>
+            </thead>
+            <tbody>";
+        while($row = mysqli_fetch_assoc($query_result)) {
+            echo "<tr>";
+            echo "<td>{$row["title"]}</td>";
+            echo "<td>{$row["content"]}</td>";
+            echo "<td>{$row["post_date"]}</td>";
+            echo "<td>{$row["view_permission"]}</td>";
+            echo "<td>
+                <div class=\"btn-group mr-2\">
+                <a href=\"includes/post.php?pid={$row["post_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">View</button>
+                <a href=\"includes/delete_inc.php?pid={$row["post_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
+                </div>
+                </td>";
+        }
+    }
+    echo "</tbody>";
+        
+
+    mysqli_free_result($query_result);
+    mysqli_close($conn);
 }
