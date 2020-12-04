@@ -1,13 +1,31 @@
 <?php // 40058095
 
-function print_posts($conn) {
+function print_posts($conn,$uid) {
     require_once "functions_inc.php";
+    require_once "group_functions_inc.php";
     
     $sql = "SELECT * FROM posts ORDER BY is_announcement DESC, post_id DESC;";
     $query_result = mysqli_query($conn, $sql);
+
     echo '<div class="row mb-2 margin-top">';
     if($query_result) {
-        while($row = mysqli_fetch_assoc($query_result)) {            
+        while($row = mysqli_fetch_assoc($query_result)) {  
+            
+            if("admin" == admin_by_id($conn, $uid)){
+                $gid = fetch_group_id_by_admin($conn, $uid);
+            }
+            else{
+                $gid = fetch_group_id_by_user($conn, $uid);
+            }
+
+            if("admin" == admin_by_id($conn, $row["user_id"])){
+            $post_gid = fetch_group_id_by_admin($conn, $row["user_id"]);
+            }
+            else{
+            $post_gid = fetch_group_id_by_user($conn, $row["user_id"]);
+            }
+
+
             $content = $row["content"];
             if(strlen($content) > 100)
                 $content = substr($content, 0, 100)."...";
@@ -26,6 +44,12 @@ function print_posts($conn) {
             else {
                 if($row["view_permission"] == "admin" && $_SESSION["privilege"] != "admin")
                     continue;
+            }
+            
+            if("admin" != $_SESSION["privilege"]){
+                 if($row["view_permission"] == "group" && $gid != $post_gid)
+                    continue;
+                
             }
 
 
@@ -49,6 +73,60 @@ function print_posts($conn) {
         mysqli_free_result($query_result);
     mysqli_close($conn);
 }
+
+
+function print_posts_no_id($conn) {
+    require_once "functions_inc.php";
+    
+    $sql = "SELECT * FROM posts ORDER BY is_announcement DESC, post_id DESC;";
+    $query_result = mysqli_query($conn, $sql);
+
+    echo '<div class="row mb-2 margin-top">';
+    if($query_result) {
+        while($row = mysqli_fetch_assoc($query_result)) {  
+
+            $content = $row["content"];
+            if(strlen($content) > 100)
+                $content = substr($content, 0, 100)."...";
+
+
+            $user = fetch_user_by_id($conn, $row["user_id"]);
+            $message_type = "primary";
+            if($row["is_announcement"] == 1)
+                $message_type = "danger";
+            
+            // visibility
+            if(!isset($_SESSION["privilege"])) {
+                if($row["view_permission"] != "public")
+                    continue;
+            } 
+            else {
+                if($row["view_permission"] == "admin" && $_SESSION["privilege"] != "admin")
+                    continue;
+            }
+
+            echo '
+                <div class="col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-'. $message_type .'">'.$user["name"].'</strong>
+                            <h3 class="mb-0">'. $row["title"] .'</h3>
+                            <div class="mb-1 text-muted">'. $row["post_date"] .'</div>
+                            <p class="card-text mb-auto">'. $content .'</p>
+                            <a href="post.php?pid='. $row["post_id"] .'" class="stretched-link text-muted">Continue reading</a>
+                        </div>
+                    </div>
+                </div>';
+        }
+    }
+
+    echo '</div>';
+    if($query_result !== false)
+        mysqli_free_result($query_result);
+    mysqli_close($conn);
+}
+
+
 
 function print_posts_table($conn) {
     $sql = "SELECT * FROM posts ORDER BY post_id ASC;";
@@ -196,4 +274,76 @@ function next_post_id($conn) {
     mysqli_close($conn);
 
     return $result;
+}
+
+
+function print_post_button($conn,$uid){
+    $sql = "SELECT * FROM condo_owners WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($query_result)) {
+        mysqli_stmt_close($stmt);
+        echo "  <a href=\"user_post.php\"><button type=\"button\" class=\"btn btn-lg btn-outline-primary\">Create Post</button></a> &nbsp;";
+        return $row["user_id"];
+    }
+    else {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+}
+
+function print_posts_table_id($conn,$uid) {
+    $sql = "SELECT * FROM posts WHERE user_id =?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+
+        
+    $query_result = mysqli_stmt_get_result($stmt);
+    if($query_result) {
+    echo "<thead>
+            <tr>
+              <th>Title</th>
+              <th>Content</th>
+              <th>Date</th>
+              <th>Visibility</th>
+              <th>Manage</th>
+            </tr>
+            </thead>
+            <tbody>";
+        while($row = mysqli_fetch_assoc($query_result)) {
+            echo "<tr>";
+            echo "<td>{$row["title"]}</td>";
+            echo "<td>{$row["content"]}</td>";
+            echo "<td>{$row["post_date"]}</td>";
+            echo "<td>{$row["view_permission"]}</td>";
+            echo "<td>
+                <div class=\"btn-group mr-2\">
+                <a href=\"post.php?pid={$row["post_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">View</button>
+                <a href=\"includes/delete_inc.php?pid={$row["post_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
+                </div>
+                </td>";
+        }
+    }
+    echo "</tbody>";
+        
+
+    mysqli_free_result($query_result);
+    mysqli_close($conn);
 }
