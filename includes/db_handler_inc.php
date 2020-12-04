@@ -1,9 +1,10 @@
 <?php // 40058095
+$config = parse_ini_file("config.ini");
 
-$serverName = "localhost";
-$dbUsername = "root";
-$dbPassword = "";
-$dbName = "consys";
+$serverName = $config['serverName'];
+$dbUsername = $config['dbUsername'];
+$dbPassword = $config['dbPassword'];
+$dbName = $config['dbName'];
 
 $conn = mysqli_connect($serverName, $dbUsername, $dbPassword, $dbName);
 

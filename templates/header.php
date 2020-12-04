@@ -29,7 +29,7 @@
                 <?php
                     if (isset($_SESSION["user_id"])) {
                         echo "<a class=\"nav-link ";
-                            if($active_page == "email.php")
+                            if(strpos($active_page, "email") !== false) // if name page contains "email"
                                 echo "active";
                         echo "\" href=\"{$email_url}\">Email</a>";
                         if ($_SESSION["privilege"] == "admin") {
@@ -39,7 +39,7 @@
                             echo "\" href=\"{$admin_url}\">Admin</a></li>";
                         }
                         echo "<li class=\"nav-item\"><a class=\"nav-link ";
-                            if($active_page == "setings.php") // if name page contains "admin"
+                            if($active_page == "{$settings_url}") // if name page contains "admin"
                                 echo "active";
                             echo "\" href=\"{$settings_url}\">Settings</a></li>";
 
@@ -50,7 +50,7 @@
                     }
                     else {
                         echo "<a class=\"nav-link ";
-                            if($active_page == "login.php")
+                            if($active_page == "{$login_url}")
                                 echo "active";
                         echo "\" href=\"{$login_url}\">Login</a>";
                     }

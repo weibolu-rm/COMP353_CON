@@ -1,5 +1,5 @@
 <?php // 40058095
-    include_once "admin_header.php";
+    include_once "templates/admin_header.php";
 ?>
 
 <h2>Registered Users</h2>
@@ -35,5 +35,5 @@
 </div>
 
 <?php
-    include_once "admin_footer.php";
+    include_once "templates/admin_footer.php";
 ?>

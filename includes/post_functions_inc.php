@@ -45,7 +45,8 @@ function print_posts($conn) {
     }
 
     echo '</div>';
-    mysqli_free_result($query_result);
+    if($query_result !== false)
+        mysqli_free_result($query_result);
     mysqli_close($conn);
 }
 
@@ -92,7 +93,8 @@ function print_posts_table($conn) {
     echo "</tbody>";
         
 
-    mysqli_free_result($query_result);
+    if($query_result !== false)
+        mysqli_free_result($query_result);
     mysqli_close($conn);
 }
 
@@ -164,7 +166,6 @@ function create_post($conn, $uid, $title,
     else
         $announcement = 0;
     
-;
     
     $sql = "INSERT INTO posts (user_id, post_date, title, content, view_permission, image_id, is_announcement)
             VALUES (?, ?, ?, ?, ?, ?, ?);";
@@ -190,7 +191,8 @@ function next_post_id($conn) {
     $query_result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($query_result);
     $result = $row["i"];
-    mysqli_free_result($query_result);
+    if($query_result !== false)
+        mysqli_free_result($query_result);
     mysqli_close($conn);
 
     return $result;
