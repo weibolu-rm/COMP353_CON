@@ -1,4 +1,3 @@
-
 <?php 
     include_once "templates/email_header.php";
 ?>

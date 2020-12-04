@@ -74,7 +74,7 @@ function print_user_table($conn) {
               <th>uid</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Address</th>
+              <th>Primary Address</th>
               <th>Privilege</th>
               <th>Manage</th>
             </tr>
@@ -86,7 +86,7 @@ function print_user_table($conn) {
             echo "<td>{$row["user_id"]}</td>";
             echo "<td>{$row["name"]}</td>";
             echo "<td>{$row["email"]}</td>";
-            echo "<td>{$row["address"]}</td>";
+            echo "<td>{$row["primary_address"]}</td>";
             echo "<td>{$row["privilege"]}</td>";
             echo "<td>
                 <div class=\"btn-group mr-2\">
@@ -109,7 +109,7 @@ function print_single_user_table($conn, $uid) {
               <th>uid</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Address</th>
+              <th>Primary Address</th>
               <th>Privilege</th>
             </tr>
             </thead>
@@ -120,7 +120,7 @@ function print_single_user_table($conn, $uid) {
         echo "<td>{$row["user_id"]}</td>";
         echo "<td>{$row["name"]}</td>";
         echo "<td>{$row["email"]}</td>";
-        echo "<td>{$row["address"]}</td>";
+        echo "<td>{$row["primary_address"]}</td>";
         echo "<td>{$row["privilege"]}</td>";
     }
     echo "</tbody>";
@@ -134,7 +134,7 @@ function print_single_user_name($conn, $uid) {
      /*  echo "<td>{$row["user_id"]}</td>";
         echo "<td>{$row["name"]}</td>";
         echo "<td>{$row["email"]}</td>";
-        echo "<td>{$row["address"]}</td>";
+        echo "<td>{$row["primary_address"]}</td>";
         echo "<td>{$row["privilege"]}</td>"; */
     }
 }
@@ -144,7 +144,7 @@ function print_single_user_profile($conn, $uid) {
 
     if($row = fetch_user_by_id($conn, $uid)) {
         echo "<h3>Email: ". $row["email"] . "</h3> ";
-        echo "<h3>Address: ". $row["address"] . "</h3> ";
+        echo "<h3>Address: ". $row["primary_address"] . "</h3> ";
     }
 
 }
@@ -175,7 +175,7 @@ function invalid_password_length($password) {
 }
 
 function create_user($conn, $name, $email, $password, $address, $privilege) {
-    $sql = "INSERT INTO condo_owners (name, email, password, address, privilege) VALUES (?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO condo_owners (name, email, password, primary_address, privilege) VALUES (?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -328,7 +328,7 @@ function admin_change_user_name($conn, $uid, $name) {
 // for admin use
 function admin_change_user_address($conn, $uid, $address) {
     $user = fetch_user_by_id($conn, $uid);
-    $sql = "UPDATE condo_owners SET address = ? WHERE user_id = ?;";
+    $sql = "UPDATE condo_owners SET primary_address = ? WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
     if(!mysqli_stmt_prepare($stmt, $sql)) {
