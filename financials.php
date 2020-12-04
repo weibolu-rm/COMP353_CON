@@ -25,11 +25,11 @@
 
 <div class="table-responsive sm-margin-top"> 
 <h3> Building 1 Summary: </h3>
-<b> Percentage Occupied:</b>
+<b> Number of Condos Occupied:</b>
 <?php
         require_once "includes/db_handler_inc.php";
         require_once "includes/functions_inc.php";
-		$sql = "SELECT SUM(percent_owned) AS building_1_owned FROM condo_owners WHERE user_id <= 10";
+		$sql = "SELECT COUNT(owner_id) AS building_1_owned FROM condo WHERE building_id = 1";
 		$query_result = mysqli_query($conn, $sql);
 		$row = mysqli_fetch_assoc($query_result);
 		  echo "<td>{$row["building_1_owned"]}</td>";
@@ -40,7 +40,8 @@
 <?php
         require_once "includes/db_handler_inc.php";
         require_once "includes/functions_inc.php";
-		$sql = "SELECT SUM(default_monthly_payment) AS building_1_default_yearly_sum FROM transaction_record WHERE user_id <= 10";
+		$sql = "SELECT SUM(default_monthly_payment) AS building_1_default_yearly_sum FROM transaction_record, condo 
+		WHERE (transaction_record.user_id = condo.owner_id AND condo.building_id = 1)";
 		$query_result = mysqli_query($conn, $sql);
 		$row = mysqli_fetch_assoc($query_result);
 		  echo "<td>{$row["building_1_default_yearly_sum"]}</td>";
@@ -58,7 +59,7 @@
 ?>  
 	
 	  <div class=\"btn-group mr-2\">
-                <a href=\"building_1_transactions.php?uid={$row["user_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Full Yearly Report</button></a>
+                <a href=\"financial_report.php?bid={$row["building_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Full Yearly Report</button></a>
                 </div>
 
 	
@@ -66,11 +67,11 @@
 
 <div class="table-responsive sm-margin-top"> 
 <h3> Building 2 Summary: </h3>
-<b> Percentage Occupied:</b>
+<b> Number of Condos Occupied:</b>
 <?php
         require_once "includes/db_handler_inc.php";
         require_once "includes/functions_inc.php";
-		$sql = "SELECT SUM(percent_owned) AS building_2_owned FROM condo_owners WHERE (10 < user_id AND user_id <= 20)";
+		$sql = "SELECT COUNT(owner_id) AS building_2_owned FROM condo WHERE building_id = 2";
 		$query_result = mysqli_query($conn, $sql);
 		$row = mysqli_fetch_assoc($query_result);
 		  echo "<td>{$row["building_2_owned"]}</td>";
@@ -81,7 +82,8 @@
 <?php
         require_once "includes/db_handler_inc.php";
         require_once "includes/functions_inc.php";
-		$sql = "SELECT SUM(default_monthly_payment) AS building_2_default_yearly_sum FROM transaction_record WHERE (10 < user_id AND user_id <= 20)";
+		$sql = "SELECT SUM(default_monthly_payment) AS building_2_default_yearly_sum FROM transaction_record, condo 
+		WHERE (transaction_record.user_id = condo.owner_id AND condo.building_id = 2)";
 		$query_result = mysqli_query($conn, $sql);
 		$row = mysqli_fetch_assoc($query_result);
 		  echo "<td>{$row["building_2_default_yearly_sum"]}</td>";
@@ -99,17 +101,17 @@
 ?>  
 	
 	  <div class=\"btn-group mr-2\">
-                <a href=\"building_2_transactions.php?uid={$row["user_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Full Yearly Report</button></a>
+                <a href=\"financial_report.php?bid={$row["building_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Full Yearly Report</button></a>
                 </div>
 </div>
 
 <div class="table-responsive sm-margin-top"> 
 <h3> Building 3 Summary: </h3>
-<b> Percentage Occupied:</b>
+<b> Number of Condos Occupied:</b>
 <?php
         require_once "includes/db_handler_inc.php";
         require_once "includes/functions_inc.php";
-		$sql = "SELECT SUM(percent_owned) AS building_3_owned FROM condo_owners WHERE (20 < user_id AND user_id <= 300)";
+		$sql = "SELECT COUNT(owner_id) AS building_3_owned FROM condo WHERE building_id = 3";
 		$query_result = mysqli_query($conn, $sql);
 		$row = mysqli_fetch_assoc($query_result);
 		  echo "<td>{$row["building_3_owned"]}</td>";
@@ -120,7 +122,8 @@
 <?php
         require_once "includes/db_handler_inc.php";
         require_once "includes/functions_inc.php";
-		$sql = "SELECT SUM(default_monthly_payment) AS building_3_default_yearly_sum FROM transaction_record WHERE (20 < user_id AND user_id <= 30)";
+		$sql = "SELECT SUM(default_monthly_payment) AS building_3_default_yearly_sum FROM transaction_record, condo 
+		WHERE (transaction_record.user_id = condo.owner_id AND condo.building_id = 3)";
 		$query_result = mysqli_query($conn, $sql);
 		$row = mysqli_fetch_assoc($query_result);
 		  echo "<td>{$row["building_3_default_yearly_sum"]}</td>";
@@ -138,7 +141,7 @@
 ?>  
 	
 	  <div class=\"btn-group mr-2\">
-                <a href=\"building_3_transactions.php?uid={$row["user_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Full Yearly Report</button></a>
+                <a href=\"financial_report.php?bid={$row["building_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Full Yearly Report</button></a>
                 </div>
 </div>
 

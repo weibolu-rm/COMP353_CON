@@ -98,7 +98,38 @@ function print_user_table($conn) {
         }
     }
     echo "</tbody>";
-        
+
+
+    if($query_result !== false)
+        mysqli_free_result($query_result);
+    mysqli_close($conn);
+}
+
+//40025805
+function print_full_transactions_by_building($conn, $bid){
+    $sql = "SELECT  FROM transaction_record 
+	WHERE(transaction_record.user_id = condo.owner_id AND condo.building_id = " $bid ") ORDER BY user_id ASC;";
+    // here we don't need to bind a prepared statement as you couldn't do 
+    $query_result = mysqli_query($conn, $sql);
+    echo "<thead>
+            <tr>
+              <th>User ID</th>
+              <th>Payment Date</th>
+              <th>Default Monthly Payment</th>
+              <th>Maintenance  Payment</th>
+            </tr>
+            </thead>
+            <tbody>";
+    if($query_result) {
+        while($row = mysqli_fetch_assoc($query_result)) {
+            echo "<tr>";
+            echo "<td>{$row["user_id"]}</td>";
+            echo "<td>{$row["payment_date"]}</td>";
+            echo "<td>{$row["default_monthly_payment"]}</td>";
+            echo "<td>{$row["maintenance_payment"]}</td>";
+        }
+    }
+    echo "</tbody>";
 
 
     if($query_result !== false)
