@@ -22,7 +22,8 @@ function fetch_user($conn, $email) {
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
-        return false;
+        header("location: ../admin_registration.php?error=stmterror");
+        exit();
     }
 
     mysqli_stmt_bind_param($stmt, "s", $email);
@@ -31,9 +32,7 @@ function fetch_user($conn, $email) {
     $query_result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($query_result)) {
-        mysqli_free_result($query_result);
         mysqli_stmt_close($stmt);
-
         return $row;
     }
     else {
@@ -100,9 +99,7 @@ function print_user_table($conn) {
     echo "</tbody>";
         
 
-
-    if($query_result !== false)
-        mysqli_free_result($query_result);
+    mysqli_free_result($query_result);
     mysqli_close($conn);
 }
 
@@ -127,6 +124,29 @@ function print_single_user_table($conn, $uid) {
         echo "<td>{$row["privilege"]}</td>";
     }
     echo "</tbody>";
+}
+
+
+function print_single_user_name($conn, $uid) {
+
+    if($row = fetch_user_by_id($conn, $uid)) {
+        echo "<h1>". $row["name"] . "</h1> ";
+     /*  echo "<td>{$row["user_id"]}</td>";
+        echo "<td>{$row["name"]}</td>";
+        echo "<td>{$row["email"]}</td>";
+        echo "<td>{$row["address"]}</td>";
+        echo "<td>{$row["privilege"]}</td>"; */
+    }
+}
+
+
+function print_single_user_profile($conn, $uid) {
+
+    if($row = fetch_user_by_id($conn, $uid)) {
+        echo "<h3>Email: ". $row["email"] . "</h3> ";
+        echo "<h3>Address: ". $row["address"] . "</h3> ";
+    }
+
 }
 
 function email_already_taken($conn, $email) {

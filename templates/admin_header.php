@@ -1,7 +1,6 @@
 <?php // 40058095
     include_once "header.php";
-?>
-<?php
+
     if(!isset($_SESSION["user_id"]) || $_SESSION["privilege"] != "admin"){
         header("location: {$login_url}?error=restricted");
         exit();
@@ -49,7 +48,7 @@
         </h6>
         <ul class="nav flex-column mb-2">
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="<?php echo $admin_groups_url; ?>">
             Dashboard
             </a>
         </li>
