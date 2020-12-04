@@ -21,4 +21,12 @@
     $email_view_url = "email_view.php";
     $email_sent_url = "email_sent.php";
     $send_email_url = "send_email.php";
+<<<<<<< HEAD
     $user_post_url = "user_post.php";
+=======
+    $financials_url = "financials.php";
+    date_default_timezone_set("America/New_York");
+    // TODO: REMOVE BEFORE DEPLOYMENT
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    // error_reporting(0);
+>>>>>>> master

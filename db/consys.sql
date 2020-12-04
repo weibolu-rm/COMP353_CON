@@ -1,9 +1,32 @@
+<<<<<<< HEAD
 -- -----------------------------------------------------
 -- Schema consys
 -- -----------------------------------------------------
 DROP DATABASE IF EXISTS `consys`;
 CREATE DATABASE `consys`;
 USE `consys`;
+=======
+/*40025805, 40058095*/
+
+CREATE DATABASE IF NOT EXISTS `eac353_2`;
+USE `eac353_2`;
+
+
+DROP TABLE IF EXISTS `parking_space`;
+DROP TABLE IF EXISTS `storage_space`;
+DROP TABLE IF EXISTS `public_space`;
+DROP TABLE IF EXISTS `maintenance`;
+DROP TABLE IF EXISTS `transaction_record`;
+DROP TABLE IF EXISTS `posts`;
+DROP TABLE IF EXISTS `friend`;
+DROP TABLE IF EXISTS `from_group`;
+DROP TABLE IF EXISTS `groups`;
+DROP TABLE IF EXISTS `emails`;
+DROP TABLE IF EXISTS `emails_record`;
+DROP TABLE IF EXISTS `condo`;
+DROP TABLE IF EXISTS `building`;
+DROP TABLE IF EXISTS `condo_owners`;
+>>>>>>> master
 
 -- -----------------------------------------------------
 -- Table `consys`.`building`
@@ -16,6 +39,7 @@ CREATE TABLE `consys`.`building` (
 );
 
 -- -----------------------------------------------------
+<<<<<<< HEAD
 -- Table `consys`.`condo`
 -- -----------------------------------------------------
 CREATE TABLE `consys`.`condo` (
@@ -27,6 +51,9 @@ CREATE TABLE `consys`.`condo` (
 
 -- -----------------------------------------------------
 -- Table `consys`.`parking_space`
+=======
+-- Table `parking_space`
+>>>>>>> master
 -- -----------------------------------------------------
 CREATE TABLE `consys`.`parking_space` (
   `building_id` INT NOT NULL,
@@ -73,14 +100,46 @@ CREATE TABLE `consys`.`condo_owners` (
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL, 
+<<<<<<< HEAD
   `address` VARCHAR(45) NOT NULL,
   `percent_owned` DECIMAL NOT NULL,
+=======
+  `primary_address` VARCHAR(45) NOT NULL,
+>>>>>>> master
   `privilege` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`)
 );
 
 -- -----------------------------------------------------
+<<<<<<< HEAD
 -- Table `consys`.`maintenance`
+=======
+-- Table `condo`
+-- -----------------------------------------------------
+CREATE TABLE `condo` (
+  `building_id` INT NOT NULL,
+  `condo_id` INT NOT NULL,
+  `owner_id` INT NOT NULL,
+  CONSTRAINT compkey2 PRIMARY KEY (`building_id`, `condo_id`),
+  FOREIGN KEY (`building_id`) REFERENCES building (`building_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`owner_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------
+-- Table `transaction_record`
+-- -----------------------------------------------------
+CREATE TABLE `transaction_record` (
+  `user_id` INT NOT NULL,
+  `payment_date` DATE NOT NULL,
+  `default_monthly_payment` DECIMAL,
+  `maintenance_payment` DECIMAL, 
+  CONSTRAINT compkey6 PRIMARY KEY (`user_id`, `payment_date`),
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------
+-- Table `maintenance`
+>>>>>>> master
 -- -----------------------------------------------------
 CREATE TABLE `consys`.`maintenance` (
   `Contractor` VARCHAR(45) NOT NULL,
@@ -138,6 +197,7 @@ CREATE TABLE `consys`.`groups` (
 CREATE TABLE `consys`.`from_group` (
   `user_id` INT NOT NULL,
   `group_id` INT NOT NULL,
+<<<<<<< HEAD
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`),
   FOREIGN KEY (`group_id`) REFERENCES groups(`group_id`)
 );
@@ -145,3 +205,40 @@ CREATE TABLE `consys`.`from_group` (
 /* default admin user */
 INSERT INTO condo_owners (name, email, password, address, privilege, percent_owned) 
 VALUES ("admin", "admin", "admin", "admin", "admin", 0);
+=======
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE
+
+);
+
+-- -----------------------------------------------------
+-- table `emails`
+-- -----------------------------------------------------
+CREATE TABLE `emails` (
+  `from_id` INT NOT NULL,
+  `to_id` INT NOT NULL,
+  `subject` VARCHAR(45) DEFAULT "No Subject",
+  `content` VARCHAR(1000) NOT NULL,
+  `email_date` DATETIME NOT NULL,
+  FOREIGN KEY (`from_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------
+-- table `emails_record`
+-- -----------------------------------------------------
+CREATE TABLE `emails_record` (
+  `from_id` INT NOT NULL,
+  `to_id` INT NOT NULL,
+  `subject` VARCHAR(45) DEFAULT "No Subject",
+  `content` VARCHAR(1000) NOT NULL,
+  `email_date` DATETIME NOT NULL,
+  FOREIGN KEY (`from_id`) REFERENCES condo_owners(`user_id`),
+  FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
+);
+
+/* default admin user */
+INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
+VALUES ("admin", "admin", "admin", "admin", "admin");
+
+>>>>>>> master
