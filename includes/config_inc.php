@@ -20,5 +20,4 @@
     $send_email_url = "send_email.php";
     date_default_timezone_set("America/New_York");
     // TODO: REMOVE BEFORE DEPLOYMENT
-    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    // error_reporting(0);
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); 
