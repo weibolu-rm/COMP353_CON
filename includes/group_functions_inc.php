@@ -394,7 +394,7 @@ function print_from_group_table_from_id($conn,$gid) {
     echo "<thead>
             <tr>
               <th>Name</th>
-              <th>Address</th>
+              <th>Primary Address</th>
               <th>Email</th>
               <th>Message</th>
             </tr>
@@ -408,7 +408,7 @@ function print_from_group_table_from_id($conn,$gid) {
 
             echo "<tr>";
             echo "<td>{$username}</td>";
-            echo "<td>{$col["address"]}</td>";
+            echo "<td>{$col["primary_address"]}</td>";
             echo "<td>{$col["email"]}</td>";
             echo "<td>
                 <div class=\"btn-group mr-2\">

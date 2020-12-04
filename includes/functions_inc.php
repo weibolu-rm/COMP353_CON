@@ -145,7 +145,7 @@ function print_single_user_profile($conn, $uid) {
 
     if($row = fetch_user_by_id($conn, $uid)) {
         echo "<h3>Email: ". $row["email"] . "</h3> ";
-        echo "<h3>Address: ". $row["address"] . "</h3> ";
+        echo "<h3>Primary Address: ". $row["primary_address"] . "</h3> ";
     }
 
 }
