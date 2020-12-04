@@ -108,7 +108,7 @@ function print_post_button($conn,$uid){
 
     if ($row = mysqli_fetch_assoc($query_result)) {
         mysqli_stmt_close($stmt);
-        echo "  <a href=\"post.php?uid=$uid\"><button type=\"button\" class=\"btn btn-lg btn-outline-primary\">Create Post</button></a> &nbsp;";
+        echo "  <a href=\"admin_announcement.php\"><button type=\"button\" class=\"btn btn-lg btn-outline-primary\">Create Post</button></a> &nbsp;";
         return $row["user_id"];
     }
     else {

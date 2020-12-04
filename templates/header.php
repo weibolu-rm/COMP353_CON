@@ -19,7 +19,9 @@
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-        <a class="navbar-brand" href="<?php echo $home_url ?>">Home</a>
+        <a id="logo" class="navbar-brand" href="<?php echo $home_url ?>">
+    <img src="assets/images/logo.png" alt="HTML tutorial" style="width:150px;height:30px;">
+    </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>

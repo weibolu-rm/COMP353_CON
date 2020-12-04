@@ -13,8 +13,7 @@
     <img src="assets/images/head.png" alt="head" />
     <?php
         require_once "includes/db_handler_inc.php";
-        require_once "includes/group_functions_inc.php";   
-        require_once "includes/post_functions_inc.php";     
+        require_once "includes/group_functions_inc.php";       
         print_single_user_profile($conn, $_GET["uid"]); 
         if ($_SESSION["privilege"] == "admin") {
             fetch_group_name_by_admin($conn, $_GET["uid"]);
@@ -32,11 +31,12 @@
 
 <div class="row justify-content-md-end"> <span class="align-text-top">
     <?php
+            if ($_SESSION["privilege"] == "admin") {
         require_once "includes/db_handler_inc.php";
-        require_once "includes/group_functions_inc.php";   
         require_once "includes/post_functions_inc.php";     
         
         print_post_button($conn, $_GET["uid"]);
+            }
     ?>
 
 </span> </div>
