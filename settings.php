@@ -1,5 +1,5 @@
 <?php  // 40058095
-    include_once "templates/header.php";
+    include_once "header.php";
 ?>
 <div class="justify-content-start">
 <div class="pt-3 pb-2 mb-3 border-bottom">
@@ -108,6 +108,6 @@
     </div>
 </div>
 <?php 
-    include_once "templates/footer.php";
+    include_once "footer.php";
 ?>
 

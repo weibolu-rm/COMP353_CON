@@ -1,5 +1,5 @@
 <?php // 40058095
-    include_once "templates/admin_header.php";
+    include_once "admin_header.php";
 ?>
 
 
@@ -144,5 +144,5 @@ echo '
 <!-- give some space to scroll -->
 <div class="margin-top"></div> 
 <?php
-    include_once "templates/admin_footer.php";
+    include_once "admin_footer.php";
 ?>

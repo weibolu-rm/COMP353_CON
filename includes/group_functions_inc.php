@@ -189,6 +189,62 @@ function fetch_group_name_by_user($conn, $uid) {
 }
 
 
+function print_group_button($conn, $uid) {
+    $sql = "SELECT * FROM from_group WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($query_result)) {
+        mysqli_stmt_close($stmt);
+        $gid = $row["group_id"];
+        echo "<br><a href=\"group.php?gid=$gid\"><button type=\"button\" class=\"btn btn-mid btn-outline-secondary\">Group</button></a>";
+  
+        return $row["group_id"];
+    }
+    else {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+}
+
+
+function print_group_button_admin($conn, $uid) {
+    $sql = "SELECT * FROM groups WHERE owner_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($query_result)) {
+        mysqli_stmt_close($stmt);
+        $gid = $row["group_id"];
+        echo "<br><a href=\"group.php?gid=$gid\"><button type=\"button\" class=\"btn btn-mid btn-outline-secondary\">Group</button></a>";
+  
+        return $row["group_id"];
+    }
+    else {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+}
+
+
 
 
 function fetch_group_name_by_id($conn, $gid) {
@@ -208,6 +264,30 @@ function fetch_group_name_by_id($conn, $gid) {
     if ($row = mysqli_fetch_assoc($query_result)) {
         mysqli_stmt_close($stmt);
         return $row["group_name"];
+    }
+    else {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+}
+
+function fetch_group_owner_by_id($conn, $gid) {
+    $sql = "SELECT * FROM groups WHERE group_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $gid);
+    mysqli_stmt_execute($stmt);
+
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($query_result)) {
+        mysqli_stmt_close($stmt);
+        return $row["owner_id"];
     }
     else {
         mysqli_stmt_close($stmt);
@@ -252,41 +332,50 @@ function print_group_table($conn) {
 
 
 
-function print_from_group_table_from_id($conn,$uid) {
-    $sql = "SELECT * FROM from_group WHERE user_id =?;";
+function print_from_group_table_from_id($conn,$gid) {
+     $sql = "SELECT * FROM from_group WHERE group_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
-
+    
     if(!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../index.php?error=stmterror");
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_bind_param($stmt, "i", $gid);
     mysqli_stmt_execute($stmt);
-
         
     $query_result = mysqli_stmt_get_result($stmt);
+    $groupname = fetch_group_name_by_id($conn, $gid);
+    $groupownerid = fetch_group_owner_by_id($conn, $gid);
+    $ownername = fetch_name_by_id($conn, $groupownerid);
+    $cod = fetch_user_by_id($conn, $groupownerid);
+    echo "<h4>Group Name: ".$groupname."</h4><br>";
+    echo "<h5>Group Owner: ".$ownername."</h5> ";
+    echo "<h5>Owner Email: ".$cod["email"]."</h5>";
+    echo "<a href=\"message_user.php?uid=$groupownerid\"><button type=\"button\" class=\"btn btn-md btn-outline-secondary\">Message</button></a><br><br>";
     if($query_result) {
     echo "<thead>
             <tr>
-              <th>Title</th>
-              <th>Content</th>
-              <th>Date</th>
-              <th>Visibility</th>
-              <th>Manage</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Email</th>
+              <th>Message</th>
             </tr>
             </thead>
             <tbody>";
         while($row = mysqli_fetch_assoc($query_result)) {
             echo "<tr>";
-            echo "<td>{$row["title"]}</td>";
-            echo "<td>{$row["content"]}</td>";
-            echo "<td>{$row["post_date"]}</td>";
-            echo "<td>{$row["view_permission"]}</td>";
+            $uid = $row["user_id"];
+            $username = fetch_name_by_id($conn, $uid);
+            $col = fetch_user_by_id($conn, $uid);
+
+            echo "<tr>";
+            echo "<td>{$username}</td>";
+            echo "<td>{$col["address"]}</td>";
+            echo "<td>{$col["email"]}</td>";
             echo "<td>
                 <div class=\"btn-group mr-2\">
-                <a href=\"includes/post.php?pid={$row["post_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">View</button>
-                <a href=\"includes/delete_inc.php?pid={$row["post_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
+                <a href=\"message_user.php?uid=$uid\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Message</button></a>
                 </div>
                 </td>";
         }
@@ -297,6 +386,7 @@ function print_from_group_table_from_id($conn,$uid) {
     mysqli_free_result($query_result);
     mysqli_close($conn);
 }
+
 
 
 

@@ -1,5 +1,5 @@
 <?php // 40058095
-    include_once "templates/header.php";
+    include_once "header.php";
 ?>
 
 <div class="col-md-12 text-center">
@@ -16,6 +16,6 @@
 </div>
 
 <?php
-    include_once "templates/footer.php";
+    include_once "footer.php";
 ?>
 
