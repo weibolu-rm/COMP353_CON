@@ -22,7 +22,7 @@ CREATE TABLE `consys`.`condo` (
   `building_id` INT NOT NULL,
   `condo_id` INT NOT NULL,
   CONSTRAINT compkey1 PRIMARY KEY (`building_id`, `condo_id`),
-  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
+  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -51,7 +51,7 @@ CREATE TABLE `consys`.`condo` (
   `building_id` INT NOT NULL,
   `condo_id` INT NOT NULL,
   CONSTRAINT compkey2 PRIMARY KEY (`building_id`, `condo_id`),
-  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
+  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -61,7 +61,7 @@ CREATE TABLE `consys`.`parking_space` (
   `building_id` INT NOT NULL,
   `parking_space_id` INT NOT NULL,
   CONSTRAINT compkey3 PRIMARY KEY (`building_id`, `parking_space_id`),
-  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
+  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -71,7 +71,7 @@ CREATE TABLE `consys`.`storage_space` (
   `building_id` INT NOT NULL,
   `ss_id` INT NOT NULL,
   CONSTRAINT compkey4 PRIMARY KEY (`building_id`, `ss_id`),
-  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
+  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -82,7 +82,7 @@ CREATE TABLE `consys`.`public_space` (
   `square_footage` DECIMAL NOT NULL,
   `type` VARCHAR(45) NOT NULL,
   CONSTRAINT compkey5 PRIMARY KEY (`building_id`, `square_footage`, `type`),
-  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`)
+  FOREIGN KEY (`building_id`) REFERENCES building(`building_id`) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -108,7 +108,7 @@ CREATE TABLE `consys`.`transaction_record` (
   `default_monthly_payment` DECIMAL,
   `maintenance_payment` DECIMAL, 
   CONSTRAINT compkey6 PRIMARY KEY (`user_id`, `payment_date`),
-  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -139,7 +139,7 @@ CREATE TABLE `consys`.`posts` (
   `image_id` VARCHAR(45) DEFAULT "none", /* none = no image */
   `is_announcement` INT(1) DEFAULT 0, /* 0 = not announcement, 1 = announcement */
   PRIMARY KEY (`post_id`),
-  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -148,8 +148,8 @@ CREATE TABLE `consys`.`posts` (
 CREATE TABLE `consys`.`friend` (
   `friend_id_1` INT NOT NULL,
   `friend_id_2` INT NOT NULL,
-  FOREIGN KEY (`friend_id_1`) REFERENCES condo_owners(`user_id`),
-  FOREIGN KEY (`friend_id_2`) REFERENCES condo_owners(`user_id`),
+  FOREIGN KEY (`friend_id_1`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`friend_id_2`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE,
   CHECK (friend_id_1 <> friend_id_2)
 );
 
@@ -161,7 +161,7 @@ CREATE TABLE `consys`.`groups` (
   `owner_id` INT NOT NULL,
   `group_name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`group_id`),
-  FOREIGN KEY (`owner_id`) REFERENCES condo_owners(`user_id`)
+  FOREIGN KEY (`owner_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE
 );
 
 
@@ -171,7 +171,7 @@ CREATE TABLE `consys`.`groups` (
 CREATE TABLE `consys`.`from_group` (
   `user_id` INT NOT NULL,
   `group_id` INT NOT NULL,
-  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`),
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE,
   FOREIGN KEY (`group_id`) REFERENCES groups(`group_id`)
 );
 
@@ -184,8 +184,8 @@ CREATE TABLE `consys`.`emails` (
   `subject` VARCHAR(45) DEFAULT "No Subject",
   `content` VARCHAR(1000) NOT NULL,
   `email_date` DATETIME NOT NULL,
-  FOREIGN KEY (`from_id`) REFERENCES condo_owners(`user_id`),
-  FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
+  FOREIGN KEY (`from_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE
 );
 
 
