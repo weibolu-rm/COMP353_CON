@@ -42,7 +42,7 @@
                         echo "<a class=\"nav-link ";
                             if($active_page == "profile.php")
                                 echo "active";
-                        echo "\" href=\"{$profile_url}\">Profile</a>";
+                        echo "\" href=\"{$profile_url}?uid={$_SESSION["user_id"]}\" >Profile</a>";
                     }
                     else {
                         echo "<a class=\"nav-link ";
