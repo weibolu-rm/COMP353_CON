@@ -74,7 +74,7 @@ CREATE TABLE `consys`.`condo_owners` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL, 
   `address` VARCHAR(45) NOT NULL,
-  `percent_owned` DECIMAL NOT NULL,
+  `percent_owned` DECIMAL NOT NULL DEFAULT 0.0,
   `privilege` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`)
 );

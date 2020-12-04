@@ -1,4 +1,3 @@
-
 <?php // 40058095
     include_once "admin_header.php";
 ?>
@@ -30,5 +29,5 @@
 </div>
 
 <?php
-    include_once "admin_footer.php";
+    include_once "templates/admin_footer.php";
 ?>
