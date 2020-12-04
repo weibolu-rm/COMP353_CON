@@ -1,5 +1,6 @@
+
 <?php // 40058095
-    include_once "admin_header.php";
+    include_once "templates/admin_header.php";
 ?>
 
 <h2>Posts</h2>

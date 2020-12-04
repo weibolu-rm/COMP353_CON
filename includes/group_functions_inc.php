@@ -352,7 +352,7 @@ function print_from_group_table_from_id($conn,$gid) {
     echo "<h4>Group Name: ".$groupname."</h4><br>";
     echo "<h5>Group Owner: ".$ownername."</h5> ";
     echo "<h5>Owner Email: ".$cod["email"]."</h5>";
-    echo "<a href=\"message_user.php?uid=$groupownerid\"><button type=\"button\" class=\"btn btn-md btn-outline-secondary\">Message</button></a><br><br>";
+    echo "<a href=\"send_email.php?uid=$groupownerid\"><button type=\"button\" class=\"btn btn-md btn-outline-secondary\">Message</button></a><br><br>";
     if($query_result) {
     echo "<thead>
             <tr>
@@ -375,7 +375,7 @@ function print_from_group_table_from_id($conn,$gid) {
             echo "<td>{$col["email"]}</td>";
             echo "<td>
                 <div class=\"btn-group mr-2\">
-                <a href=\"message_user.php?uid=$uid\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Message</button></a>
+                <a href=\"send_email.php?uid=$uid\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Message</button></a>
                 </div>
                 </td>";
         }
