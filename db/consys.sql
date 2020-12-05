@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS `transaction_record`;
 DROP TABLE IF EXISTS `posts`;
 DROP TABLE IF EXISTS `friend`;
 DROP TABLE IF EXISTS `from_group`;
-DROP TABLE IF EXISTS `groups`;
+DROP TABLE IF EXISTS `member_groups`;
 DROP TABLE IF EXISTS `emails`;
 DROP TABLE IF EXISTS `emails_record`;
 DROP TABLE IF EXISTS `condo`;
@@ -139,9 +139,9 @@ CREATE TABLE `friend` (
 );
 
 -- -----------------------------------------------------
--- table `groups`
+-- table `member_groups`
 -- -----------------------------------------------------
-CREATE TABLE `groups` (
+CREATE TABLE `member_groups` (
   `group_id` INT NOT NULL AUTO_INCREMENT,
   `owner_id` INT NOT NULL,
   `group_name` VARCHAR(45) NOT NULL,
@@ -151,13 +151,13 @@ CREATE TABLE `groups` (
 
 
 -- -----------------------------------------------------
--- table `groups`
+-- table `from_groups`
 -- -----------------------------------------------------
 CREATE TABLE `from_group` (
   `user_id` INT NOT NULL,
   `group_id` INT NOT NULL,
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE
+  FOREIGN KEY (`group_id`) REFERENCES `member_groups`(`group_id`) ON DELETE CASCADE
 
 );
 

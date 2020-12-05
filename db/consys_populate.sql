@@ -438,7 +438,6 @@ INSERT INTO transaction_record VALUES (25, "2020-03-01", 950, null);
 INSERT INTO transaction_record VALUES (25, "2020-04-01", 950, null);
 INSERT INTO transaction_record VALUES (25, "2020-05-01", 950, null);
 INSERT INTO transaction_record VALUES (25, "2020-05-02", null, 1500); 
-<<<<<<< HEAD
 INSERT INTO transaction_record VALUES (25, "2020-06-01", 950, null);
 INSERT INTO transaction_record VALUES (25, "2020-07-01", 950, null);
 INSERT INTO transaction_record VALUES (25, "2020-08-01", 950, null);
@@ -446,74 +445,6 @@ INSERT INTO transaction_record VALUES (25, "2020-09-01", 950, null);
 INSERT INTO transaction_record VALUES (25, "2020-10-01", 950, null);
 INSERT INTO transaction_record VALUES (25, "2020-11-01", 950, null);
 INSERT INTO transaction_record VALUES (25, "2020-12-01", 950, null);
-=======
-INSERT INTO transaction_record VALUES (25, "2020-06-01", 750, null);
-INSERT INTO transaction_record VALUES (25, "2020-07-01", 750, null);
-INSERT INTO transaction_record VALUES (25, "2020-08-01", 750, null);
-INSERT INTO transaction_record VALUES (25, "2020-09-01", 750, null);
-INSERT INTO transaction_record VALUES (25, "2020-10-01", 750, null);
-INSERT INTO transaction_record VALUES (25, "2020-11-01", 750, null);
-INSERT INTO transaction_record VALUES (25, "2020-12-01", 750, null);
-
-/*
-INSERT INTO transaction_record VALUES (26, "2020-01-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-02-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-03-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-04-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-05-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-05-02", null, 1500); 
-INSERT INTO transaction_record VALUES (26, "2020-06-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-07-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-08-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-09-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-10-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-11-01", 750, null);
-INSERT INTO transaction_record VALUES (26, "2020-12-01", 750, null);
-
-INSERT INTO transaction_record VALUES (27, "2020-01-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-02-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-03-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-04-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-05-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-05-02", null, 1500); 
-INSERT INTO transaction_record VALUES (27, "2020-06-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-06-20", null, 310.45);
-INSERT INTO transaction_record VALUES (27, "2020-07-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-08-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-09-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-10-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-11-01", 750, null);
-INSERT INTO transaction_record VALUES (27, "2020-12-01", 750, null);
-
-INSERT INTO transaction_record VALUES (28, "2020-01-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-02-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-03-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-04-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-05-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-05-02", null, 1500); 
-INSERT INTO transaction_record VALUES (28, "2020-06-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-07-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-08-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-09-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-10-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-11-01", 750, null);
-INSERT INTO transaction_record VALUES (28, "2020-12-01", 750, null);
-
-INSERT INTO transaction_record VALUES (29, "2020-01-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-02-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-03-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-04-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-05-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-05-02", null, 1500); 
-INSERT INTO transaction_record VALUES (29, "2020-06-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-07-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-08-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-09-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-10-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-11-01", 750, null);
-INSERT INTO transaction_record VALUES (29, "2020-12-01", 750, null);
-*/
->>>>>>> master
 
 /*data for parking table*/
 insert into parking_space values (1, 1);
@@ -622,10 +553,10 @@ VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing 
  
  
  
-INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (1,6, "3524Sherb");
-INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (2,17, "1587Laval1");
-INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (3,18, "1587Laval2");
-INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (4,22, "2490Stden");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (1,6, "3524Sherb");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (2,17, "1587Laval1");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (3,18, "1587Laval2");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (4,22, "2490Stden");
 
 
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 12, 2);

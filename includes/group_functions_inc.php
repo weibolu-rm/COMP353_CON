@@ -96,7 +96,7 @@ function fetch_name_by_id($conn, $uid) {
 }
 
 function fetch_group_by_id($conn, $gid) {
-    $sql = "SELECT * FROM groups WHERE group_id = ?;";
+    $sql = "SELECT * FROM member_groups WHERE group_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -121,7 +121,7 @@ function fetch_group_by_id($conn, $gid) {
 }
 
 function fetch_group_name_by_admin($conn, $uid) {
-    $sql = "SELECT * FROM groups WHERE owner_id = ?;";
+    $sql = "SELECT * FROM member_groups WHERE owner_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -147,7 +147,7 @@ function fetch_group_name_by_admin($conn, $uid) {
 }
 
 function fetch_group_id_by_admin($conn, $uid) {
-    $sql = "SELECT * FROM groups WHERE owner_id = ?;";
+    $sql = "SELECT * FROM member_groups WHERE owner_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -255,7 +255,7 @@ function print_group_button($conn, $uid) {
 
 
 function print_group_button_admin($conn, $uid) {
-    $sql = "SELECT * FROM groups WHERE owner_id = ?;";
+    $sql = "SELECT * FROM member_groups WHERE owner_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -285,7 +285,7 @@ function print_group_button_admin($conn, $uid) {
 
 
 function fetch_group_name_by_id($conn, $gid) {
-    $sql = "SELECT * FROM groups WHERE group_id = ?;";
+    $sql = "SELECT * FROM member_groups WHERE group_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -309,7 +309,7 @@ function fetch_group_name_by_id($conn, $gid) {
 }
 
 function fetch_group_owner_by_id($conn, $gid) {
-    $sql = "SELECT * FROM groups WHERE group_id = ?;";
+    $sql = "SELECT * FROM member_groups WHERE group_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -334,7 +334,7 @@ function fetch_group_owner_by_id($conn, $gid) {
 
 
 function print_group_table($conn) {
-    $sql = "SELECT * FROM groups ORDER BY group_id ASC;";
+    $sql = "SELECT * FROM member_groups ORDER BY group_id ASC;";
     // here we don't need to bind a prepared statement as you couldn't do 
     $query_result = mysqli_query($conn, $sql);
     echo "<thead>
@@ -692,7 +692,7 @@ function admin_change_user_name($conn, $uid, $name) {
 
 function admin_change_group_name($conn, $gid, $group_name) {
     $group = fetch_group_by_id($conn, $gid);
-    $sql = "UPDATE groups SET group_name = ? WHERE group_id = ?;";
+    $sql = "UPDATE member_groups SET group_name = ? WHERE group_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
     if(!mysqli_stmt_prepare($stmt, $sql)) {
