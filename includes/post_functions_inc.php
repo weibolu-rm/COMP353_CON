@@ -207,7 +207,7 @@ function print_single_post($conn, $pid) {
 
 
         echo '
-            <div class="jumbotron jumbotron-fluid" style="background-color:black;">
+            <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1 class="display-4">'. $row["title"] .'</h1>
                 <p class="lead">Post by '. $user["name"].'</p>
