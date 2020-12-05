@@ -49,7 +49,7 @@
         </h6>
         <ul class="nav flex-column mb-2">
         <li class="nav-item">
-            <a class="nav-link" href="#">
+			<a class="nav-link" href="<?php echo $admin_groups_url; ?>">
             Dashboard
             </a>
         </li>
@@ -87,4 +87,3 @@
         <div class="pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Dashboard</h1>
         </div>
-
