@@ -53,8 +53,18 @@
     ?>
 </table>
 </div>
+<div class="margin-top table-responsive sm-margin-top">
+<table class="table table-striped table-sm">
+    <?php
+        require_once "includes/db_handler_inc.php";
+        require_once "includes/financials_functions_inc.php";
 
-
+        echo "User transaction";
+        print_full_transactions_by_uid($conn, $_GET["uid"]);
+    ?>
+</table>
+</div>
+<div class="margin-top"></div>
 <?php
     include_once "templates/footer.php";
 ?>

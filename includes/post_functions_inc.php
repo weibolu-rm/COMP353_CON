@@ -344,6 +344,6 @@ function print_posts_table_id($conn,$uid) {
     echo "</tbody>";
         
 
-    mysqli_free_result($query_result);
-    mysqli_close($conn);
+    if($query_result !== false)
+        mysqli_free_result($query_result);
 }
