@@ -138,11 +138,11 @@
 		$query_result = mysqli_query($conn, $sql);
 		$row = mysqli_fetch_assoc($query_result);
 		  echo "<td>{$row["building_3_maintenance"]}</td>";
-?>  
 	
-	  <div class=\"btn-group mr-2\">
+	  echo "<div class=\"btn-group mr-2\">
                 <a href=\"financial_report.php?bid={$row["building_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Full Yearly Report</button></a>
-                </div>
+                </div>"
+?>  
 </div>
 
 <?php
