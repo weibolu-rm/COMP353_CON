@@ -53,22 +53,6 @@
             Dashboard
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Last quarter
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Social engagement
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-            Year-end sale
-            </a>
-        </li>
-
         </ul>
 		
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
