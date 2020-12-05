@@ -98,12 +98,12 @@ function print_user_table($conn) {
         }
     }
     echo "</tbody>";
-        
 
     if($query_result !== false)
         mysqli_free_result($query_result);
     mysqli_close($conn);
 }
+
 
 function print_single_user_table($conn, $uid) {
     echo "<thead>

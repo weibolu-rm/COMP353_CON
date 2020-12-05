@@ -79,7 +79,7 @@ CREATE TABLE `condo_owners` (
 CREATE TABLE `condo` (
   `building_id` INT NOT NULL,
   `condo_id` INT NOT NULL,
-  `owner_id` INT NOT NULL,
+  `owner_id` INT,
   CONSTRAINT compkey2 PRIMARY KEY (`building_id`, `condo_id`),
   FOREIGN KEY (`building_id`) REFERENCES building (`building_id`) ON DELETE CASCADE,
   FOREIGN KEY (`owner_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE
