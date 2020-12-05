@@ -1,5 +1,4 @@
-<?php
-//40025805
+<?php  //40025805
 
 
 function get_occupied_condos_count($conn, $bid) {

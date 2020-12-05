@@ -26,11 +26,7 @@
 	require_once "includes/financials_functions_inc.php";
 
 	print_building_financial_overview($conn);
-
-	
-
 ?>  
-</div>
 
 <?php
     include_once "templates/admin_footer.php";
