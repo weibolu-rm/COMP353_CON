@@ -38,10 +38,10 @@
         require_once "includes/functions_inc.php";
         if(isset($_GET["uid"])){
         $row = fetch_user_by_id($conn, $_GET["uid"]);
-        echo "<input type=" ."email". " name=" ."recipient". " class=" ."form-control". " value=".$row["email"]." required>";
+        echo "<input type=" ."text". " name=" ."recipient". " class=" ."form-control". " value=".$row["email"]." required>";
         }
         else{
-        echo "<input type=" ."email". " name=" ."recipient". " class=" ."form-control". " required>";
+        echo "<input type=" ."text". " name=" ."recipient". " class=" ."form-control". " required>";
         }
     ?>
     </div>      
