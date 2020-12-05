@@ -6,7 +6,7 @@
 <div class="col-md-12 text-center">
     <h2>&nbsp </h2>
     <br>
-    <img src="assets/images/logo.png" alt="HTML tutorial" style="width:700px;height:141px;">
+    <img src="uploads/logo.png" alt="Condo Association Online Network System" style="width:700px;height:141px;">
     <?php 
         if (isset($_SESSION["name"]))
             echo "<h3 class=\"margin-top\">Welcome back, {$_SESSION["name"]}.";

@@ -11,7 +11,7 @@
         require_once "includes/group_functions_inc.php";
         print_single_user_name($conn, $_GET["uid"]);  
     ?>
-    <img src="assets/images/head.png" alt="head" />
+    <img src="uploads/head.png" alt="head" />
     <?php
         require_once "includes/db_handler_inc.php";
         require_once "includes/functions_inc.php";
