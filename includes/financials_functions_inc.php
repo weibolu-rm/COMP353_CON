@@ -76,6 +76,7 @@ function print_full_transactions_by_building($conn, $bid){
 	        WHERE condo.building_id = {$bid} ORDER BY user_id ASC;";
     // here we don't need to bind a prepared statement as you couldn't do 
     $query_result = mysqli_query($conn, $sql);
+    echo "<h3>Full Yearly Transction Report - Building ID {$bid} </h3>";
     echo "<thead>
             <tr>
               <th>User ID</th>

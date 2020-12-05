@@ -27,7 +27,7 @@
 
 	print_building_financial_overview($conn);
 ?>  
-
+<div class="margin-top"></div>
 <?php
     include_once "templates/admin_footer.php";
 ?>
