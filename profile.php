@@ -58,9 +58,11 @@
     <?php
         require_once "includes/db_handler_inc.php";
         require_once "includes/financials_functions_inc.php";
-
-        echo "User transaction";
-        print_full_transactions_by_uid($conn, $_GET["uid"]);
+	$uid = $_GET["uid"];
+	if(isset($_SESSION["user_id"]) && $_SESSION["user_id"] == $uid ) { 
+        	echo "User transaction";
+        	print_full_transactions_by_uid($conn, $_GET["uid"]);
+	}
     ?>
 </table>
 </div>
