@@ -26,6 +26,7 @@ CREATE TABLE `building` (
   `building_id` INT NOT NULL AUTO_INCREMENT,
   `square_footage` DECIMAL NOT NULL,
   `address` VARCHAR(45) NOT NULL,
+  `postal_code` VARCHAR(7) NOT NULL,
   PRIMARY KEY (`building_id`)
 );
 
@@ -69,6 +70,7 @@ CREATE TABLE `condo_owners` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL, 
   `primary_address` VARCHAR(45) NOT NULL,
+  `postal_code` VARCHAR (7) NOT NULL,
   `privilege` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`)
 );

@@ -3,60 +3,60 @@
 USE `eac353_2`;
 
 /*row data for building table*/
-INSERT INTO building (square_footage, address) VALUES (2300, "3524 Rue Sherbrooke, Montreal, QC");
-INSERT INTO building (square_footage, address) VALUES (3000, "1587 Rue Laval, Montreal, QC");
-INSERT INTO building (square_footage, address) VALUES (2500, "2490 Rue St Denis, Montreal, QC");
+INSERT INTO building (square_footage, address, postal_code) VALUES (2300, "1524 Rue Sherbrooke O, Montreal, QC", "H3A 1B2");
+INSERT INTO building (square_footage, address, postal_code) VALUES (3000, "3587 Rue Laval, Montreal, QC", "H2X 3C9");
+INSERT INTO building (square_footage, address, postal_code) VALUES (2500, "2490 Rue Saint-Denis, Montreal, QC",  "H2X 3K7");
 
 
 /* Data for populating condo owners */
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Shinji Ikari", "s.ikari@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #1, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Misato Katsuragi", "m.katsuragi@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #2, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Rei Ayanami", "r.ayami@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #3, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Asuka Langley Soryu", "a.soryu@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #4, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Gendo Ikari", "g.ikari@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #5, Montreal, QC", "admin");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Kozo Fuyutsuki", "k.fuyutsuki@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #7, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Ryoji Kaji", "r.kaji@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #8, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Makoto Hyuga", "m.hyuga@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #9, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Maya Ibuki", "m.ibuki@consys.com", "passw0rd1234", "3524 Rue Sherbrooke #10, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Shigeru Aoba", "s.aoba@consys.com", "passw0rd1234", "1587 Rue Laval #1, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Kaworu Nagisa", "k.nagisa@consys.com", "passw0rd1234", "1587 Rue Laval #2, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Toji Suzuhara", "t.suzuhara@consys.com", "passwo0rd1234", "1587 Rue Laval #3, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Kensuke Aida", "k.aida@consys.com", "passw0rd1234", "1587 Rue Laval #4, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Hikari Horaki", "h.horaki@consys.com", "passw0rd1234", "1587 Rue Laval #5, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Pen Pen", "p.pen@consys.com", "passw0rd1234", "1587 Rue Laval #6, Montreal, QC", "admin");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Naoko Akagi", "n.akagi@consys.com", "passw0rd1234", "1587 Rue Laval #7, Montreal, QC", "admin");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Yui Ikari", "y.ikari@consys.com", "passw0rd1234", "1587 Rue Laval #8, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Kyoko Zeppelin Soryu", "k.soryu@consys.com", "passw0rd1234", "1587 Rue Laval #9, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Keel Lorenz", "k.lorenz@consys.com", "passw0rd1234", "1587 Rue Laval #10, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Adam Angel", "a.angel@consys.com", "passw0rd1234", "2490 Rue St Denis #1, Montreal, QC", "admin");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Lilith Angel", "lth.angel@consys.com", "passw0rd1234", "2490 Rue St Denis #2, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Tabris Angel", "t.angel@consys.com", "passw0rd1234", "2490 Rue St Denis #3, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Lilin Angel", "ln.angel@consys.com", "passw0rd1234", "2490 Rue St Denis #4, Montreal, QC", "user");
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("Ritsuko Akagi", "r.akagi@consys.com", "passw0rd1234", "#2490 Rue St Denis #10, Montreal, QC", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Shinji Ikari", "s.ikari@consys.com", "passw0rd1234", "1524 Rue Sherbrooke O #1, Montreal, QC", "H3A 1B2", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Misato Katsuragi", "m.katsuragi@consys.com", "passw0rd1234", "1524 Rue Sherbrooke O #2, Montreal, QC", "H3A 1B2", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Rei Ayanami", "r.ayami@consys.com", "passw0rd1234", "1524 Rue Sherbrooke O #3, Montreal, QC", "H3A 1B2", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Asuka Langley Soryu", "a.soryu@consys.com", "passw0rd1234", "1524 Rue Sherbrooke O #4, Montreal, QC", "H3A 1B2", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Gendo Ikari", "g.ikari@consys.com", "passw0rd1234", "1524 Rue Sherbrooke O #5, Montreal, QC", "H3A 1B2", "admin");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Kozo Fuyutsuki", "k.fuyutsuki@consys.com", "passw0rd1234", "1524 Rue Sherbrooke O #7, Montreal, QC", "H3A 1B2", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Ryoji Kaji", "r.kaji@consys.com", "passw0rd1234", "1524 Rue Sherbrooke O #8, Montreal, QC", "H3A 1B2", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Makoto Hyuga", "m.hyuga@consys.com", "passw0rd1234", "1524 Rue Sherbrooke O #9, Montreal, QC", "H3A 1B2", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Maya Ibuki", "m.ibuki@consys.com", "passw0rd1234", "1524 Rue Sherbrooke O #10, Montreal, QC", "H3A 1B2", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Shigeru Aoba", "s.aoba@consys.com", "passw0rd1234", "3587 Rue Laval #1, Montreal, QC", "H2X 3C9", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Kaworu Nagisa", "k.nagisa@consys.com", "passw0rd1234", "3587 Rue Laval #2, Montreal, QC", "H2X 3C9", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Toji Suzuhara", "t.suzuhara@consys.com", "passwo0rd1234", "3587 Rue Laval #3, Montreal, QC", "H2X 3C9", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Kensuke Aida", "k.aida@consys.com", "passw0rd1234", "3587 Rue Laval #4, Montreal, QC", "H2X 3C9", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Hikari Horaki", "h.horaki@consys.com", "passw0rd1234", "3587 Rue Laval #5, Montreal, QC", "H2X 3C9", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Pen Pen", "p.pen@consys.com", "passw0rd1234", "3587 Rue Laval #6, Montreal, QC", "H2X 3C9", "admin");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Naoko Akagi", "n.akagi@consys.com", "passw0rd1234", "3587 Rue Laval #7, Montreal, QC", "H2X 3C9", "admin");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Yui Ikari", "y.ikari@consys.com", "passw0rd1234", "3587 Rue Laval #8, Montreal, QC", "H2X 3C9", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Kyoko Zeppelin Soryu", "k.soryu@consys.com", "passw0rd1234", "3587 Rue Laval #9, Montreal, QC", "H2X 3C9", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Keel Lorenz", "k.lorenz@consys.com", "passw0rd1234", "3587 Rue Laval #10, Montreal, QC", "H2X 3C9", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Adam Angel", "a.angel@consys.com", "passw0rd1234", "2490 Rue Saint-Denis #1, Montreal, QC", "H2X 3K7", "admin");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Lilith Angel", "lth.angel@consys.com", "passw0rd1234", "2490 Rue Saint-Denis #2, Montreal, QC", "H2X 3K7", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Tabris Angel", "t.angel@consys.com", "passw0rd1234", "2490 Rue Saint-Denis #3, Montreal, QC", "H2X 3K7", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Lilin Angel", "ln.angel@consys.com", "passw0rd1234", "2490 Rue Saint-Denis #4, Montreal, QC", "H2X 3K7", "user");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("Ritsuko Akagi", "r.akagi@consys.com", "passw0rd1234", "#2490 Rue Saint-Denis #10, Montreal, QC", "H2X 3K7", "user");
 
 
 /*row data for condo table*/
