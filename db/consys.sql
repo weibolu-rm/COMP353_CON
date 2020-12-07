@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS `storage_space`;
 DROP TABLE IF EXISTS `public_space`;
 DROP TABLE IF EXISTS `maintenance`;
 DROP TABLE IF EXISTS `transaction_record`;
+DROP TABLE IF EXISTS `posts_comments`;
 DROP TABLE IF EXISTS `posts`;
 DROP TABLE IF EXISTS `friend`;
 DROP TABLE IF EXISTS `from_group`;
@@ -189,7 +190,7 @@ CREATE TABLE `emails` (
 
 -- -----------------------------------------------------
 -- table `emails_record`
------------------------------------------------------
+-- ---------------------------------------------------
 CREATE TABLE `emails_record` (
   `from_id` INT NOT NULL,
   `to_id` INT NOT NULL,
