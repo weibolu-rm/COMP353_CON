@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS `storage_space`;
 DROP TABLE IF EXISTS `public_space`;
 DROP TABLE IF EXISTS `maintenance`;
 DROP TABLE IF EXISTS `transaction_record`;
+DROP TABLE IF EXISTS `posts_comments`;
 DROP TABLE IF EXISTS `posts`;
 DROP TABLE IF EXISTS `friend`;
 DROP TABLE IF EXISTS `from_group`;
@@ -128,6 +129,19 @@ CREATE TABLE `posts` (
 );
 
 -- -----------------------------------------------------
+-- table `comments`
+-- -----------------------------------------------------
+CREATE TABLE `posts_comments` (
+  `user_id` INT NOT NULL,
+  `post_id` INT NOT NULL,
+  `content` VARCHAR(1000) NOT NULL,
+  `comment_date` DATETIME NOT NULL,
+  `view_permission` VARCHAR(45) DEFAULT "public",
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`post_id`) REFERENCES posts(`post_id`) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------
 -- Table `friend`
 -- -----------------------------------------------------
 CREATE TABLE `friend` (
@@ -176,7 +190,7 @@ CREATE TABLE `emails` (
 
 -- -----------------------------------------------------
 -- table `emails_record`
--- -----------------------------------------------------
+-- ---------------------------------------------------
 CREATE TABLE `emails_record` (
   `from_id` INT NOT NULL,
   `to_id` INT NOT NULL,
@@ -186,6 +200,8 @@ CREATE TABLE `emails_record` (
   FOREIGN KEY (`from_id`) REFERENCES condo_owners(`user_id`),
   FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
 );
+
+
 
 /* default admin user */
 INSERT INTO condo_owners (name, email, password, primary_address, privilege) 

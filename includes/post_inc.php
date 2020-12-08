@@ -2,6 +2,29 @@
     require_once "config_inc.php";
     session_start();
 
+if(isset($_POST["post_comment"])) {
+    $pid = $_GET["pid"];
+    $uid = $_SESSION["user_id"];
+    $visibility = $_POST["visibility"];
+    $content = $_POST["content"];
+
+    require_once "post_functions_inc.php";
+    require_once "db_handler_inc.php";
+
+
+    if(post_comment($conn, $uid, $pid, $content, $visibility) === false) {
+        header("location: ../{$post_url}?pid={$pid}&error=stmt");
+        exit();
+    }
+    else {
+        header("location: ../{$post_url}?pid={$pid}&error=none");
+        exit();
+
+    }
+
+}   
+
+
 if (isset($_POST["post_announcement"])) {
     $uid = $_SESSION["user_id"];
     $title = $_POST["title"];    
@@ -23,8 +46,7 @@ if (isset($_POST["post_announcement"])) {
         $allowed_img_types = array("jpg", "jpeg", "png", "gif");
 
         if($file_error !== 0) {
-            header("location: ../{$admin_announcement_url}?error=imgerror");
-            exit();
+;
         } 
         if(!in_array($file_type, $allowed_img_types) || getimagesize($file_tmp) === false) {
             header("location: ../{$admin_announcement_url}?error=imgtype");
