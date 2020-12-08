@@ -54,7 +54,7 @@
             if(isset($_SESSION["user_id"]))
                 echo '
                 <div class="sm-margin-top">
-                <form action="includes/post_inc.php?pid=<?php echo $_GET["pid"] ?>" method="post">
+                <form action="includes/post_inc.php?pid='.$_GET["pid"].'" method="post">
                     <div class="form-group">
                         <label for="content">Comment</label>
                         <textarea name="content" class="form-control" rows="2" required></textarea>
