@@ -126,7 +126,64 @@ function print_posts_no_id($conn) {
     mysqli_close($conn);
 }
 
+function print_comments($conn, $pid) {
+    $sql = "SELECT * FROM posts_comments WHERE post_id = {$pid}";
+    $query_result = mysqli_query($conn, $sql);
 
+
+    echo '<h6 class="text-white border-bottom border-gray pb-2 mb-0">Comments</h6>';
+
+    if($query_result) {
+        while($row = mysqli_fetch_assoc($query_result)) {
+            $content = $row["content"];
+            $visibility = $row["view_permission"];
+            $user = fetch_user_by_id($conn, $row["user_id"]);   
+            $post = fetch_post_by_id($conn, $pid);    
+            if(isset($_SESSION["user_id"]))
+                $viewer = $_SESSION["user_id"];
+
+
+            if(!isset($_SESSION["user_id"]) && $row["view_permission"] != "public")
+                continue;
+            if ($row["view_permission"] == "original poster" && $viewer != $row["user_id"] 
+                && $viewer != $post["user_id"] && $_SESSION["permission"] != "admin")
+                continue;
+            
+            echo '<div class="media text-muted pt-3">
+            <a href=profile.php?uid='. $row["user_id"] .'><svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg></a>
+            <p class="text-white media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <a href=profile.php?uid='. $row["user_id"] .'><strong class="d-block text-primary">'. $user["name"] .'</strong></a>
+                '. $content .'
+            </p></a>
+            </div>';
+        }
+    }
+        
+
+    if($query_result !== false)
+        mysqli_free_result($query_result);
+    mysqli_close($conn);
+}
+
+function post_comment($conn, $uid, $pid, $content, $visibility) {
+    
+    $sql = "INSERT INTO posts_comments (user_id, post_id, content, comment_date, view_permission)
+            VALUES (?, ?, ?, ?, ?);";
+
+
+    $stmt = mysqli_stmt_init($conn);
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+
+    $current_datetime = date('Y-m-d H:i:s');
+
+    mysqli_stmt_bind_param($stmt, "iisss", $uid, $pid, $content, $current_datetime, $visibility);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
 
 function print_posts_table($conn) {
     $sql = "SELECT * FROM posts ORDER BY post_id ASC;";
@@ -164,6 +221,50 @@ function print_posts_table($conn) {
                 <div class=\"btn-group mr-2\">
                 <a href=\"post.php?pid={$row["post_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">View</button>
                 <a href=\"includes/delete_inc.php?pid={$row["post_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
+                </div>
+                </td>";
+        }
+    }
+    echo "</tbody>";
+        
+
+    if($query_result !== false)
+        mysqli_free_result($query_result);
+    // mysqli_close($conn); can't close $conn since will be used for comments
+}
+
+function print_comments_table($conn) {
+    $sql = "SELECT * FROM posts_comments ORDER BY post_id ASC;";
+    
+
+    $query_result = mysqli_query($conn, $sql);
+    echo "<thead>
+            <tr>
+              <th>pid</th>
+              <th>uid</th>
+              <th>Date</th>
+              <th>Content</th>
+              <th>Visibility</th>
+              <th>Manage</th>
+            </tr>
+            </thead>
+            <tbody>";
+    if($query_result) {
+        while($row = mysqli_fetch_assoc($query_result)) {
+            $content = $row["content"];
+
+            if(strlen($content) > 100)
+                $content = substr($content, 0, 100)."...";
+            echo "<tr>";
+            echo "<td>{$row["post_id"]}</td>";
+            echo "<td><a href=\"admin_change_user.php?uid={$row["user_id"]}\">{$row["user_id"]}</a></td>";
+            echo "<td>{$row["comment_date"]}</td>";
+            echo "<td>{$content}</td>";
+            echo "<td>{$row["view_permission"]}</td>";
+            echo "<td>
+                <div class=\"btn-group mr-2\">
+                <a href=\"post.php?pid={$row["post_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">View</button>
+                <a href=\"includes/delete_inc.php?pid={$row["post_id"]}&comment=yes&date={$row["comment_date"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
                 </div>
                 </td>";
         }
@@ -231,6 +332,22 @@ function delete_post($conn, $pid) {
     }
 
     mysqli_stmt_bind_param($stmt, "i", $pid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
+function delete_comment($conn, $pid, $date) {
+
+
+    $sql = "DELETE FROM posts_comments WHERE post_id = ? AND comment_date = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+
+    mysqli_stmt_bind_param($stmt, "is", $pid, $date);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;

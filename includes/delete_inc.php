@@ -10,16 +10,30 @@
 
 if(isset($_GET["pid"])) { // POST DELETION
     $pid = $_GET["pid"];
-    
     // prevents non admins and non post authors to delete posts by manually entering some url
     if(!isset($_SESSION["user_id"])) {
         header("location: ../{$login_url}?error=restricted");
         exit();
     }
 
+    if(isset($_GET["comment"]) && isset($_GET["date"]) && $_SESSION["privilege"] == "admin") { // DELETE COMMENT    
+        $date = $_GET["date"];
+        if(delete_comment($conn, $pid, $date) === false) {
+            header("location: ../{$admin_posts_url}?error=stmt");
+            exit();
+        }
+
+        else {
+            header("location: ../{$admin_posts_url}?error=successcomment");
+            exit();
+        }
+    }
+    
+
+
     if ($_SESSION["privilege"] != "admin") {
         if($row = fetch_post_by_id($conn, $pid) === false) {
-            header("location: ../{$admin_posts_url}?error=stmterror");
+            header("location: ../{$admin_posts_url}?error=stmt");
             exit();
         }
         // will allow post author to delete post
@@ -30,7 +44,7 @@ if(isset($_GET["pid"])) { // POST DELETION
     }
 
     if(delete_post($conn, $pid) === false) {
-        header("location: ../{$admin_posts_url}?error=stmterror");
+        header("location: ../{$admin_posts_url}?error=stmt");
         exit();
     }
 
