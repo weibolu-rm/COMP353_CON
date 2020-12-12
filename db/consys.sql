@@ -207,5 +207,5 @@ CREATE TABLE `emails_record` (
 
 /* default admin user */
 INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
-VALUES ("admin", "admin", "admin", "admin", "admin");
+VALUES ("admin", "admin", "admin", "admin", "admin", "admin");
 
