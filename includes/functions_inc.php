@@ -108,7 +108,7 @@ function print_user_table($conn) {
 //40025805
 function print_full_transactions_by_building($conn, $bid){
     $sql = "SELECT  FROM transaction_record 
-	WHERE(transaction_record.user_id = condo.owner_id AND condo.building_id = " $bid ") ORDER BY user_id ASC;";
+	WHERE(transaction_record.user_id = condo.owner_id AND condo.building_id = " {$bid} ") ORDER BY user_id ASC;";
     // here we don't need to bind a prepared statement as you couldn't do 
     $query_result = mysqli_query($conn, $sql);
     echo "<thead>
