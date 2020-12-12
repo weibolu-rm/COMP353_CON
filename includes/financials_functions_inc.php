@@ -47,6 +47,8 @@ function print_building_financial_overview($conn) {
 
     while($row = mysqli_fetch_assoc($query_result)) {
         $bid = $row["building_id"];
+        $address = $row["address"];
+        $postal_code = $row["postal_code"];
         $square_footage = $row["square_footage"];
         $occupied_count = get_occupied_condos_count($conn, $bid);
         $monthly_fees_paid = get_total_monthly_fees($conn, $bid);
@@ -55,6 +57,8 @@ function print_building_financial_overview($conn) {
         echo "
         <h3 class='sm-margin-top'> Building Summary: </h3>
         <p><b> ID:</b> {$bid}</p>
+        <p><b> Address: </b> {$address}</p>
+        <p><b> Postal Code: </b> {$postal_code}</p>
         <p><b> Square footage:</b> {$square_footage}</p>
         <p><b> Number of Condos Occupied:</b> {$occupied_count}</p>
         <p><b> Total monthly fees paid:</b> {$monthly_fees_paid}</p>

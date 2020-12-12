@@ -7,6 +7,7 @@ if (isset($_POST["register_user"])) {
     $password = $_POST["password_1"];
     $password_confirm = $_POST["password_2"];
     $address = $_POST["address"];
+    $postal_code = $_POST["postal_code"];
     $privilege = $_POST["privilege"];
 
 
@@ -33,7 +34,11 @@ if (isset($_POST["register_user"])) {
         header("location: ../{$register_url}?error=invalidpasswordlength");
         exit();
     }
-    if(create_user($conn, $name, $email, $password, $address, $privilege) === false) {
+    if (invalid_postal_code_length($postal_code)) {
+        header("location: ../{$register_url}?error=postallength");
+        exit();
+    }
+    if(create_user($conn, $name, $email, $password, $address, $postal_code, $privilege) === false) {
         header("location: ../{$admin_registration_url}?error=stmterror");
         exit();
     }

@@ -93,6 +93,22 @@ if (isset($_GET["uid"])) {
             exit();
         }
     }
+    if(isset($_POST["change_user_postal_code"])) {
+        $postal_code = $_POST["postal_code"];
+
+        if(invalid_postal_code_length($postal_code)) {
+            header("location: ../{$admin_change_url}?uid={$uid}&error=postallength");
+            exit();
+        }
+        if(admin_change_user_postal_code($conn, $uid, $postal_code)) {
+            header("location: ../{$admin_change_url}?uid={$uid}&error=postalsuccess");
+            exit();
+        }
+        else {
+            header("location: ../{$admin_change_url}?uid={$uid}&error=stmterror");
+            exit();
+        }
+    }
     if(isset($_POST["change_user_privilege"])) {
         $privilege = $_POST["privilege"];        
         
