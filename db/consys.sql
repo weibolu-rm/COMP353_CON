@@ -107,7 +107,7 @@ CREATE TABLE `maintenance` (
   `Contractor` VARCHAR(45) NOT NULL,
   `start_date` DATE NOT NULL,
   `complete_date` DATE NULL,
-  `Type` VARCHAR(45) NOT NULL,
+  `Type` VARCHAR(100) NOT NULL,
   `total_cost` DECIMAL DEFAULT NULL,
   `building_id` INT NOT NULL,
   `condo_id` INT,
