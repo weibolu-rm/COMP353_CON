@@ -1,8 +1,8 @@
-<?php // 40025805
+<?php // 40024592
     include_once "templates/admin_header.php";
 ?>
 
-<h2>Building Financial Overview</h2>
+<h2>Group Owners</h2>
 <?php
     if (isset($_GET["error"])) {
         switch($_GET["error"]) {
@@ -21,13 +21,21 @@
     }
 ?>
 
-<?php
-	require_once "includes/db_handler_inc.php";
-	require_once "includes/financials_functions_inc.php";
+<div class="table-responsive sm-margin-top">
+<table class="table table-striped table-sm">
 
-	print_building_financial_overview($conn);
-?>  
-<div class="margin-top"></div>
+    <?php
+        require_once "includes/db_handler_inc.php";
+        require_once "includes/group_functions_inc.php";
+        //print_group_table($conn);
+        print_group_table($conn);
+
+        print_from_group_table($conn);
+    ?>          
+</table>
+
+</div>
+
 <?php
     include_once "templates/admin_footer.php";
 ?>

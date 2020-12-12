@@ -19,7 +19,9 @@
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-        <a class="navbar-brand" href="<?php echo $home_url ?>">Home</a>
+        <a id="logo" class="navbar-brand" href="<?php echo $home_url ?>">
+    <img src="uploads/logo.png" alt="Home" style="width:150px;height:30px;">
+    </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -46,7 +48,7 @@
                         echo "<a class=\"nav-link ";
                             if($active_page == "profile.php")
                                 echo "active";
-                        echo "\" href=\"{$profile_url}\">Profile</a>";
+                        echo "\" href=\"{$profile_url}?uid={$_SESSION["user_id"]}\" >Profile</a>";
                     }
                     else {
                         echo "<a class=\"nav-link ";

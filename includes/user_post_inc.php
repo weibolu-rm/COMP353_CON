@@ -2,30 +2,7 @@
     require_once "config_inc.php";
     session_start();
 
-if(isset($_POST["post_comment"])) {
-    $pid = $_GET["pid"];
-    $uid = $_SESSION["user_id"];
-    $visibility = $_POST["visibility"];
-    $content = $_POST["content"];
-
-    require_once "post_functions_inc.php";
-    require_once "db_handler_inc.php";
-
-
-    if(post_comment($conn, $uid, $pid, $content, $visibility) === false) {
-        header("location: ../{$post_url}?pid={$pid}&error=stmt");
-        exit();
-    }
-    else {
-        header("location: ../{$post_url}?pid={$pid}&error=none");
-        exit();
-
-    }
-
-}   
-
-
-if (isset($_POST["post_announcement"])) {
+if (isset($_POST["user_post"])) {
     $uid = $_SESSION["user_id"];
     $title = $_POST["title"];    
     $content = $_POST["content"];
@@ -46,15 +23,16 @@ if (isset($_POST["post_announcement"])) {
         $allowed_img_types = array("jpg", "jpeg", "png", "gif");
 
         if($file_error !== 0) {
-;
+            header("location: ../{$user_post_url }?error=imgerror");
+            exit();
         } 
         if(!in_array($file_type, $allowed_img_types) || getimagesize($file_tmp) === false) {
-            header("location: ../{$admin_announcement_url}?error=imgtype");
+            header("location: ../{$user_post_url }?error=imgtype");
             exit();
         }
 
         if($file_size > 5242880) { // 5MB
-            header("location: ../{$admin_announcement_url}?error=imgsize");
+            header("location: ../{$user_post_url }?error=imgsize");
             exit();
         }
         // get next post id for name
@@ -65,17 +43,17 @@ if (isset($_POST["post_announcement"])) {
         $file_destination = $target_dir . $img_name;
 
         if(move_uploaded_file($file_tmp, $file_destination) === false) {
-            header("location: ../{$admin_announcement_url}?error=imgupload");
+            header("location: ../{$user_post_url }?error=imgupload");
             exit();
         }
         else {    
             // post with image
-            if(create_post($conn, $uid, $title, $content, $visibility, $img_name, true) === false) {
-                header("location: ../{$admin_announcement_url}?error=stmterror");
+            if(create_post($conn, $uid, $title, $content, $visibility, $img_name, false) === false) {
+                header("location: ../{$user_post_url }?error=stmterror");
                 exit();
             }
             else {
-                header("location: ../{$admin_announcement_url}?error=none");
+                header("location: ../{$user_post_url }?error=none");
                 exit();
             }
 
@@ -83,12 +61,12 @@ if (isset($_POST["post_announcement"])) {
     } // endif for image post
 
     // NO IMAGE
-    if(create_post($conn, $uid, $title, $content, $visibility, "none", true) === false) {
-        header("location: ../{$admin_announcement_url}?error=stmterror");
+    if(create_post($conn, $uid, $title, $content, $visibility, "none", false) === false) {
+        header("location: ../{$user_post_url }?error=stmterror");
         exit();
     }
     else {
-        header("location: ../{$admin_announcement_url}?error=none");
+        header("location: ../{$user_post_url }?error=none");
         exit();
     }
     
@@ -97,6 +75,6 @@ if (isset($_POST["post_announcement"])) {
 
 // will send users back to login page if they accessed this include illegally
 else {
-    header("location: ../{$login_url}");
+    header("location: ../{$user_post_url}");
     exit();
 }

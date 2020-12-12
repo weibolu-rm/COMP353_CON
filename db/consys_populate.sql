@@ -528,11 +528,14 @@ insert into posts (user_id, post_date, title, content, view_permission)
 VALUES (4, "2020-11-28 20:30:35", "Package stealing", "It has come to my attention that a few of my packages have been
 getting stolen. After speaking with some of my neighbors, it seems that it is a common occurence.", "user");
 insert into posts (user_id, post_date, title, content)
-VALUES (5, "2020-11-28 20:30:35", "Free cookies", "Email me with a receipt of your donation to your favorite charity and I'll
+VALUES (5, "2020-11-20 08:30:35", "Free cookies", "Email me at <a.soryu@consys.com> with a receipt of your donation to your favorite charity and I'll
 make the arrangements for you to get free cookies.
-
-
 Best, Asuka.");
+
+INSERT INTO posts_comments (user_id, post_id, comment_Date, content)
+VALUES (6, 3, "2020-11-28 21:30:00", "Yes, I can see this post. Don't worry.");
+INSERT INTO posts_comments (user_id, post_id, comment_Date, content)
+VALUES (6, 5, "2020-11-28 21:31:00", "Sent you an email!");
 
 INSERT INTO emails (from_id, to_id, subject, content, email_date) 
 VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -541,8 +544,6 @@ VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing 
  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
  mollit anim id est laborum.", "2020-11-30 00:12:12");
-
-
 INSERT INTO emails_record (from_id, to_id, subject, content, email_date) 
 VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
@@ -550,13 +551,16 @@ VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing 
  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
  mollit anim id est laborum.", "2020-11-30 00:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) 
+VALUES (6, 5, "Charity Receipt", "[Receipt] Doctors without borders: $500.00 (this is a legit receipt, trust me)", "2020-11-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) 
+VALUES (6, 5, "Charity Receipt", "[Receipt] Doctors without borders: $500.00 (this is a legit receipt, trust me)", "2020-11-29 09:12:12");
  
  
- 
-INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (1,6, "3524Sherb");
-INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (2,17, "1587Laval1");
-INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (3,18, "1587Laval2");
-INSERT INTO `groups`(`group_id`, `owner_id`, `group_name`) VALUES (4,22, "2490Stden");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (1,6, "3524Sherb");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (2,17, "1587Laval1");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (3,18, "1587Laval2");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (4,22, "2490Stden");
 
 
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 12, 2);

@@ -98,6 +98,7 @@ function print_user_table($conn) {
         }
     }
     echo "</tbody>";
+        
 
     if($query_result !== false)
         mysqli_free_result($query_result);
@@ -175,7 +176,7 @@ function invalid_password_length($password) {
 }
 
 function create_user($conn, $name, $email, $password, $address, $privilege) {
-    $sql = "INSERT INTO condo_owners (name, email, password, primary_address, privilege) VALUES (?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO condo_owners (name, email, password, address, privilege) VALUES (?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -328,7 +329,7 @@ function admin_change_user_name($conn, $uid, $name) {
 // for admin use
 function admin_change_user_address($conn, $uid, $address) {
     $user = fetch_user_by_id($conn, $uid);
-    $sql = "UPDATE condo_owners SET primary_address = ? WHERE user_id = ?;";
+    $sql = "UPDATE condo_owners SET address = ? WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
     if(!mysqli_stmt_prepare($stmt, $sql)) {
