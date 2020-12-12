@@ -56,8 +56,8 @@ CREATE TABLE `storage_space` (
 -- -----------------------------------------------------
 CREATE TABLE `public_space` (
   `building_id` INT NOT NULL,
-  `square_footage` DECIMAL NOT NULL,
   `type` VARCHAR(45) NOT NULL,
+  `square_footage` DECIMAL NOT NULL,
   CONSTRAINT compkey5 PRIMARY KEY (`building_id`, `square_footage`, `type`),
   FOREIGN KEY (`building_id`) REFERENCES building(`building_id`) ON DELETE CASCADE
 );
