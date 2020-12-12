@@ -27,6 +27,7 @@ CREATE TABLE `building` (
   `building_id` INT NOT NULL AUTO_INCREMENT,
   `square_footage` DECIMAL NOT NULL,
   `address` VARCHAR(45) NOT NULL,
+  `postal_code` VARCHAR(7) NOT NULL,
   PRIMARY KEY (`building_id`)
 );
 
@@ -55,8 +56,8 @@ CREATE TABLE `storage_space` (
 -- -----------------------------------------------------
 CREATE TABLE `public_space` (
   `building_id` INT NOT NULL,
-  `square_footage` DECIMAL NOT NULL,
   `type` VARCHAR(45) NOT NULL,
+  `square_footage` DECIMAL NOT NULL,
   CONSTRAINT compkey5 PRIMARY KEY (`building_id`, `square_footage`, `type`),
   FOREIGN KEY (`building_id`) REFERENCES building(`building_id`) ON DELETE CASCADE
 );
@@ -70,6 +71,7 @@ CREATE TABLE `condo_owners` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL, 
   `primary_address` VARCHAR(45) NOT NULL,
+  `postal_code` VARCHAR (7) NOT NULL,
   `privilege` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`)
 );
@@ -105,7 +107,7 @@ CREATE TABLE `maintenance` (
   `Contractor` VARCHAR(45) NOT NULL,
   `start_date` DATE NOT NULL,
   `complete_date` DATE NULL,
-  `Type` VARCHAR(45) NOT NULL,
+  `Type` VARCHAR(100) NOT NULL,
   `total_cost` DECIMAL DEFAULT NULL,
   `building_id` INT NOT NULL,
   `condo_id` INT,
@@ -204,6 +206,6 @@ CREATE TABLE `emails_record` (
 
 
 /* default admin user */
-INSERT INTO condo_owners (name, email, password, primary_address, privilege) 
-VALUES ("admin", "admin", "admin", "admin", "admin");
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("admin", "admin", "admin", "admin", "admin", "admin");
 

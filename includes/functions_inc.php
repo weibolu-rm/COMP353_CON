@@ -104,7 +104,6 @@ function print_user_table($conn) {
     mysqli_close($conn);
 }
 
-
 function print_single_user_table($conn, $uid) {
     echo "<thead>
             <tr>
