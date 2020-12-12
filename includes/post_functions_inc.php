@@ -154,6 +154,7 @@ function print_comments($conn, $pid) {
             <p class="text-white media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <a href=profile.php?uid='. $row["user_id"] .'><strong class="d-block text-primary">'. $user["name"] .'</strong></a>
                 '. $content .'
+            </br><small class="text-muted">'. $row["comment_date"] .'</small>
             </p></a>
             </div>';
         }
