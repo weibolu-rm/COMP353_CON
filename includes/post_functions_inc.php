@@ -127,7 +127,7 @@ function print_posts_no_id($conn) {
 }
 
 function print_comments($conn, $pid) {
-    $sql = "SELECT * FROM posts_comments WHERE post_id = {$pid}";
+    $sql = "SELECT * FROM posts_comments WHERE post_id = {$pid};";
     $query_result = mysqli_query($conn, $sql);
 
 
@@ -389,7 +389,6 @@ function next_post_id($conn) {
     $result = $row["i"];
     if($query_result !== false)
         mysqli_free_result($query_result);
-    mysqli_close($conn);
 
     return $result;
 }

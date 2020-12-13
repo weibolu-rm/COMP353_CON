@@ -2,7 +2,7 @@
 
 
 function get_occupied_condos_count($conn, $bid) {
-    $sql = "SELECT COUNT(owner_id) AS building_owned FROM condo WHERE building_id = {$bid}";
+    $sql = "SELECT COUNT(owner_id) AS building_owned FROM condo WHERE building_id = {$bid};";
     $query_result = mysqli_query($conn, $sql);
 
     $row = mysqli_fetch_assoc($query_result);
@@ -16,7 +16,7 @@ function get_occupied_condos_count($conn, $bid) {
 
 function get_total_monthly_fees($conn, $bid) {
     $sql = "SELECT SUM(default_monthly_payment) AS building_default_yearly_sum FROM transaction_record, condo 
-		    WHERE (transaction_record.user_id = condo.owner_id AND condo.building_id = {$bid})";
+		    WHERE (transaction_record.user_id = condo.owner_id AND condo.building_id = {$bid});";
     $query_result = mysqli_query($conn, $sql);
 
     $row = mysqli_fetch_assoc($query_result);
@@ -29,7 +29,7 @@ function get_total_monthly_fees($conn, $bid) {
 }
 
 function get_total_maintenance_costs($conn, $bid) {
-$sql = "SELECT SUM(total_cost) AS building_maintenance FROM maintenance WHERE building_id = {$bid}";
+$sql = "SELECT SUM(total_cost) AS building_maintenance FROM maintenance WHERE building_id = {$bid};";
     $query_result = mysqli_query($conn, $sql);
 
     $row = mysqli_fetch_assoc($query_result);
