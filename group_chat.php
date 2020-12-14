@@ -24,9 +24,6 @@
 </table>
 </div>
 
-<html>
-<body>
-
 <?php
     require_once "includes/db_handler_inc.php";
     require_once "includes/functions_inc.php";
@@ -70,8 +67,7 @@ function closeForm() {
   document.getElementById("myForm").style.display = "none";
 }
 </script>
-</body>
-</html>
+
 
 
 
