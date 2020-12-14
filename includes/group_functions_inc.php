@@ -601,7 +601,7 @@ function print_groups_posts($conn,$gid) {
     require_once "functions_inc.php";
     require_once "group_functions_inc.php";
     
-    $sql = "SELECT * FROM group_posts WHERE group_id=? ORDER BY post_date DESC;";
+    $sql = "SELECT * FROM group_posts WHERE group_id=? ORDER BY post_date ASC;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -635,7 +635,7 @@ function print_groups_posts($conn,$gid) {
             $user = fetch_user_by_id($conn, $row["user_id"]);
 
             echo '
-                <div class="col-md-5">
+                <div class="col-md-12">
                     <div class="row no-gutters border rounded mb-4 shadow-sm h-md-250">
                         <div class="col p-4">
                             <strong class="mb-2 ">'.$user["name"].'</strong>
