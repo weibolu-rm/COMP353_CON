@@ -137,6 +137,21 @@ if (isset($_GET["uid"])) {
         }
 
     }
+    if(isset($_POST["change_user_group"])) {
+        $gid = $_POST["group_id"];
+        require_once "db_handler_inc.php";
+        require_once "group_functions_inc.php";
+
+
+        if(admin_change_user_group($conn, $uid, $gid)) {
+            header("location: ../{$admin_group_change_user_url}?uid={$uid}&error=groupchangesuccess");
+            exit();
+        }
+        else {
+            header("location: ../{ $admin_group_change_user_url}?uid={$uid}&error=stmterror");
+            exit();
+        }
+    }
 
     header("location: ../{$admin_url}");
 }

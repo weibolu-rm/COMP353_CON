@@ -6,9 +6,14 @@
 <?php
     if (isset($_GET["error"])) {
         switch($_GET["error"]) {
-        case "none":
+        case "groupdelete":
             echo "<div class=\"alert alert-success\" role=\"alert\">
-            Successfully removed user.
+            Successfully removed Group.
+            </div>";
+        break;
+        case "memberremoved":
+            echo "<div class=\"alert alert-success\" role=\"alert\">
+            Successfully removed group member.
             </div>";
         break;
         case "forbiden":

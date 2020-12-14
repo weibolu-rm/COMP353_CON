@@ -23,6 +23,8 @@
     $send_email_url = "send_email.php";
     $financials_url = "financials.php";
     $user_post_url = "user_post.php";
+    $admin_group_change_user_url = "admin_change_group_user.php";
+    $group_chat_url = "group_chat.php";
 
     date_default_timezone_set("America/New_York");
     // TODO: REMOVE BEFORE DEPLOYMENT

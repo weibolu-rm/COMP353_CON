@@ -19,14 +19,17 @@
         print_single_user_profile($conn, $_GET["uid"]); 
         if ($_SESSION["privilege"] == "admin") {
             fetch_group_name_by_admin($conn, $_GET["uid"]);
-                    print_group_button_admin($conn, $_GET["uid"]);
+                $gid = print_group_button_admin($conn, $_GET["uid"]);
         }
         else{
         fetch_group_name_by_user($conn, $_GET["uid"]);
-                print_group_button($conn, $_GET["uid"]);
+                $gid = print_group_button($conn, $_GET["uid"]);
+                request_group_button($conn, $_GET["uid"]);
         }
-       // echo"<br>";
-      //  print_post_button($conn, $_GET["uid"]);
+        if($gid != false){
+        echo "<br><a href=\"group_chat.php?gid=$gid\"><button type=\"button\" class=\"btn btn-mid btn-outline-secondary\">Group Chat</button></a>";
+
+        }
     ?>
     </span>
 </div>
