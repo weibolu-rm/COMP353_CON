@@ -204,12 +204,6 @@ CREATE TABLE `emails_record` (
   FOREIGN KEY (`to_id`) REFERENCES condo_owners(`user_id`)
 );
 
-
-
-/* default admin user */
-INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
-VALUES ("admin", "admin", "admin", "admin", "admin", "admin");
-
 -- -----------------------------------------------------
 -- table `group_posts`
 -- ---------------------------------------------------
@@ -220,7 +214,13 @@ CREATE TABLE `group_posts` (
   `post_date` DATETIME NOT NULL,
   `content` VARCHAR(1000),
   PRIMARY KEY (`post_id`),
-  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`),
   FOREIGN KEY (`group_id`) REFERENCES `member_groups`(`group_id`)
 );
+
+
+
+/* default admin user */
+INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
+VALUES ("admin", "admin", "admin", "admin", "admin", "admin");
 
