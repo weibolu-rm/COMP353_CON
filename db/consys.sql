@@ -93,7 +93,7 @@ CREATE TABLE `condo` (
 -- -----------------------------------------------------
 CREATE TABLE `transaction_record` (
   `user_id` INT NOT NULL,
-  `payment_date` DATE NOT NULL,
+  `payment_date` DATETIME NOT NULL,
   `default_monthly_payment` DECIMAL,
   `maintenance_payment` DECIMAL, 
   CONSTRAINT compkey6 PRIMARY KEY (`user_id`, `payment_date`),
