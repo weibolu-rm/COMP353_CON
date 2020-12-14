@@ -620,33 +620,25 @@ VALUES (6, 5, "Charity Receipt", "[Receipt] Doctors without borders: $500.00 (th
  
 
 INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (1,6, "3524Sherb");
-INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (2,17, "1587Laval1");
-INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (3,18, "1587Laval2");
-INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (4,22, "2490Stden");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (2,16, "1587Laval1");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (3,17, "1587Laval2");
+INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (4,21, "2490Stden");
 
 
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 22, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 23, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 24, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 25, 4);
+
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 11, 2);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 12, 2);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 13, 2);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 14, 2);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 15, 2);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 16, 2);
 
-
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 18, 3);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 19, 3);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 20, 3);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 21, 3);
-
-
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 23, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 24, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 25, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 26, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 27, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 28, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 29, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 30, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 31, 4);
-
 
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 2, 1);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 3, 1);
@@ -656,7 +648,6 @@ INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 7, 1);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 8, 1);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 9, 1);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 10, 1);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 11, 1);
 
 
 
