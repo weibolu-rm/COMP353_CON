@@ -53,10 +53,14 @@
         </select>
     </div>
      <div class="form-group">
-        <label for="exampleFormControlFile1">Upload image</label>
+        <label for="upload">Upload image</label>
         <input type="file" class="form-control-file" name="img_file">
+    </div>    
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="disabled_comments">
+        <label class="form-check-label">Disable Comments</label>
     </div>
-    <button type="submit" name="post_announcement" class="btn btn-light">Post</button>
+    <button type="submit" name="post_announcement" class="sm-margin-top btn btn-light">Post</button>
 
 </form>
 

@@ -49,27 +49,33 @@
             require_once "includes/db_handler_inc.php";
             require_once "includes/post_functions_inc.php";
             $pid = $_GET["pid"];
-            print_comments($conn, $pid);
-        
-            if(isset($_SESSION["user_id"]))
-                echo '
-                <div class="sm-margin-top">
-                <form action="includes/post_inc.php?pid='.$_GET["pid"].'" method="post">
-                    <div class="form-group">
-                        <label for="content">Comment</label>
-                        <textarea name="content" class="form-control" rows="2" required></textarea>
-                    </div>    
-                    <div class="form-group">
-                        <label for="privilege">Visibility</label>
-                        <select class="form-control" name="visibility" required>
-                            <option>public</option>
-                            <option>original poster</option>
-                        </select>
-                    </div>
-                    <button type="submit" name="post_comment" class="btn btn-light">Post Comment</button>
 
-                </form>
-                </div>';
+            if(!post_disabled_comments($conn, $pid)) {
+                print_comments($conn, $pid);
+        
+                if(isset($_SESSION["user_id"]))
+                    echo '
+                    <div class="sm-margin-top">
+                    <form action="includes/post_inc.php?pid='.$_GET["pid"].'" method="post">
+                        <div class="form-group">
+                            <label for="content">Comment</label>
+                            <textarea name="content" class="form-control" rows="2" required></textarea>
+                        </div>    
+                        <div class="form-group">
+                            <label for="privilege">Visibility</label>
+                            <select class="form-control" name="visibility" required>
+                                <option>public</option>
+                                <option>original poster</option>
+                            </select>
+                        </div>
+                        <button type="submit" name="post_comment" class="btn btn-light">Post Comment</button>
+
+                    </form>
+                    </div>';
+            } else
+                echo '<p class="text-muted">Comments disabled.</p>'
+
+
         ?>
     </div>
 
