@@ -209,3 +209,16 @@ CREATE TABLE `emails_record` (
 INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) 
 VALUES ("admin", "admin", "admin", "admin", "admin", "admin");
 
+-- -----------------------------------------------------
+-- table `group_posts`
+-- ---------------------------------------------------
+CREATE TABLE `group_posts` (
+  `post_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `group_id` INT NOT NULL,
+  `post_date` DATETIME NOT NULL,
+  `content` VARCHAR(1000),
+  PRIMARY KEY (`post_id`),
+  FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
+);
+
