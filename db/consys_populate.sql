@@ -519,7 +519,7 @@ insert into storage_space values (3, 9);
 insert into storage_space values (3, 10);
 
 insert into posts (user_id, post_date, title, content, is_announcement, image_id)
-VALUES (1, "2020-11-28 20:30:30", "Administrator Announcement", "Welcome to CONSYS", 1, "condo.jpg");
+VALUES (1, "2020-10-20 10:30:30", "Administrator Announcement", "Welcome to CONSYS", 1, "condo.jpg");
 insert into posts (user_id, post_date, title, content, view_permission)
 VALUES (2, "2020-11-28 20:30:35", "Wow so cool", "Guys, I love my new condo. Thanks for having me", "user");
 insert into posts (user_id, post_date, title, content, view_permission)
@@ -533,11 +533,72 @@ make the arrangements for you to get free cookies.
 Best, Asuka.");
 
 INSERT INTO posts_comments (user_id, post_id, comment_Date, content)
-VALUES (6, 3, "2020-11-28 21:30:00", "Yes, I can see this post. Don't worry.");
+VALUES (2, 1, "2020-10-28 21:30:00", "Thanks!");
+INSERT INTO posts_comments (user_id, post_id, comment_Date, content)
+VALUES (3, 1, "2020-10-28 21:31:00", "Love it");
+INSERT INTO posts_comments (user_id, post_id, comment_Date, content)
+VALUES (7, 1, "2020-10-28 21:31:28", "how do i post");
+INSERT INTO posts_comments (user_id, post_id, comment_Date, content)
+VALUES (8, 1, "2020-10-28 21:32:00", "is there a light mode? I don't like the dark look.");
+INSERT INTO posts_comments (user_id, post_id, comment_Date, content)
+VALUES (6, 3, "2020-11-28 20:33:00", "Yes, I can see this post. Don't worry.");
 INSERT INTO posts_comments (user_id, post_id, comment_Date, content)
 VALUES (6, 5, "2020-11-28 21:31:00", "Sent you an email!");
+INSERT INTO posts_comments (user_id, post_id, comment_Date, content)
+VALUES (9, 4, "2020-11-29 21:31:00", "me too");
 
-INSERT INTO emails (from_id, to_id, subject, content, email_date) 
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 2, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 3, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 4, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 5, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 6, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 7, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 8, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 9, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 10, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 11, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 12, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 13, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 13, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 14, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 15, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 16, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 17, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 18, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 19, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 20, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 21, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 22, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 23, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 24, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails(from_id, to_id, subject, content, email_date) VALUES (1, 25, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 2, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 3, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 4, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 5, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 6, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 7, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 8, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 9, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 10, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 11, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 12, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 13, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 13, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 14, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 15, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 16, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 17, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 18, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 19, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 20, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 21, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 22, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 23, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 24, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 25, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
+ 
 VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -555,8 +616,9 @@ INSERT INTO emails(from_id, to_id, subject, content, email_date)
 VALUES (6, 5, "Charity Receipt", "[Receipt] Doctors without borders: $500.00 (this is a legit receipt, trust me)", "2020-11-29 09:12:12");
 INSERT INTO emails_record(from_id, to_id, subject, content, email_date) 
 VALUES (6, 5, "Charity Receipt", "[Receipt] Doctors without borders: $500.00 (this is a legit receipt, trust me)", "2020-11-29 09:12:12");
+
  
- 
+
 INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (1,6, "3524Sherb");
 INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (2,17, "1587Laval1");
 INSERT INTO `member_groups`(`group_id`, `owner_id`, `group_name`) VALUES (3,18, "1587Laval2");
@@ -577,13 +639,13 @@ INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 21, 3);
 
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 23, 4);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 24, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 1, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 2, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 3, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 5, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 6, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 7, 4);
-INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 8, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 25, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 26, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 27, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 28, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 29, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 30, 4);
+INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 31, 4);
 
 
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 2, 1);
@@ -595,5 +657,7 @@ INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 8, 1);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 9, 1);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 10, 1);
 INSERT INTO `from_group`(`user_id`, `group_id`) VALUES ( 11, 1);
+
+
 
 

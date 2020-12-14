@@ -127,7 +127,7 @@ function print_posts_no_id($conn) {
 }
 
 function print_comments($conn, $pid) {
-    $sql = "SELECT * FROM posts_comments WHERE post_id = {$pid}";
+    $sql = "SELECT * FROM posts_comments WHERE post_id = {$pid};";
     $query_result = mysqli_query($conn, $sql);
 
 
@@ -154,6 +154,7 @@ function print_comments($conn, $pid) {
             <p class="text-white media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <a href=profile.php?uid='. $row["user_id"] .'><strong class="d-block text-primary">'. $user["name"] .'</strong></a>
                 '. $content .'
+            </br><small class="text-muted">'. $row["comment_date"] .'</small>
             </p></a>
             </div>';
         }
@@ -388,7 +389,6 @@ function next_post_id($conn) {
     $result = $row["i"];
     if($query_result !== false)
         mysqli_free_result($query_result);
-    mysqli_close($conn);
 
     return $result;
 }

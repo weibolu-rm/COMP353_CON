@@ -25,6 +25,9 @@
             case "passworddontmatch":
                 echo "Passwords don't match. Please try again.";
             break;
+            case "postallength":
+                echo "Invalid postal code length. (A2A 2A2 or A2A2A2) ";
+            break;
             case "invalidpasswordlength":
                 echo "Password has to be at least 8 characters.";
             break;
@@ -59,6 +62,10 @@
     <div class="form-group">
         <label for="address">Address</label>
         <input type="text" name="address" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="postal_code">Postal Code</label>
+        <input type="text" name="postal_code" class="form-control" required>
     </div>
     <div class="form-group">
         <label for="privilege">User privilege</label>

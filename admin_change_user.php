@@ -40,6 +40,9 @@
             case "invalidpasswordlength":
                 echo "Password has to be at least 8 characters.";
             break;
+            case "postallength":
+                echo "Invalid postal code length. (A2A 2A2 or A2A2A2) ";
+            break;
             case "emailalreadytaken":
                 echo "Email is already taken.";
             break;           
@@ -60,6 +63,9 @@
             break;
             case "addresssuccess":
                 echo "Successfuly changed address.";
+            break;            
+            case "postalsuccess":
+                echo "Successfuly changed postal code.";
             break;
         }
         echo "</div>";
@@ -114,10 +120,23 @@
     <div class ="col-lg-6">
         <?php echo'<form action="'. $change_inc_url .'?uid=' . $_GET["uid"] . '" method="post">'; ?>
             <div class="form-group">
-                <label for="name">Address</label>
+                <label for="address">Address</label>
                 <input type="text" name="address" class="form-control" required>
             </div>
             <button type="submit" name="change_user_address" class="btn btn-light">Change Address</button>
+
+        </form>
+    </div>
+</div>
+<h2 class="sm-margin-top">Change Postal Code</h2>
+<div class="row justify-content-start">
+    <div class ="col-lg-6">
+        <?php echo'<form action="'. $change_inc_url .'?uid=' . $_GET["uid"] . '" method="post">'; ?>
+            <div class="form-group">
+                <label for="postal_code">Postal Code</label>
+                <input type="text" name="postal_code" class="form-control" required>
+            </div>
+            <button type="submit" name="change_user_postal_code" class="btn btn-light">Change Postal Code</button>
 
         </form>
     </div>

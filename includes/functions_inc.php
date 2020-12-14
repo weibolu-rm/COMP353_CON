@@ -76,6 +76,7 @@ function print_user_table($conn) {
               <th>Name</th>
               <th>Email</th>
               <th>Primary Address</th>
+              <th>Postal Code</th>
               <th>Privilege</th>
               <th>Manage</th>
             </tr>
@@ -88,6 +89,7 @@ function print_user_table($conn) {
             echo "<td>{$row["name"]}</td>";
             echo "<td>{$row["email"]}</td>";
             echo "<td>{$row["primary_address"]}</td>";
+            echo "<td>{$row["postal_code"]}</td>";
             echo "<td>{$row["privilege"]}</td>";
             echo "<td>
                 <div class=\"btn-group mr-2\">
@@ -111,6 +113,7 @@ function print_single_user_table($conn, $uid) {
               <th>Name</th>
               <th>Email</th>
               <th>Primary Address</th>
+              <th>Postal Code</th>
               <th>Privilege</th>
             </tr>
             </thead>
@@ -122,6 +125,7 @@ function print_single_user_table($conn, $uid) {
         echo "<td>{$row["name"]}</td>";
         echo "<td>{$row["email"]}</td>";
         echo "<td>{$row["primary_address"]}</td>";
+        echo "<td>{$row["postal_code"]}</td>";
         echo "<td>{$row["privilege"]}</td>";
     }
     echo "</tbody>";
@@ -145,6 +149,7 @@ function print_single_user_profile($conn, $uid) {
     if($row = fetch_user_by_id($conn, $uid)) {
         echo "<h3>Email: ". $row["email"] . "</h3> ";
         echo "<h3>Primary Address: ". $row["primary_address"] . "</h3> ";
+        echo "<h3>Postal Code: ".$row["postal_code"]."</h3>";
     }
 
 }
@@ -174,8 +179,16 @@ function invalid_password_length($password) {
     return $invalid;
 }
 
-function create_user($conn, $name, $email, $password, $address, $privilege) {
-    $sql = "INSERT INTO condo_owners (name, email, password, primary_address, privilege) VALUES (?, ?, ?, ?, ?);";
+function invalid_postal_code_length($postal_code) {
+    $invalid = false;
+    if (strlen($postal_code) > 7)
+        $invalid = true;
+
+    return $invalid;
+}
+
+function create_user($conn, $name, $email, $password, $address, $postal_code, $privilege) {
+    $sql = "INSERT INTO condo_owners (name, email, password, primary_address, postal_code, privilege) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
     
     if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -192,7 +205,7 @@ function create_user($conn, $name, $email, $password, $address, $privilege) {
         break;
     }
 
-    mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $hashed_password, $address, $privilege);
+    mysqli_stmt_bind_param($stmt, "ssssss", $name, $email, $hashed_password, $address, $postal_code, $privilege);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
@@ -336,6 +349,21 @@ function admin_change_user_address($conn, $uid, $address) {
     }
         
     mysqli_stmt_bind_param($stmt, "si", $address, $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+// for admin use
+function admin_change_user_postal_code($conn, $uid, $postal_code) {
+    $user = fetch_user_by_id($conn, $uid);
+    $sql = "UPDATE condo_owners SET postal_code = ? WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+        
+    mysqli_stmt_bind_param($stmt, "si", $postal_code, $uid);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
