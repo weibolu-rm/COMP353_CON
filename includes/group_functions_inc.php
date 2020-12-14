@@ -680,6 +680,20 @@ function admin_change_user_group($conn, $uid, $gid) {
     return true;
 }
 
+function admin_add_user_group($conn, $uid, $gid) {
+    $sql = "INSERT INTO from_group (user_id, group_id) VALUES (?,?);";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+        
+    mysqli_stmt_bind_param($stmt, "ss", $uid, $gid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
 function admin_change_group_name($conn, $gid, $group_name) {
     $group = fetch_group_by_id($conn, $gid);
     $sql = "UPDATE member_groups SET group_name = ? WHERE group_id = ?;";
@@ -693,4 +707,86 @@ function admin_change_group_name($conn, $gid, $group_name) {
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
+}
+
+function print_user_without_group($conn) {
+    $sql1 = "SELECT * FROM condo_owners ORDER BY user_id ASC;";
+    // here we don't need to bind a prepared statement as you couldn't do 
+
+    $query_result1 = mysqli_query($conn, $sql1);
+    echo "<thead>
+            <tr>
+              <th>Name</th>  
+              <th>Primary Address</th>  
+              <th>Postal Code</th>
+              <th>Email</th>                                    
+              <th>Manage</th>
+            </tr>
+            </thead>
+            <tbody>";
+    if($query_result1) {
+        while($row = mysqli_fetch_assoc($query_result1)) {
+            $uid = $row["user_id"];
+            if(fetch_group_id_by_user($conn, $uid) == false){
+            $cod = fetch_user_by_id($conn, $uid);
+            echo "<tr>";
+            echo "<td>{$cod["name"]}</td>";
+            echo "<td>{$cod["primary_address"]}</td>";
+            echo "<td>{$cod["postal_code"]}</td>";
+            echo "<td>{$cod["email"]}</td>";
+            echo "<td>
+                <div class=\"btn-group mr-2\">
+                <a href=\"admin_member_add.php?uid={$uid}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Add</button></a>
+                </div>
+                </td>";
+            }
+        }
+    }
+    echo "</tbody>";  
+
+    mysqli_free_result($query_result1);
+
+}
+
+function print_user_for_group($conn, $uid) {
+    $sql = "SELECT * FROM condo_owners WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $uid);
+    mysqli_stmt_execute($stmt);
+
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    echo "<thead>
+            <tr>
+              <th>Name</th>  
+              <th>Primary Address</th>  
+              <th>Postal Code</th>
+              <th>Email</th>                                    
+            </tr>
+            </thead>
+            <tbody>";
+    if($query_result) {
+        while($row = mysqli_fetch_assoc($query_result)) {
+            $uid = $row["user_id"];
+            if(fetch_group_id_by_user($conn, $uid) == false){
+            $cod = fetch_user_by_id($conn, $uid);
+            echo "<tr>";
+            echo "<td>{$cod["name"]}</td>";
+            echo "<td>{$cod["primary_address"]}</td>";
+            echo "<td>{$cod["postal_code"]}</td>";
+            echo "<td>{$cod["email"]}</td>";
+            }
+        }
+    }
+    echo "</tbody>";  
+
+
+    mysqli_free_result($query_result);
+
 }

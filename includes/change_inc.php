@@ -152,6 +152,22 @@ if (isset($_GET["uid"])) {
             exit();
         }
     }
+    if(isset($_POST["add_user_group"])) {
+        $gid = $_POST["group_id"];
+        require_once "db_handler_inc.php";
+        require_once "group_functions_inc.php";
+
+
+        if(admin_add_user_group($conn, $uid, $gid)) {
+            header("location: ../{$admin_group_add_url}?error=groupaddsuccess");
+            exit();
+        }
+        else {
+            header("location: ../{ $admin_group_add_url}?error=stmterror");
+            exit();
+        }
+    }
+
 
     header("location: ../{$admin_url}");
 }
