@@ -253,6 +253,33 @@ function print_group_button($conn, $uid) {
     }
 }
 
+function request_group_button($conn, $uid) {
+    $sql = "SELECT * FROM condo_owners WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $uid);
+    mysqli_stmt_execute($stmt);
+
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($query_result)) {
+        mysqli_stmt_close($stmt);
+        echo "<br><a href=\"group_change.php?uid=$uid\"><button type=\"button\" class=\"btn btn-mid btn-outline-secondary\">Request/Change Group</button></a>";
+  
+        return true;
+    }
+    else {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+}
+
+
 
 function print_group_button_admin($conn, $uid) {
     $sql = "SELECT * FROM groups WHERE owner_id = ?;";
@@ -355,7 +382,7 @@ function print_group_table($conn) {
             echo "<td>
                 <div class=\"btn-group mr-2\">
                 <a href=\"admin_change_group.php?gid={$row["group_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Change</button></a>
-                <a href=\"includes/delete_inc.php?gid={$row["group_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
+                <a href=\"includes/delete_group_inc.php?gid={$row["group_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
                 </div>
                 </td>";
         }
@@ -367,6 +394,43 @@ function print_group_table($conn) {
     mysqli_free_result($query_result);
 }
 
+function print_group_owner_table($conn) {
+    $sql = "SELECT * FROM groups ORDER BY group_id ASC;";
+    // here we don't need to bind a prepared statement as you couldn't do 
+    $query_result = mysqli_query($conn, $sql);
+    echo "<thead>
+            <tr>
+              <th>Group Id</th>
+              <th>Group Name</th>
+              <th>Owner Name</th>
+              <th>Owner Email</th>
+              <th>Change/Request</th>
+            </tr>
+            </thead>
+            <tbody>";
+    if($query_result) {
+        while($row = mysqli_fetch_assoc($query_result)) {
+            echo "<tr>";
+            echo "<td>{$row["group_id"]}</td>";
+            echo "<td>{$row["group_name"]}</td>";
+            $uid = $row["owner_id"];
+            $cod = fetch_user_by_id($conn, $uid);
+            echo "<td>{$cod["name"]}</td>";
+            echo "<td>{$cod["email"]}</td>";           
+            echo "<td>
+            <div class=\"btn-group mr-2\">
+                <a href=\"send_email.php?uid=$uid\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Notify</button></a>
+                </div>
+
+                </td>";
+        }
+    }
+    echo "</tbody>";
+
+
+
+    mysqli_free_result($query_result);
+}
 
 
 function print_from_group_table_from_id($conn,$gid) {
@@ -455,8 +519,8 @@ function print_from_group_table($conn) {
             echo "<td>{$username}</td>";
             echo "<td>
                 <div class=\"btn-group mr-2\">
-                <a href=\"admin_change_group.php?gid={$row["group_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Change</button></a>
-                <a href=\"includes/delete_inc.php?gid={$row["group_id"]}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
+                <a href=\"admin_change_group_user.php?uid={$uid}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Change</button></a>
+                <a href=\"includes/delete_group_inc.php?uid={$uid}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Remove</button>
                 </div>
                 </td>";
         }
@@ -464,6 +528,47 @@ function print_from_group_table($conn) {
     echo "</tbody>";  
 
     mysqli_free_result($query_result1);
+
+}
+
+
+function print_single_from_group_table($conn, $uid) {
+    $sql = "SELECT * FROM from_group WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmterror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $uid);
+    mysqli_stmt_execute($stmt);
+
+    $query_result = mysqli_stmt_get_result($stmt);
+
+    echo "<thead>
+            <tr>
+              <th>Group Id</th>
+              <th>Group Name</th>
+              <th>Name</th>           
+            </tr>
+            </thead>
+            <tbody>";
+    if($query_result) {
+        while($row = mysqli_fetch_assoc($query_result)) {
+            $uid = $row["user_id"];
+            $username = fetch_name_by_id($conn, $uid);
+            $gid = $row["group_id"];
+            $groupname = fetch_group_name_by_id($conn, $gid);
+            echo "<tr>";
+            echo "<td>{$row["group_id"]}</td>";
+            echo "<td>{$groupname}</td>";
+            echo "<td>{$username}</td>";
+        }
+    }
+    echo "</tbody>";  
+
+    mysqli_free_result($query_result);
 
 }
 
@@ -510,6 +615,52 @@ function print_single_group_table($conn, $gid) {
     }
     echo "</tbody>";
 }
+
+function delete_group_2($conn, $gid){
+    $sql = "DELETE FROM groups WHERE group_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $gid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+}
+
+function delete_group($conn, $gid) {
+    $sql1 = "DELETE FROM from_group WHERE group_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql1)) {
+        return false;
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $gid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    delete_group_2($conn,$gid);
+    return true;
+}
+
+
+function delete_group_user($conn, $uid) {
+    $sql = "DELETE FROM from_group WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+    
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
+
 
 /*
 function email_already_taken($conn, $email) {
@@ -689,7 +840,7 @@ function admin_change_user_name($conn, $uid, $name) {
     mysqli_stmt_close($stmt);
     return true;
 }
-
+*/
 function admin_change_group_name($conn, $gid, $group_name) {
     $group = fetch_group_by_id($conn, $gid);
     $sql = "UPDATE groups SET group_name = ? WHERE group_id = ?;";
@@ -705,6 +856,20 @@ function admin_change_group_name($conn, $gid, $group_name) {
     return true;
 }
 
+function admin_change_user_group($conn, $uid, $gid) {
+    $sql = "UPDATE from_group SET group_id = ? WHERE user_id = ?;";
+    $stmt = mysqli_stmt_init($conn); // prevents sql injection
+
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+        
+    mysqli_stmt_bind_param($stmt, "ss", $gid, $uid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+/*
 // for admin use
 function admin_change_user_address($conn, $uid, $address) {
     $user = fetch_user_by_id($conn, $uid);

@@ -24,6 +24,7 @@
         else{
         fetch_group_name_by_user($conn, $_GET["uid"]);
                 print_group_button($conn, $_GET["uid"]);
+                request_group_button($conn, $_GET["uid"]);
         }
        // echo"<br>";
       //  print_post_button($conn, $_GET["uid"]);
