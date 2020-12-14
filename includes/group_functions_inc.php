@@ -667,6 +667,9 @@ function delete_group_user($conn, $uid) {
 }
 
 function admin_change_user_group($conn, $uid, $gid) {
+    if(fetch_group_by_id($conn,$gid) == false){
+        return false;
+    }
     $sql = "UPDATE from_group SET group_id = ? WHERE user_id = ?;";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 
@@ -681,6 +684,9 @@ function admin_change_user_group($conn, $uid, $gid) {
 }
 
 function admin_add_user_group($conn, $uid, $gid) {
+    if(fetch_group_by_id($conn,$gid) == false){
+        return false;
+    }
     $sql = "INSERT INTO from_group (user_id, group_id) VALUES (?,?);";
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
 

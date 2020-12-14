@@ -144,11 +144,11 @@ if (isset($_GET["uid"])) {
 
 
         if(admin_change_user_group($conn, $uid, $gid)) {
-            header("location: ../{$admin_group_change_user_url}?uid={$uid}&error=groupchangesuccess");
+            header("location: ../{$admin_group_url}?error=groupchangesuccess");
             exit();
         }
         else {
-            header("location: ../{ $admin_group_change_user_url}?uid={$uid}&error=stmterror");
+            header("location: ../{$admin_group_url}?error=groupchangeerror");
             exit();
         }
     }
@@ -159,11 +159,11 @@ if (isset($_GET["uid"])) {
 
 
         if(admin_add_user_group($conn, $uid, $gid)) {
-            header("location: ../{$admin_group_add_url}?error=groupaddsuccess");
+            header("location: ../{$admin_group_url}?error=groupaddsuccess");
             exit();
         }
         else {
-            header("location: ../{ $admin_group_add_url}?error=stmterror");
+            header("location: ../{$admin_group_url}?error=groupadderror");
             exit();
         }
     }

@@ -16,6 +16,26 @@
             Successfully removed group member.
             </div>";
         break;
+        case "groupchangesuccess":
+            echo "<div class=\"alert alert-success\" role=\"alert\">
+            Successfully change group member.
+            </div>";
+        break;
+        case "groupchangeerror":
+            echo "<div class=\"alert alert-danger\" role=\"alert\">
+            Group Does Not Exist.
+            </div>";
+        break;
+            case "groupaddsuccess":
+            echo "<div class=\"alert alert-success\" role=\"alert\">
+            Successfully added member.
+            </div>";
+        break;
+            case "groupadderror":
+            echo "<div class=\"alert alert-danger\" role=\"alert\">
+            Group Does Not Exist.
+            </div>";
+        break;
         case "forbiden":
             echo "<div class=\"alert alert-danger\" role=\"alert\">
             This action is forbiden.
