@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS `posts_comments`;
 DROP TABLE IF EXISTS `posts`;
 DROP TABLE IF EXISTS `friend`;
 DROP TABLE IF EXISTS `from_group`;
+DROP TABLE IF EXISTS `group_posts`;
 DROP TABLE IF EXISTS `member_groups`;
 DROP TABLE IF EXISTS `emails`;
 DROP TABLE IF EXISTS `emails_record`;
@@ -220,5 +221,6 @@ CREATE TABLE `group_posts` (
   `content` VARCHAR(1000),
   PRIMARY KEY (`post_id`),
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`)
+  FOREIGN KEY (`group_id`) REFERENCES `member_groups`(`group_id`)
 );
 
