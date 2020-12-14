@@ -520,8 +520,8 @@ insert into storage_space values (3, 10);
 
 insert into posts (user_id, post_date, title, content, is_announcement, image_id)
 VALUES (1, "2020-10-20 10:30:30", "Administrator Announcement", "Welcome to CONSYS", 1, "condo.jpg");
-insert into posts (user_id, post_date, title, content, view_permission)
-VALUES (2, "2020-11-28 20:30:35", "Wow so cool", "Guys, I love my new condo. Thanks for having me", "user");
+insert into posts (user_id, post_date, title, content, view_permission, disabled_comments)
+VALUES (2, "2020-11-28 20:30:35", "Wow so cool", "Guys, I love my new condo. Thanks for having me", "user", 1);
 insert into posts (user_id, post_date, title, content, view_permission)
 VALUES (3, "2020-11-28 20:30:35", "Test message", "Can anyone see this post???", "user");
 insert into posts (user_id, post_date, title, content, view_permission)

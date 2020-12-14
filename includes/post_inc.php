@@ -31,6 +31,11 @@ if (isset($_POST["post_announcement"])) {
     $content = $_POST["content"];
     $visibility = $_POST["visibility"];
 
+    if(isset($_POST["disabled_comments"])) 
+        $disabled_comments = true;
+    else 
+        $disabled_comments = false;
+
 
     require_once "post_functions_inc.php";
     require_once "db_handler_inc.php";
@@ -70,7 +75,7 @@ if (isset($_POST["post_announcement"])) {
         }
         else {    
             // post with image
-            if(create_post($conn, $uid, $title, $content, $visibility, $img_name, true) === false) {
+            if(create_post($conn, $uid, $title, $content, $visibility, $img_name, $disabled_comments, true) === false) {
                 header("location: ../{$admin_announcement_url}?error=stmterror");
                 exit();
             }
@@ -83,7 +88,7 @@ if (isset($_POST["post_announcement"])) {
     } // endif for image post
 
     // NO IMAGE
-    if(create_post($conn, $uid, $title, $content, $visibility, "none", true) === false) {
+    if(create_post($conn, $uid, $title, $content, $visibility, "none", $disabled_comments, true) === false) {
         header("location: ../{$admin_announcement_url}?error=stmterror");
         exit();
     }

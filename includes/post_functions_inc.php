@@ -163,7 +163,6 @@ function print_comments($conn, $pid) {
 
     if($query_result !== false)
         mysqli_free_result($query_result);
-    mysqli_close($conn);
 }
 
 function post_comment($conn, $uid, $pid, $content, $visibility) {
@@ -355,16 +354,19 @@ function delete_comment($conn, $pid, $date) {
 }
 
 function create_post($conn, $uid, $title, 
-                     $content, $visibility, $img, $announcement = false) {
+                     $content, $visibility, $img, $disabled_comments = false, $announcement = false) {
 
+    if(!$disabled_comments === false)
+        $disabled_comments = 1;
+    else
+        $disabled_comments = 0;
     if(!$announcement === false)
         $announcement = 1;
     else
         $announcement = 0;
     
-    
-    $sql = "INSERT INTO posts (user_id, post_date, title, content, view_permission, image_id, is_announcement)
-            VALUES (?, ?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO posts (user_id, post_date, title, content, view_permission, image_id, is_announcement, disabled_comments)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
 
     $stmt = mysqli_stmt_init($conn); // prevents sql injection
@@ -375,7 +377,7 @@ function create_post($conn, $uid, $title,
 
     $current_datetime = date('Y-m-d H:i:s');
 
-    mysqli_stmt_bind_param($stmt, "isssssi", $uid, $current_datetime, $title, $content, $visibility, $img, $announcement);
+    mysqli_stmt_bind_param($stmt, "isssssii", $uid, $current_datetime, $title, $content, $visibility, $img, $announcement, $disabled_comments);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
@@ -463,4 +465,12 @@ function print_posts_table_id($conn,$uid) {
 
     if($query_result !== false)
         mysqli_free_result($query_result);
+}
+
+function post_disabled_comments($conn, $pid) {
+    $post = fetch_post_by_id($conn, $pid);
+
+    if($post["disabled_comments"] === 1)
+        return true;
+    return false;
 }

@@ -127,6 +127,7 @@ CREATE TABLE `posts` (
   `content` VARCHAR(1000),
   `image_id` VARCHAR(45) DEFAULT "none", /* none = no image */
   `is_announcement` INT(1) DEFAULT 0, /* 0 = not announcement, 1 = announcement */
+  `disabled_comments` INT(1) DEFAULT 0, /* 0 = disabled, 1 = enabled */
   PRIMARY KEY (`post_id`),
   FOREIGN KEY (`user_id`) REFERENCES condo_owners(`user_id`) ON DELETE CASCADE
 );
