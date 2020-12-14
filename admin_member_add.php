@@ -30,6 +30,10 @@
             case "groupaddsuccess":
                 echo "Successfuly added member to group.";
             break;
+            case "groupadderror":
+                echo "Group Does Not Exist.";
+            break;
+            
         }
         echo "</div>";
     }
