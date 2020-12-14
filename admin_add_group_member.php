@@ -16,6 +16,11 @@
             Successfully removed group member.
             </div>";
         break;
+        case "groupaddsuccess":
+            echo "<div class=\"alert alert-success\" role=\"alert\">
+            Successfully added group member.
+            </div>";
+        break;
         case "forbiden":
             echo "<div class=\"alert alert-danger\" role=\"alert\">
             This action is forbiden.
@@ -31,11 +36,9 @@
 
     <?php
         require_once "includes/db_handler_inc.php";
+        require_once "includes/functions_inc.php";
         require_once "includes/group_functions_inc.php";
-        //print_group_table($conn);
-        print_group_table($conn);
-
-        print_from_group_table($conn);
+        print_user_without_group($conn);
     ?>          
 </table>
 

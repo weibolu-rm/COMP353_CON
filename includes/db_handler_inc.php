@@ -1,4 +1,5 @@
 <?php // 40058095
+
 $config = parse_ini_file("config.ini");
 
 $serverName = $config['serverName'];

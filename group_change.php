@@ -6,10 +6,10 @@
 <table class="table table-striped table-sm">
     <?php
         require_once "includes/db_handler_inc.php";
-        require_once "includes/functions_inc.php";
+                require_once "includes/functions_inc.php";
         require_once "includes/group_functions_inc.php";
-        echo "<h2>Groups</h2><br>";
-        print_from_group_table_from_id($conn, $_GET["gid"]);
+        echo "<h2>Change/Request Group</h2><br>";
+        print_group_owner_table($conn);
 
     ?>
 </table>
