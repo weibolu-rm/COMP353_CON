@@ -19,7 +19,11 @@
         print_single_user_profile($conn, $_GET["uid"]); 
         if ($_SESSION["privilege"] == "admin") {
             fetch_group_name_by_admin($conn, $_GET["uid"]);
-                $gid = print_group_button_admin($conn, $_GET["uid"]);
+            $gid = print_group_button_admin($conn, $_GET["uid"]);
+            if($gid == false){
+                $gid = print_group_button($conn, $_GET["uid"]);
+                request_group_button($conn, $_GET["uid"]);
+            }
         }
         else{
         fetch_group_name_by_user($conn, $_GET["uid"]);
