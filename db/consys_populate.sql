@@ -599,6 +599,7 @@ INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (
 INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 24, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
 INSERT INTO emails_record(from_id, to_id, subject, content, email_date) VALUES (1, 25, "Welcome", "Welcome to consys", "2020-10-29 09:12:12");
  
+INSERT INTO emails (from_id, to_id, subject, content, email_date) 
 VALUES (2, 1, "Test Email", "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
