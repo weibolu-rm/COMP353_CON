@@ -2,7 +2,7 @@
     include_once "templates/admin_header.php";
 ?>
 
-<h2>Building Financial Overview</h2>
+<h2>Building Overview</h2>
 <?php
     if (isset($_GET["error"])) {
         switch($_GET["error"]) {

@@ -146,13 +146,13 @@ function print_full_transactions_by_uid($conn, $uid) {
 function print_building_details($conn, $bid) {
     $sql1 = "SELECT * FROM building INNER JOIN public_space 
             ON building.building_id = public_space.building_id 
-            WHERE building.building_id = {$bid}";
+            WHERE building.building_id = {$bid};";
     $sql2 = "SELECT * FROM building INNER JOIN storage_space 
             ON building.building_id = storage_space.building_id 
-            WHERE building.building_id = {$bid}";
+            WHERE building.building_id = {$bid};";
     $sql3 = "SELECT * FROM building INNER JOIN parking_space 
             ON building.building_id = parking_space.building_id 
-            WHERE building.building_id = {$bid}";
+            WHERE building.building_id = {$bid};";
 
     $query_result_1 = mysqli_query($conn, $sql1);
     $query_result_2 = mysqli_query($conn, $sql2);
