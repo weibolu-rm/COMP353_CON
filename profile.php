@@ -64,7 +64,7 @@
 <table class="table table-striped table-sm">
     <?php
         require_once "includes/db_handler_inc.php";
-        require_once "includes/financials_functions_inc.php";
+        require_once "includes/building_functions_inc.php";
 	$uid = $_GET["uid"];
 	if(isset($_SESSION["user_id"]) && $_SESSION["user_id"] == $uid ) { 
         	echo "User transaction";

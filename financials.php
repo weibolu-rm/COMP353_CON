@@ -20,10 +20,9 @@
         }
     }
 ?>
-
 <?php
 	require_once "includes/db_handler_inc.php";
-	require_once "includes/financials_functions_inc.php";
+	require_once "includes/building_functions_inc.php";
 
 	print_building_financial_overview($conn);
 ?>  

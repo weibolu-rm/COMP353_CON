@@ -65,7 +65,10 @@ function print_building_financial_overview($conn) {
         <p><b> Total maintenance costs paid:</b> {$maintenance_fees_paid}</p>
         ";	
         echo "<div class=\"btn-group mr-2\">
-                <a href=\"financial_report.php?bid={$bid}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Full Yearly Report</button></a>
+                <a href=\"building_report.php?bid={$bid}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">View Building Details</button></a>
+                </div>";
+        echo "<div class=\"btn-group mr-2\">
+                <a href=\"financial_report.php?bid={$bid}\"><button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Full Financial Report</button></a>
                 </div>";
     }
 
@@ -138,4 +141,82 @@ function print_full_transactions_by_uid($conn, $uid) {
     if($query_result)
         mysqli_free_result($query_result);
     mysqli_close($conn);
+}
+
+function print_building_details($conn, $bid) {
+    $sql1 = "SELECT * FROM building INNER JOIN public_space 
+            ON building.building_id = public_space.building_id 
+            WHERE building.building_id = {$bid}";
+    $sql2 = "SELECT * FROM building INNER JOIN storage_space 
+            ON building.building_id = storage_space.building_id 
+            WHERE building.building_id = {$bid}";
+    $sql3 = "SELECT * FROM building INNER JOIN parking_space 
+            ON building.building_id = parking_space.building_id 
+            WHERE building.building_id = {$bid}";
+
+    $query_result_1 = mysqli_query($conn, $sql1);
+    $query_result_2 = mysqli_query($conn, $sql2);
+    $query_result_3 = mysqli_query($conn, $sql3);
+
+    echo "<h3>Public Space</h3>";    
+    echo "<thead>
+            <tr>
+              <th>Type</th>
+              <th>Square Footage</th>
+            </tr>
+            </thead>
+            <tbody>";
+    if($query_result_1) {
+        while($row = mysqli_fetch_assoc($query_result_1)) {
+            echo "<tr>";
+            echo "<td>{$row["type"]}</td>";
+            echo "<td>{$row["square_footage"]}</td>";
+            echo "</tr>";
+        }
+        echo "</tbody></table>";
+    }
+
+    echo "<h3>Storage Space</h3>";    
+    echo "
+            <table class=\"table table-striped table-sm\">
+            <thead>
+            <tr>
+              <th>Storage Space ID</th>
+            </tr>
+            </thead>
+            <tbody>";
+    if($query_result_2) {
+        while($row = mysqli_fetch_assoc($query_result_2)) {
+            echo "<tr>";
+            echo "<td>{$row["ss_id"]}</td>";
+            echo "</tr>";
+        }
+        echo "</tbody></table>";
+    }
+
+    echo "<h3>Parking Space</h3>";    
+    echo "
+            <table class=\"table table-striped table-sm\">
+            <thead>
+            <tr>
+              <th>Parking Space ID</th>
+            </tr>
+            </thead>
+            <tbody>";
+    if($query_result_3) {
+        while($row = mysqli_fetch_assoc($query_result_3)) {
+            echo "<tr>";
+            echo "<td>{$row["parking_space_id"]}</td>";
+            echo "</tr>";
+        }
+        echo "</tbody>";
+    }
+
+    if($query_result_1)
+        mysqli_free_result($query_result_1);
+    if($query_result_2)
+        mysqli_free_result($query_result_2);
+    if($query_result_3)
+        mysqli_free_result($query_result_3);
+
 }

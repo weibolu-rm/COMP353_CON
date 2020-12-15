@@ -7,7 +7,7 @@
     require_once "includes/building_functions_inc.php";
     require_once "includes/db_handler_inc.php";
     $building_id = $_GET["bid"];
-    print_full_transactions_by_building($conn, $building_id);
+    print_building_details($conn, $building_id);
 ?>
 </table>
 
